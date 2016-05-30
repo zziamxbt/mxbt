@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VoteActivity extends AppCompatActivity {
-
+//jjjkkkkkk
     RecyclerView recycler;
     recycleview_adapter adapter;
     List<vote_content> list;
