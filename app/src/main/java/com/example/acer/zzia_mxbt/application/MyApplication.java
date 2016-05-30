@@ -14,19 +14,13 @@ public class MyApplication extends Application {
     //获取续写内容
     private static String Url_WriteArticle="http://10.201.1.183:8080/ZZIA_MXBT/write_Content";
     //获取文章内容
-<<<<<<< HEAD
-    private static String Url_Article="http://10.201.1.166:8080/ZZIA_MXBT/article_complete";
-    /*private String registUrl="http://10.201.1.170:80/MXBT_Register/checkServlet";
-    private String loginUrl="http://10.201.1.170:80/MXBT_Register/loginCheckServlet";*/
-    //注册
-    private String registUrl="http://10.201.1.166:8080/ZZIA_MXBT/registCheckServlet";
-=======
+
     private static String Url_Article = "http://10.201.1.183:8080/ZZIA_MXBT/article_complete";
     /*private String registUrl="http://10.201.1.170:80/MXBT_Register/checkServlet";
     private String loginUrl="http://10.201.1.170:80/MXBT_Register/loginCheckServlet";*/
     //注册
     private String registUrl = "http://10.201.1.183:8080/ZZIA_MXBT/registCheckServlet";
->>>>>>> a1366b9838d5ec1ce1f063796b4aa20538d84ffd
+
     //登录
     private String loginUrl = "http://10.201.1.183:8080/ZZIA_MXBT/loginCheckServlet";
     //显示专题封面

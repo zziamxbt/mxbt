@@ -37,16 +37,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".activity.MainActivity">
-<<<<<<< HEAD
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-=======
             <!-- 记得把主函数改过来 -->
->>>>>>> 198933d18b88973024f8dd14f00608c73ffaf18c
         </activity>
         <activity android:name=".activity.Article_ReadActivity" />
         <activity android:name=".activity.LoginActivity" />
@@ -98,35 +94,10 @@
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="573329d1e0f55aea7500430f" />
-
-<<<<<<< HEAD
-        <activity android:name=".activity.Write_ReadActivity">
-
-        </activity>
-=======
-<<<<<<< HEAD
-        <activity android:name=".activity.Write_ReadActivity" />
-        <activity android:name=".activity.AndWriteContent_Activity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-=======
-<<<<<<< HEAD
-        <activity android:name=".activity.Write_ReadActivity" />
         <activity android:name=".activity.CenterActivity"></activity>
-=======
-
         <activity android:name=".activity.ThemeActivity">
-
         </activity>
         <activity android:name=".activity.Write_ReadActivity"></activity>
-
->>>>>>> d3c0fd6047d0f6bf84f1f9e174754d9e321b6bf4
->>>>>>> a1366b9838d5ec1ce1f063796b4aa20538d84ffd
->>>>>>> 198933d18b88973024f8dd14f00608c73ffaf18c
     </application>
 
 </manifest>
