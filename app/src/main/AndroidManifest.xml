@@ -37,7 +37,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".activity.MainActivity">
+<<<<<<< HEAD
 
+=======
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+>>>>>>> 4481314122da5a419752ed081b99d5cefaf2c362
         </activity>
         <activity android:name=".activity.Article_ReadActivity" />
         <activity android:name=".activity.LoginActivity" />
@@ -90,6 +98,7 @@
             android:name="UMENG_APPKEY"
             android:value="573329d1e0f55aea7500430f" />
 
+<<<<<<< HEAD
         <activity android:name=".activity.ThemeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -97,6 +106,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+=======
+        <activity android:name=".activity.Write_ReadActivity"></activity>
+>>>>>>> 4481314122da5a419752ed081b99d5cefaf2c362
     </application>
 
 </manifest>
