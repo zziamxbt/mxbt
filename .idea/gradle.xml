@@ -3,23 +3,22 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="distributionType" value="LOCAL" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+<<<<<<< HEAD
         <option name="gradleHome" value="E:\android\studio\gradle\gradle-2.10" />
+=======
+>>>>>>> 360a5b5af9ca43712036e07047eb35a537ef851a
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/PullToResresh" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/regist" />
           </set>
         </option>
         <option name="myModules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/PullToResresh" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/regist" />
           </set>
         </option>
       </GradleProjectSettings>
