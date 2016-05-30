@@ -36,7 +36,7 @@ public class VoteActivity extends AppCompatActivity {
     String path;
     int Uid;
     String flag;
-    int Cid;
+    static int Cid;
     public Handler handler2=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -69,19 +69,23 @@ public class VoteActivity extends AppCompatActivity {
         Fresco.initialize(VoteActivity.this);
         setContentView(R.layout.activity_vote);
         initview();
+        initIntent();
         initdata();
 
     }
 
+    private void initIntent() {
+        Intent intent=getIntent();
+        Cid= intent.getIntExtra("Chapter_Id",0);
+        Log.e("Cid", "initdata: "+Cid );
+    }
 
 
     private void initdata() {
         list = new ArrayList<>();
         MyApplication application=new MyApplication();
         path=application.getVote_url();
-        Intent intent=getIntent();
-        Cid= intent.getIntExtra("Chapter_Id",0);
-        Log.e("Cid", "initdata: "+Cid );
+
         RequestParams params = new RequestParams(path);
         params.addQueryStringParameter("Uid",Uid+"");
         params.addQueryStringParameter("Cid",""+Cid);

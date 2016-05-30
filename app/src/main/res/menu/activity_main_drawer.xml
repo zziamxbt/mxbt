@@ -37,6 +37,12 @@
                 android:icon="@drawable/ic_menu_send"
                 android:title="夜间模式"
                 />
+
+            <item
+                android:id="@+id/side_quit"
+                android:icon="@drawable/ic_menu_send"
+                android:title="退出登录"
+                />
         </menu>
     </item>
 

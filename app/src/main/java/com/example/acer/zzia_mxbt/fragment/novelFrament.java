@@ -113,10 +113,8 @@ static String data;
 
             @Override
             public void onFinished() {
-
             }
         });
-
     }
 
     private void initview() {

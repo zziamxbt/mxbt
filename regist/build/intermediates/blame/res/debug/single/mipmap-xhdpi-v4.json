@@ -1,6 +1,15 @@
 [
     {
+<<<<<<< HEAD
+        "merged": "E:\\ZZIA_MXBT\\regist\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\ic_launcher.png",
+        "source": "E:\\ZZIA_MXBT\\regist\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "E:\\AndroidStudioProjects\\ZZIA_MXBT\\regist\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\ic_launcher.png",
+        "source": "E:\\AndroidStudioProjects\\ZZIA_MXBT\\regist\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
+=======
         "merged": "C:\\Users\\C5-0\\Desktop\\ZZIA_MXBT\\regist\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\ic_launcher.png",
         "source": "C:\\Users\\C5-0\\Desktop\\ZZIA_MXBT\\regist\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
+>>>>>>> 4481314122da5a419752ed081b99d5cefaf2c362
     }
 ]
