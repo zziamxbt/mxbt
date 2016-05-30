@@ -42,7 +42,7 @@ import cn.smssdk.gui.RegisterPage;
 
 public class LoginActivity extends AppCompatActivity {
     /**
-     * 用户的正常登录途径(ffffffffffffffffffff)
+     * 用户的正常登录途径(aaaaaaaaaaaaaaaa)
      */
     private EditText mUname;//用户帐号
     private EditText mUpassword;//用户密码
@@ -89,7 +89,6 @@ public class LoginActivity extends AppCompatActivity {
         setShareContent();//第三方登录设置分享内容
         initListeners(); //第三方登录的监听事件
     }
-
 
 
 
