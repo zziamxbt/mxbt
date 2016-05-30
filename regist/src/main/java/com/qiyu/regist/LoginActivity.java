@@ -43,6 +43,7 @@ import cn.smssdk.gui.RegisterPage;
 public class LoginActivity extends AppCompatActivity {
     /**
      * 用户的正常登录途径(ffffffffffffffffffff)
+     * wty
      */
     private EditText mUname;//用户帐号
     private EditText mUpassword;//用户密码
