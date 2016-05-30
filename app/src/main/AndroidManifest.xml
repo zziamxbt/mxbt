@@ -94,7 +94,8 @@
             android:name="UMENG_APPKEY"
             android:value="573329d1e0f55aea7500430f" />
 
-        <activity android:name=".activity.Write_ReadActivity"></activity>
+        <activity android:name=".activity.Write_ReadActivity" />
+        <activity android:name=".activity.CenterActivity"></activity>
     </application>
 
 </manifest>

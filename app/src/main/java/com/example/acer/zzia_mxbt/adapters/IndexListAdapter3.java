@@ -25,13 +25,13 @@ import java.util.List;
 /**
  * Created by acer on 2016/5/7.
  */
-public class IndexListAdapter2 extends BaseAdapter {
+public class IndexListAdapter3 extends BaseAdapter {
 
 
     Context mcontext;
     static  List<IndexBean> mlist;
     LayoutInflater layoutInflater;
-    public IndexListAdapter2(Context context , List<IndexBean> list){
+    public IndexListAdapter3(Context context , List<IndexBean> list){
         this.mcontext = context;
         this.mlist = list;
         layoutInflater = LayoutInflater.from(context);

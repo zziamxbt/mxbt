@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import com.example.acer.zzia_mxbt.activity.Article_ReadActivity;
 import com.example.acer.zzia_mxbt.activity.MainActivity;
-import com.example.acer.zzia_mxbt.adapters.IndexListAdapter2;
+import com.example.acer.zzia_mxbt.adapters.IndexListAdapter1;
 import com.example.acer.zzia_mxbt.bean.IndexBean;
 import com.example.acer.zzia_mxbt.R;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -54,7 +54,7 @@ public class ViewFragment1 extends Fragment {
     List<IndexBean> list;
     List<IndexBean> savelist;
     PullToRefreshListView listView;
-    IndexListAdapter2 ila2;
+    IndexListAdapter1 ila1;
     SimpleDraweeView headimg ;
     Boolean isend=false;
     static  int begin = 0;
@@ -200,8 +200,8 @@ public class ViewFragment1 extends Fragment {
                         savelist.add(list.get(i));
                 }
 
-                ila2 = new IndexListAdapter2(getActivity(),  savelist);
-                listView.setAdapter(ila2);
+                ila1 = new IndexListAdapter1(getActivity(),  savelist);
+                listView.setAdapter(ila1);
 
 
 
@@ -289,7 +289,7 @@ public class ViewFragment1 extends Fragment {
             super.onPostExecute(s);
             if ("success".equals(s)) {
                 //通知数据集改变，刷新页面
-                ila2.notifyDataSetChanged();
+                ila1.notifyDataSetChanged();
                 //刷新完成
                 listView.onRefreshComplete();
             }
