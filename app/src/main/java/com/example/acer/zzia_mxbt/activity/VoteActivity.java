@@ -106,7 +106,7 @@ public class VoteActivity extends AppCompatActivity {
                    @Override
                    public void onItemClick(View view, int position) {
                        Intent intent=new Intent(VoteActivity.this,Write_ReadActivity.class);
-                       Log.e("AWid",""+list.get(position).getAWid()+"aaaaa"+position);
+                      // Log.e("AWid",""+list.get(position).getAWid()+"aaaaa"+position);
                        intent.putExtra("AWid",list.get(position).getAWid());
                        startActivity(intent);
                        //Toast.makeText(VoteActivity.this,"AA"+position,Toast.LENGTH_LONG).show();
