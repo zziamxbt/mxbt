@@ -1,4 +1,4 @@
-package com.qiyu.regist;
+﻿package com.qiyu.regist;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -44,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * 用户的正常登录途径(ffffffffffffffffffff)
      * wty
+急急急
      */
     private EditText mUname;//用户帐号
     private EditText mUpassword;//用户密码
