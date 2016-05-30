@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "merged": "E:\\AndroidStudioProjects\\ZZIA_MXBT\\regist\\build\\intermediates\\res\\merged\\debug\\raw\\libs",
         "source": "E:\\AndroidStudioProjects\\ZZIA_MXBT\\regist\\build\\intermediates\\exploded-aar\\SMSSDK-2.0.2\\res\\raw\\libs"
     },
@@ -14,5 +15,13 @@
     {
         "merged": "E:\\ZZIA_MXBT\\regist\\build\\intermediates\\res\\merged\\debug\\raw\\smssdk_pydb",
         "source": "E:\\ZZIA_MXBT\\regist\\build\\intermediates\\exploded-aar\\SMSSDKGUI-2.0.2\\res\\raw\\smssdk_pydb"
+=======
+        "merged": "C:\\Users\\C5-0\\Desktop\\ZZIA_MXBT\\regist\\build\\intermediates\\res\\merged\\debug\\raw\\smssdk_pydb",
+        "source": "C:\\Users\\C5-0\\Desktop\\ZZIA_MXBT\\regist\\build\\intermediates\\exploded-aar\\SMSSDKGUI-2.0.2\\res\\raw\\smssdk_pydb"
+    },
+    {
+        "merged": "C:\\Users\\C5-0\\Desktop\\ZZIA_MXBT\\regist\\build\\intermediates\\res\\merged\\debug\\raw\\libs",
+        "source": "C:\\Users\\C5-0\\Desktop\\ZZIA_MXBT\\regist\\build\\intermediates\\exploded-aar\\SMSSDK-2.0.2\\res\\raw\\libs"
+>>>>>>> 4481314122da5a419752ed081b99d5cefaf2c362
     }
 ]

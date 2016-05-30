@@ -1,6 +1,10 @@
 [
     {
+<<<<<<< HEAD
         "outputFile": "E:\\AndroidStudioProjects\\ZZIA_MXBT\\PullToResresh\\build\\intermediates\\res\\merged\\debug\\values-zh\\values-zh.xml",
+=======
+        "outputFile": "C:\\Users\\C5-0\\Desktop\\ZZIA_MXBT\\PullToResresh\\build\\intermediates\\res\\merged\\debug\\values-zh\\values-zh.xml",
+>>>>>>> 4481314122da5a419752ed081b99d5cefaf2c362
         "map": [
             {
                 "to": {
@@ -11,7 +15,11 @@
                     "endOffset": 111
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "E:\\AndroidStudioProjects\\ZZIA_MXBT\\PullToResresh\\build\\intermediates\\exploded-aar\\com.loopeer.android.thirdparty.pulltorefresh\\Android-PullToRefresh\\2.1.1\\res\\values-zh\\values.xml",
+=======
+                    "file": "C:\\Users\\C5-0\\Desktop\\ZZIA_MXBT\\PullToResresh\\build\\intermediates\\exploded-aar\\com.loopeer.android.thirdparty.pulltorefresh\\Android-PullToRefresh\\2.1.1\\res\\values-zh\\values.xml",
+>>>>>>> 4481314122da5a419752ed081b99d5cefaf2c362
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
@@ -30,7 +38,11 @@
                     "endOffset": 178
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "E:\\AndroidStudioProjects\\ZZIA_MXBT\\PullToResresh\\build\\intermediates\\exploded-aar\\com.loopeer.android.thirdparty.pulltorefresh\\Android-PullToRefresh\\2.1.1\\res\\values-zh\\values.xml",
+=======
+                    "file": "C:\\Users\\C5-0\\Desktop\\ZZIA_MXBT\\PullToResresh\\build\\intermediates\\exploded-aar\\com.loopeer.android.thirdparty.pulltorefresh\\Android-PullToRefresh\\2.1.1\\res\\values-zh\\values.xml",
+>>>>>>> 4481314122da5a419752ed081b99d5cefaf2c362
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
@@ -49,6 +61,7 @@
                     "endOffset": 243
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "E:\\AndroidStudioProjects\\ZZIA_MXBT\\PullToResresh\\build\\intermediates\\exploded-aar\\com.loopeer.android.thirdparty.pulltorefresh\\Android-PullToRefresh\\2.1.1\\res\\values-zh\\values.xml",
                     "position": {
                         "startLine": 8,
@@ -112,6 +125,9 @@
                 },
                 "from": {
                     "file": "E:\\ZZIA_MXBT\\PullToResresh\\build\\intermediates\\exploded-aar\\com.loopeer.android.thirdparty.pulltorefresh\\Android-PullToRefresh\\2.1.1\\res\\values-zh\\values.xml",
+=======
+                    "file": "C:\\Users\\C5-0\\Desktop\\ZZIA_MXBT\\PullToResresh\\build\\intermediates\\exploded-aar\\com.loopeer.android.thirdparty.pulltorefresh\\Android-PullToRefresh\\2.1.1\\res\\values-zh\\values.xml",
+>>>>>>> 4481314122da5a419752ed081b99d5cefaf2c362
                     "position": {
                         "startLine": 8,
                         "startColumn": 4,

@@ -518,7 +518,7 @@ public class Article_ReadActivity extends AppCompatActivity {
     }
     //分享监听
     public void MyShare(View view){
-        Toast.makeText(Article_ReadActivity.this, "你点击了分享", Toast.LENGTH_SHORT).show();
+       Toast.makeText(Article_ReadActivity.this, "你点击了分享", Toast.LENGTH_SHORT).show();
     }
     //续写监听
     public void MyWrite(View view){
@@ -528,6 +528,7 @@ public class Article_ReadActivity extends AppCompatActivity {
     public void MyVote(View view){
         Intent intent=new Intent(this,VoteActivity.class);
         intent.putExtra("Chapter_Id",listData.get(0).getChapter_id());
+        Log.e("wwwwww", "Chapter_Id：" + listData.get(0).getChapter_id());
 //        Toast.makeText(Article_ReadActivity.this, "你点击了投票", Toast.LENGTH_SHORT).show();
         startActivity(intent);
     }

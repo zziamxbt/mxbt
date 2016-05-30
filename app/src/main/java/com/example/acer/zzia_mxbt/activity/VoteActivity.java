@@ -14,8 +14,8 @@ import android.view.View;
 import com.example.acer.zzia_mxbt.R;
 import com.example.acer.zzia_mxbt.adapters.recycleview_adapter;
 import com.example.acer.zzia_mxbt.application.MyApplication;
-import com.example.acer.zzia_mxbt.utils.SpacesItemDecoration;
 import com.example.acer.zzia_mxbt.bean.vote_content;
+import com.example.acer.zzia_mxbt.utils.SpacesItemDecoration;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -69,18 +69,23 @@ public class VoteActivity extends AppCompatActivity {
         Fresco.initialize(VoteActivity.this);
         setContentView(R.layout.activity_vote);
         initview();
+        initIntent();
         initdata();
 
     }
 
+    private void initIntent() {
+        Intent intent=getIntent();
+        Cid= intent.getIntExtra("Chapter_Id",0);
+        Log.e("Cid", "initdata: "+Cid );
+    }
 
 
     private void initdata() {
         list = new ArrayList<>();
         MyApplication application=new MyApplication();
         path=application.getVote_url();
-        Intent intent=getIntent();
-        Cid= intent.getIntExtra("Chapter_Id",0);
+
         RequestParams params = new RequestParams(path);
         params.addQueryStringParameter("Uid",Uid+"");
         params.addQueryStringParameter("Cid",""+Cid);
@@ -91,7 +96,7 @@ public class VoteActivity extends AppCompatActivity {
                 Gson gson = new Gson();
                 Type type = new TypeToken<List<vote_content>>(){}.getType();
                 list = gson.fromJson(result,type);
-                Log.e("teag",""+list.get(0).getVote_num());
+                Log.e("teag",""+list.get(0).getAWid());
                 recycler.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
                 adapter = new recycleview_adapter(list, VoteActivity.this);
                 recycler.setAdapter(adapter);
@@ -100,6 +105,10 @@ public class VoteActivity extends AppCompatActivity {
                adapter.setOnItemClickListener(new recycleview_adapter.OnRecyclerViewItemClickListener() {
                    @Override
                    public void onItemClick(View view, int position) {
+                       Intent intent=new Intent(VoteActivity.this,Write_ReadActivity.class);
+                       Log.e("AWid",""+list.get(position).getAWid()+"aaaaa"+position);
+                       intent.putExtra("AWid",list.get(position).getAWid());
+                       startActivity(intent);
                        //Toast.makeText(VoteActivity.this,"AA"+position,Toast.LENGTH_LONG).show();
                    }
                });

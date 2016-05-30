@@ -1,6 +1,10 @@
 [
     {
+<<<<<<< HEAD
         "outputFile": "E:\\AndroidStudioProjects\\ZZIA_MXBT\\PullToResresh\\build\\intermediates\\res\\merged\\debug\\values-w820dp-v13\\values-w820dp-v13.xml",
+=======
+        "outputFile": "C:\\Users\\C5-0\\Desktop\\ZZIA_MXBT\\PullToResresh\\build\\intermediates\\res\\merged\\debug\\values-w820dp-v13\\values-w820dp-v13.xml",
+>>>>>>> 4481314122da5a419752ed081b99d5cefaf2c362
         "map": [
             {
                 "to": {
@@ -11,6 +15,7 @@
                     "endOffset": 108
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "E:\\AndroidStudioProjects\\ZZIA_MXBT\\PullToResresh\\src\\main\\res\\values-w820dp\\dimens.xml",
                     "position": {
                         "startLine": 4,
@@ -36,6 +41,9 @@
                 },
                 "from": {
                     "file": "E:\\ZZIA_MXBT\\PullToResresh\\src\\main\\res\\values-w820dp\\dimens.xml",
+=======
+                    "file": "C:\\Users\\C5-0\\Desktop\\ZZIA_MXBT\\PullToResresh\\src\\main\\res\\values-w820dp\\dimens.xml",
+>>>>>>> 4481314122da5a419752ed081b99d5cefaf2c362
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,

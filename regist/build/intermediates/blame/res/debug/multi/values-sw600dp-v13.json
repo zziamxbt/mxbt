@@ -1,6 +1,10 @@
 [
     {
+<<<<<<< HEAD
         "outputFile": "E:\\AndroidStudioProjects\\ZZIA_MXBT\\regist\\build\\intermediates\\res\\merged\\debug\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+=======
+        "outputFile": "C:\\Users\\C5-0\\Desktop\\ZZIA_MXBT\\regist\\build\\intermediates\\res\\merged\\debug\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+>>>>>>> 4481314122da5a419752ed081b99d5cefaf2c362
         "map": [
             {
                 "to": {
@@ -11,7 +15,11 @@
                     "endOffset": 119
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "E:\\AndroidStudioProjects\\ZZIA_MXBT\\regist\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+=======
+                    "file": "C:\\Users\\C5-0\\Desktop\\ZZIA_MXBT\\regist\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+>>>>>>> 4481314122da5a419752ed081b99d5cefaf2c362
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -30,7 +38,11 @@
                     "endOffset": 189
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "E:\\AndroidStudioProjects\\ZZIA_MXBT\\regist\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+=======
+                    "file": "C:\\Users\\C5-0\\Desktop\\ZZIA_MXBT\\regist\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+>>>>>>> 4481314122da5a419752ed081b99d5cefaf2c362
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -49,7 +61,11 @@
                     "endOffset": 263
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "E:\\AndroidStudioProjects\\ZZIA_MXBT\\regist\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+=======
+                    "file": "C:\\Users\\C5-0\\Desktop\\ZZIA_MXBT\\regist\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+>>>>>>> 4481314122da5a419752ed081b99d5cefaf2c362
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -68,7 +84,11 @@
                     "endOffset": 339
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "E:\\AndroidStudioProjects\\ZZIA_MXBT\\regist\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+=======
+                    "file": "C:\\Users\\C5-0\\Desktop\\ZZIA_MXBT\\regist\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+>>>>>>> 4481314122da5a419752ed081b99d5cefaf2c362
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
@@ -87,7 +107,11 @@
                     "endOffset": 398
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "E:\\AndroidStudioProjects\\ZZIA_MXBT\\regist\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+=======
+                    "file": "C:\\Users\\C5-0\\Desktop\\ZZIA_MXBT\\regist\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+>>>>>>> 4481314122da5a419752ed081b99d5cefaf2c362
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
@@ -106,7 +130,11 @@
                     "endOffset": 469
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "E:\\AndroidStudioProjects\\ZZIA_MXBT\\regist\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+=======
+                    "file": "C:\\Users\\C5-0\\Desktop\\ZZIA_MXBT\\regist\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+>>>>>>> 4481314122da5a419752ed081b99d5cefaf2c362
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
@@ -125,7 +153,11 @@
                     "endOffset": 537
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "E:\\AndroidStudioProjects\\ZZIA_MXBT\\regist\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+=======
+                    "file": "C:\\Users\\C5-0\\Desktop\\ZZIA_MXBT\\regist\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+>>>>>>> 4481314122da5a419752ed081b99d5cefaf2c362
                     "position": {
                         "startLine": 8,
                         "startColumn": 4,
@@ -144,6 +176,7 @@
                     "endOffset": 592
                 },
                 "from": {
+<<<<<<< HEAD
                     "file": "E:\\AndroidStudioProjects\\ZZIA_MXBT\\regist\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.2.1\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
                     "position": {
                         "startLine": 9,
@@ -302,6 +335,9 @@
                 },
                 "from": {
                     "file": "E:\\ZZIA_MXBT\\regist\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+=======
+                    "file": "C:\\Users\\C5-0\\Desktop\\ZZIA_MXBT\\regist\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+>>>>>>> 4481314122da5a419752ed081b99d5cefaf2c362
                     "position": {
                         "startLine": 9,
                         "startColumn": 4,
