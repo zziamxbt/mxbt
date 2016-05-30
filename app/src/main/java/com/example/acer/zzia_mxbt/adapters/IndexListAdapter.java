@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.acer.zzia_mxbt.R;
 import com.example.acer.zzia_mxbt.bean.IndexBean;
+import com.example.acer.zzia_mxbt.R;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
@@ -25,13 +25,13 @@ import java.util.List;
 /**
  * Created by acer on 2016/5/7.
  */
-public class IndexListAdapter2 extends BaseAdapter {
+public class IndexListAdapter extends BaseAdapter {
 
 
     Context mcontext;
     static  List<IndexBean> mlist;
     LayoutInflater layoutInflater;
-    public IndexListAdapter2(Context context , List<IndexBean> list){
+    public IndexListAdapter(Context context , List<IndexBean> list){
         this.mcontext = context;
         this.mlist = list;
         layoutInflater = LayoutInflater.from(context);
