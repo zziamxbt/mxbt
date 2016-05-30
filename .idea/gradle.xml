@@ -5,22 +5,11 @@
       <GradleProjectSettings>
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-<<<<<<< HEAD
         <option name="gradleHome" value="C:\Program Files\Android\Android Studio\gradle\gradle-2.10" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-=======
-<<<<<<< HEAD
-        <option name="gradleHome" value="D:\Destination\androidstudio\studio\gradle\gradle-2.10" />
-=======
-        <option name="gradleHome" value="E:\adroidstudio\studio\gradle\gradle-2.10" />
->>>>>>> b2328ee8dd5d9cac4b85e570a627015b25700b9a
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/PullToResresh" />
->>>>>>> c64ea7d04d3149224ddf921a20e1fea127044edf
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/regist" />
           </set>
@@ -28,10 +17,7 @@
         <option name="myModules">
           <set>
             <option value="$PROJECT_DIR$" />
-<<<<<<< HEAD
-=======
             <option value="$PROJECT_DIR$/PullToResresh" />
->>>>>>> c64ea7d04d3149224ddf921a20e1fea127044edf
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/regist" />
           </set>
