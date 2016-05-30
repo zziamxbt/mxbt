@@ -36,7 +36,7 @@ public class VoteActivity extends AppCompatActivity {
     String path;
     int Uid;
     String flag;
-    int Cid;
+    static int Cid;
     public Handler handler2=new Handler(){
         @Override
         public void handleMessage(Message msg) {

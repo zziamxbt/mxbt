@@ -17,12 +17,12 @@ public class MyApplication extends Application {
     //注册
     private String registUrl="http://10.201.1.166:8080/ZZIA_MXBT/registCheckServlet";
     //登录
-    private String loginUrl="http://10.201.1.166:8080/ZZIA_MXBT/loginCheckServlet";
+    private String loginUrl="http://10.201.1.183:8080/ZZIA_MXBT/loginCheckServlet";
 //排行榜
-    private String author_url = "http://10.201.1.166:8080/ZZIA_MXBT/user_servlet";
-    private String novel_url = "http://10.201.1.166:8080/ZZIA_MXBT/novel_servlet";
+    private String author_url = "http://10.201.1.183:8080/ZZIA_MXBT/user_servlet";
+    private String novel_url = "http://10.201.1.183:8080/ZZIA_MXBT/novel_servlet";
     //投票
-    private String vote_url = "http://10.201.1.166:8080/ZZIA_MXBT/vote_servlet";
+    private String vote_url = "http://10.201.1.183:8080/ZZIA_MXBT/vote_servlet";
     @Override
     public void onCreate() {
         super.onCreate();
