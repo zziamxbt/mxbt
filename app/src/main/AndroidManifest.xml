@@ -37,22 +37,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".activity.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
-        <activity android:name=".activity.Article_ReadActivity"></activity>
+        <activity android:name=".activity.Article_ReadActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.ProtocolActivity" />
-        <activity android:name=".activity.QiyuActivity"></activity>
+        <activity android:name=".activity.QiyuActivity" />
         <activity android:name=".activity.RegistActivity" />
         <activity android:name=".activity.SuccessActivity" />
-        <!-- 排行榜页面 RankActivity-->
+        <!-- 排行榜页面 RankActivity -->
         <activity android:name=".activity.RankActivity" />
 
-        <!-- 投票页面VoteActivity-->
-        <activity android:name=".activity.VoteActivity"/>
+        <!-- 投票页面VoteActivity -->
+        <activity android:name=".activity.VoteActivity" />
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -93,9 +90,13 @@
             android:name="UMENG_APPKEY"
             android:value="573329d1e0f55aea7500430f" />
 
+        <activity android:name=".activity.ThemeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
