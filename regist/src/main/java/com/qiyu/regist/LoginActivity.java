@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 package com.qiyu.regist;
+=======
+﻿package com.qiyu.regist;
+>>>>>>> c64ea7d04d3149224ddf921a20e1fea127044edf
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -42,7 +46,16 @@ import cn.smssdk.gui.RegisterPage;
 
 public class LoginActivity extends AppCompatActivity {
     /**
+<<<<<<< HEAD
      * 用户的正常登录途径
+=======
+<<<<<<< HEAD
+     * 用户的正常登录途径(aaaaaaaaaaaaaaaa)
+=======
+     * 用户的正常登录途径(ffffffffffffffffffff)
+
+>>>>>>> 1808bd2e72f07fb5b10e224a11f21600443dc991
+>>>>>>> c64ea7d04d3149224ddf921a20e1fea127044edf
      */
     private EditText mUname;//用户帐号
     private EditText mUpassword;//用户密码
@@ -93,7 +106,10 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> c64ea7d04d3149224ddf921a20e1fea127044edf
     /***************************************************以下是判断用户是否记住了密码（BEGIN）*******************************************************/
 
     /**

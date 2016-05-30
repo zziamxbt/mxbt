@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
+=======
+      <module fileurl="file://$PROJECT_DIR$/PullToResresh/PullToResresh.iml" filepath="$PROJECT_DIR$/PullToResresh/PullToResresh.iml" />
+>>>>>>> c64ea7d04d3149224ddf921a20e1fea127044edf
       <module fileurl="file://$PROJECT_DIR$/ZZIA_MXBT.iml" filepath="$PROJECT_DIR$/ZZIA_MXBT.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/regist/regist.iml" filepath="$PROJECT_DIR$/regist/regist.iml" />
