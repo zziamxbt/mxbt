@@ -1,12 +1,10 @@
 package com.example.acer.zzia_mxbt.adapters;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,7 +19,6 @@ import com.example.acer.zzia_mxbt.R;
 import com.example.acer.zzia_mxbt.activity.VoteActivity;
 import com.example.acer.zzia_mxbt.bean.vote_content;
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.generic.RoundingParams;
@@ -45,7 +42,7 @@ public class recycleview_adapter extends RecyclerView.Adapter<recycleview_adapte
     static  int data=0;
     static boolean flag=false;
    int Uid=0;
-    public recycleview_adapter(List<vote_content> list,Context context) {
+    public recycleview_adapter(List<vote_content> list, Context context) {
         this.list = list;
         this.context=context;
     }
