@@ -16,6 +16,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,8 +34,8 @@ import com.example.acer.zzia_mxbt.fragment.ViewFragment;
 import com.example.acer.zzia_mxbt.fragment.ViewFragment1;
 import com.example.acer.zzia_mxbt.fragment.ViewFragment2;
 import com.example.acer.zzia_mxbt.fragment.ViewFragment3;
-import com.example.acer.zzia_mxbt.fragment.ViewFragment4;
 import com.example.acer.zzia_mxbt.R;
+import com.example.acer.zzia_mxbt.fragment.ViewFragment4;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
@@ -46,6 +47,8 @@ import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawer;
@@ -91,9 +94,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //是否登录
     private boolean isLogin = false;
     private User user;
-
+    //双击退出标志位
+    Boolean isExit =false;
     //更多按钮
     ImageView more;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,7 +128,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        toggle.syncState();
 
 
-
         navigationView.setNavigationItemSelectedListener(this);
 
     }
@@ -136,10 +140,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void initData() {
         Uri uri;
-        if(isLogin ){
-           uri  = Uri.parse(user.getUhead());
+        if (isLogin) {
+            uri = Uri.parse(user.getUhead());
             userName.setText(user.getUnickname());
-        }else{
+        } else {
             uri = Uri.parse("http://139.129.58.244:8080/image/fengjing1.jpg");
             userName.setText("游客(点击登录)");
         }
@@ -214,6 +218,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Toast.makeText(MainActivity.this, "设置", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.side_nightmode) {
             Toast.makeText(MainActivity.this, "夜间模式", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.side_quit) {
+            isLogin = false;
+            Intent intent = new Intent(MainActivity.this, QiyuActivity.class);
+            startActivity(intent);
+            Toast.makeText(MainActivity.this, "退出登录", Toast.LENGTH_SHORT).show();
         }
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -330,6 +339,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 if (isLogin) {
                     //已登录
+                    Intent intent = new Intent(MainActivity.this, CenterActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("user", user);
+                    bundle.putBoolean("isLogin", true);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
                     Toast.makeText(MainActivity.this, "您自己的头像被点击了！", Toast.LENGTH_SHORT).show();
                 } else {
                     //未登录
@@ -352,9 +367,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 drop2 = (TextView) view.findViewById(R.id.drop2);
                 drop3 = (TextView) view.findViewById(R.id.drop3);
 
-                    drop1.setText("排行榜");
-                    drop2.setText("2");
-                    drop3.setText("3");
+                drop1.setText("排行榜");
+                drop2.setText("2");
+                drop3.setText("3");
 
 
                 popupWindow = new PopupWindow(view, 250, 400, true);
@@ -400,4 +415,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         point_blue.setImageResource(R.drawable.point_unselect);
         point_red.setImageResource(R.drawable.point_unselect);
     }
+
+
+    private void exit() {
+        if (!isExit) {
+            isExit = true;
+            Toast.makeText(this, "在按一次退出程序", Toast.LENGTH_SHORT).show();
+            new Timer().schedule(new TimerTask() {
+
+                @Override
+                public void run() {
+                    isExit = false;
+                }
+            }, 2000);
+        } else {
+            Intent startMain = new Intent(Intent.ACTION_MAIN);
+            startMain.addCategory(Intent.CATEGORY_HOME);
+            startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(startMain);
+            System.exit(0);
+        }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exit();
+        }
+        return false;
+    }
+
 }
