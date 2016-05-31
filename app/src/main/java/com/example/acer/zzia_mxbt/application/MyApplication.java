@@ -19,7 +19,7 @@ public class MyApplication extends Application {
     //登录
     private String loginUrl = "http://10.201.1.183:8080/ZZIA_MXBT/loginCheckServlet";
     //显示专题封面
-    private String showSubjectUrl = "http://10.201.1.170:80/ZZIA_MXBT/showSubjectServlet";
+    private String showSubjectUrl = "http://10.201.1.183:80/ZZIA_MXBT/showSubjectServlet";
     //排行榜
     private String author_url = "http://10.201.1.183:8080/ZZIA_MXBT/user_servlet";
     private String novel_url = "http://10.201.1.183:8080/ZZIA_MXBT/novel_servlet";

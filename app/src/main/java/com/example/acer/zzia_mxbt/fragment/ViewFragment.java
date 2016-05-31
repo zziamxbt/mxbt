@@ -115,7 +115,7 @@ public class ViewFragment extends Fragment {
 
                 initRefreshListView();
                 View v = View.inflate(getActivity(),R.layout.index_header_text,null);
-                listView.getRefreshableView().addHeaderView(v,null,true);
+                listView.getRefreshableView().addHeaderView(v,null,false);
                 listView.getRefreshableView().setHeaderDividersEnabled(false);
 
                 for(int i=begin;i<=end;i++){

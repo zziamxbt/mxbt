@@ -94,17 +94,16 @@
             android:name="UMENG_APPKEY"
             android:value="573329d1e0f55aea7500430f" />
 
-<<<<<<< HEAD
+
         <activity android:name=".activity.Write_ReadActivity" />
         <activity android:name=".activity.CenterActivity"></activity>
-=======
 
         <activity android:name=".activity.ThemeActivity">
 
         </activity>
-        <activity android:name=".activity.Write_ReadActivity"></activity>
 
->>>>>>> d3c0fd6047d0f6bf84f1f9e174754d9e321b6bf4
+
+
     </application>
 
 </manifest>
