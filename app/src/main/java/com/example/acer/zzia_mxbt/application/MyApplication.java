@@ -10,12 +10,17 @@ import org.xutils.x;
  * Created by acer on 2016/5/18.
  */
 public class MyApplication extends Application {
+
+    //获取续写内容
+    private static String Url_WriteArticle="http://10.201.1.183:8080/ZZIA_MXBT/write_Content";
     //获取文章内容
+
     private static String Url_Article = "http://10.201.1.183:8080/ZZIA_MXBT/article_complete";
     /*private String registUrl="http://10.201.1.170:80/MXBT_Register/checkServlet";
     private String loginUrl="http://10.201.1.170:80/MXBT_Register/loginCheckServlet";*/
     //注册
     private String registUrl = "http://10.201.1.183:8080/ZZIA_MXBT/registCheckServlet";
+
     //登录
     private String loginUrl = "http://10.201.1.183:8080/ZZIA_MXBT/loginCheckServlet";
     //显示专题封面
@@ -33,7 +38,9 @@ public class MyApplication extends Application {
         x.Ext.setDebug(BuildConfig.DEBUG);
     }
 
-
+    public static String getUrl_WriteArticle() {
+        return Url_WriteArticle;
+    }
     public static String getUrl_Article() {
         return Url_Article;
     }
