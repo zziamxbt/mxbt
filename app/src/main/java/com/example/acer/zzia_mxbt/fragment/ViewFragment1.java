@@ -194,8 +194,6 @@ public class ViewFragment1 extends Fragment {
                 }
 
                 initRefreshListView();
-
-
                 for(int i=begin;i<=end;i++){
                         savelist.add(list.get(i));
                 }
