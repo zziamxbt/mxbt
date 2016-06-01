@@ -5,12 +5,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+<<<<<<< HEAD
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.acer.zzia_mxbt.R;
 import com.example.acer.zzia_mxbt.bean.ArticleBean;
 import com.facebook.drawee.view.SimpleDraweeView;
+=======
+import android.widget.TextView;
+
+import com.example.acer.zzia_mxbt.R;
+>>>>>>> a4904fc3aebcfe5d3f3106fbd0f9c8cc1554a62d
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,17 +25,29 @@ import java.util.List;
  * Created by 晓勇 on 2015/7/12 0012.
  */
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
+<<<<<<< HEAD
     private List<ArticleBean> datas;
     private Context context;
     private List<Integer> lists;
 
     public MyRecyclerViewAdapter(Context context, List<ArticleBean> datas) {
+=======
+    private List<Integer> datas;
+    private Context context;
+    private List<Integer> lists;
+
+    public MyRecyclerViewAdapter(Context context, List<Integer> datas) {
+>>>>>>> a4904fc3aebcfe5d3f3106fbd0f9c8cc1554a62d
         this.datas = datas;
         this.context = context;
         getRandomHeights(datas);
     }
 
+<<<<<<< HEAD
     private void getRandomHeights(List<ArticleBean> datas) {
+=======
+    private void getRandomHeights(List<Integer> datas) {
+>>>>>>> a4904fc3aebcfe5d3f3106fbd0f9c8cc1554a62d
         lists = new ArrayList<>();
         for (int i = 0; i < datas.size(); i++) {
             lists.add((int) (700));
@@ -58,6 +76,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
 }
 
 class MyViewHolder extends RecyclerView.ViewHolder {
+<<<<<<< HEAD
     SimpleDraweeView headimg;
     TextView name;
     TextView time;
@@ -76,5 +95,11 @@ class MyViewHolder extends RecyclerView.ViewHolder {
         mainimg = (SimpleDraweeView) itemView.findViewById(R.id.index_img);
         title = (TextView) itemView.findViewById(R.id.list_title);
         maincontent = (TextView) itemView.findViewById(R.id.list_maincontent);
+=======
+    TextView mTextView;
+    public MyViewHolder(View itemView) {
+        super(itemView);
+        mTextView = (TextView) itemView.findViewById(R.id.item_tv);
+>>>>>>> a4904fc3aebcfe5d3f3106fbd0f9c8cc1554a62d
     }
 }
