@@ -1,7 +1,6 @@
 package com.example.acer.zzia_mxbt.fragment;
 
 
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -55,11 +54,19 @@ public class ViewFragment extends Fragment {
     List<IndexBean> list;
     List<IndexBean> savelist;
     PullToRefreshListView listView;
+<<<<<<< HEAD
+    IndexListAdapter1 ila1;
+    SimpleDraweeView headimg;
+    Boolean isend = false;
+    static int begin = 0;
+    static int end = 9;
+=======
     IndexListAdapter ila;
     SimpleDraweeView headimg ;
     Boolean isend=false;
     static  int begin = 0;
     static  int end = 9;
+>>>>>>> db59871c633148284d7daa630ffb1dba54653085
 
     View view;
 
@@ -83,10 +90,10 @@ public class ViewFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                Toast.makeText(getActivity(), "" + position, Toast.LENGTH_SHORT).show();
-                int Aid = list.get(position-2).getArticleId();
+                int Aid = list.get(position - 2).getArticleId();
 //                Log.e("Aid", "onItemClick: "+Aid );
                 Intent intent = new Intent(getActivity(), Article_ReadActivity.class);
-                intent.putExtra("Article_Id",Aid);
+                intent.putExtra("Article_Id", Aid);
                 startActivity(intent);
             }
         });
@@ -94,7 +101,6 @@ public class ViewFragment extends Fragment {
     }
 
     private void initList() {
-
 
 
         RequestParams params = new RequestParams("http://10.201.1.183:8080/ZZIA_MXBT/index_servlet");
@@ -114,17 +120,26 @@ public class ViewFragment extends Fragment {
 
 
                 initRefreshListView();
+<<<<<<< HEAD
+                View v = View.inflate(getActivity(), R.layout.index_header_text, null);
+                listView.getRefreshableView().addHeaderView(v, null, true);
+=======
                 View v = View.inflate(getActivity(),R.layout.index_header_text,null);
                 listView.getRefreshableView().addHeaderView(v,null,false);
+>>>>>>> db59871c633148284d7daa630ffb1dba54653085
                 listView.getRefreshableView().setHeaderDividersEnabled(false);
 
-                for(int i=begin;i<=end;i++){
-                        savelist.add(list.get(i));
+                for (int i = begin; i <= end; i++) {
+                    savelist.add(list.get(i));
                 }
 
+<<<<<<< HEAD
+                ila1 = new IndexListAdapter1(getActivity(), savelist);
+                listView.setAdapter(ila1);
+=======
                 ila = new IndexListAdapter(getActivity(),  savelist);
                 listView.setAdapter(ila);
-
+>>>>>>> db59871c633148284d7daa630ffb1dba54653085
 
 
                 listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
@@ -141,8 +156,8 @@ public class ViewFragment extends Fragment {
 
                     @Override
                     public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                        new loadDataAsyncTask((MainActivity)getActivity()).execute(list);
-                        if(!isend) {
+                        new loadDataAsyncTask((MainActivity) getActivity()).execute(list);
+                        if (!isend) {
                             for (int i = begin; i <= end; i++) {
                                 savelist.add(list.get(i));
                             }
@@ -167,35 +182,33 @@ public class ViewFragment extends Fragment {
             public void onFinished() {
 
 
-
-
             }
         });
     }
 
-     class loadDataAsyncTask extends AsyncTask<List<IndexBean>, Integer, String> {
-         private static final int HIDDEN_CODE = 1;
-         private static final int APPEAR_CODE = 2;
-         private MainActivity activity;
-         public loadDataAsyncTask(MainActivity activity) {
-             this.activity = activity;
-         }
+    class loadDataAsyncTask extends AsyncTask<List<IndexBean>, Integer, String> {
+        private static final int HIDDEN_CODE = 1;
+        private static final int APPEAR_CODE = 2;
+        private MainActivity activity;
+
+        public loadDataAsyncTask(MainActivity activity) {
+            this.activity = activity;
+        }
 
         @Override
         protected String doInBackground(List<IndexBean>... params) {
             //用一个线程来模拟刷新
-            List<IndexBean> list ;
+            List<IndexBean> list;
             list = params[0];
             publishProgress(1);
             addData(list, begin, end);
-            if (list.size()>=end+10) {
+            if (list.size() >= end + 10) {
                 begin = end + 1;
                 end = end + 10;
-            }
-            else if(list.size()>=end+1){
-                begin=end+1;
-                end = list.size()-1;
-            }else{
+            } else if (list.size() >= end + 1) {
+                begin = end + 1;
+                end = list.size() - 1;
+            } else {
                 Toast.makeText(getActivity(), "没有更多了", Toast.LENGTH_SHORT).show();
                 isend = true;
             }
@@ -216,22 +229,21 @@ public class ViewFragment extends Fragment {
         }
 
 
-         protected void onProgressUpdate(Integer... values) {
-             super.onProgressUpdate(values);
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
 
-             Log.e("load", "onProgressUpdate: "+values[0] );
-             if (values[0]!=0){
-                 activity.handler.sendEmptyMessage(APPEAR_CODE);
-             }else{
-                 activity.handler.sendEmptyMessage(HIDDEN_CODE);
-             }
+            Log.e("load", "onProgressUpdate: " + values[0]);
+            if (values[0] != 0) {
+                activity.handler.sendEmptyMessage(APPEAR_CODE);
+            } else {
+                activity.handler.sendEmptyMessage(HIDDEN_CODE);
+            }
 
-         }
+        }
     }
 
 
-
-    public   void addData(List<IndexBean> beanList, int begin, int end) {
+    public void addData(List<IndexBean> beanList, int begin, int end) {
         for (int i = begin; i <= end; i++) {
             String contentHttp = beanList.get(i).getContent();
             StringBuilder content = null;
@@ -249,9 +261,9 @@ public class ViewFragment extends Fragment {
 
 //                        Log.e("lalala", "getView: "+mlist.get(p).getNickName()+stringBuilder);
                 }
-                if (content.toString().length()>=60) {
-                    beanList.get(i).setContent(content.toString().substring(0, 60)+"...");
-                }else{
+                if (content.toString().length() >= 60) {
+                    beanList.get(i).setContent(content.toString().substring(0, 60) + "...");
+                } else {
                     beanList.get(i).setContent(content.toString());
                 }
                 buff.close();
@@ -278,11 +290,13 @@ public class ViewFragment extends Fragment {
         endLabels.setRefreshingLabel("正在载入...");
         endLabels.setReleaseLabel("放开加载...");
     }
-    public void initBeginAndEnd(){
-        begin=0;
-        end=9;
+
+    public void initBeginAndEnd() {
+        begin = 0;
+        end = 9;
     }
-    public void initView(){
+
+    public void initView() {
         listView = (PullToRefreshListView) view.findViewById(R.id.index_cotent1);
 
     }
