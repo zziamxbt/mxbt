@@ -91,21 +91,10 @@ public class ViewFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                Toast.makeText(getActivity(), "" + position, Toast.LENGTH_SHORT).show();
                 int Aid = list.get(position - 2).getArticleId();
-//                Log.e("Aid", "onItemClick: "+Aid );
-                Intent intent = new Intent(getActivity(), Article_ReadActivity.class);
-<<<<<<< HEAD
+                Log.e("Aid", "onItemClick: "+Aid );
+              /*  Intent intent = new Intent(getActivity(), Article_ReadActivity.class);
                 intent.putExtra("Article_Id",Aid);
-                Log.e("Uid", "MainActivity.getUser().getUid(): "+MainActivity.getUser().getUid() );
-                if(MainActivity.getUser().getUid()==0){
-
-                }else {
-                    intent.putExtra("User_Id",MainActivity.getUser().getUid());
-                }
-
-=======
-                intent.putExtra("Article_Id", Aid);
->>>>>>> f09643b8073a206ee3703f677801783210711dd8
-                startActivity(intent);
+                startActivity(intent);*/
             }
         });
 

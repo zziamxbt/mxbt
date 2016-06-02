@@ -35,6 +35,7 @@ import com.example.acer.zzia_mxbt.application.MyApplication;
 import com.example.acer.zzia_mxbt.bean.ArticleBean;
 import com.example.acer.zzia_mxbt.bean.JavaBean_article;
 import com.example.acer.zzia_mxbt.bean.JavaBean_chapter;
+import com.example.acer.zzia_mxbt.bean.User;
 import com.example.acer.zzia_mxbt.utils.SetPicture;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -605,8 +606,9 @@ public class Article_ReadActivity extends AppCompatActivity {
         //get请求
         //第一步：设置访问路径
         RequestParams params = null;
-        int User_Id=intent.getIntExtra("User_Id",0);;
+
         int article_id=intent.getIntExtra("Article_Id",0);
+        Log.e("Aid", "onItemClick: "+article_id );
         params= new RequestParams(mPath);
          if(Num==0){
              params.addQueryStringParameter("Num",0+"");//让后台判断到底执行那个语句，对数据库进行修改（标示）
@@ -619,7 +621,7 @@ public class Article_ReadActivity extends AppCompatActivity {
              }else {
                  params.addQueryStringParameter("RecommendNum","false");
              }
-             params.addQueryStringParameter("User_Id",User_Id+"");
+           //  params.addQueryStringParameter("User_Id",User.getUid()+"");
              params.addQueryStringParameter("article_id",article_id+"");
          }else if(Num==2){
              //判断是否收藏，修改数据库
@@ -629,7 +631,7 @@ public class Article_ReadActivity extends AppCompatActivity {
              }else {
                  params.addQueryStringParameter("CollectNum","false");
              }
-             params.addQueryStringParameter("User_Id",User_Id+"");
+           //  params.addQueryStringParameter("User_Id",User.getUid()+"");
              params.addQueryStringParameter("article_id",article_id+"");
          }
 

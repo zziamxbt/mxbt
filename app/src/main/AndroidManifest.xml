@@ -46,7 +46,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
 
-        <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".activity.Article_ReadActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.ProtocolActivity" />
@@ -96,8 +102,8 @@
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="573329d1e0f55aea7500430f" />
-<<<<<<< HEAD
-<!--第三方支付的activity-->
+
+        <!--第三方支付的activity-->
         <activity
             android:name="c.b.a.A"
             android:configChanges="orientation|keyboardHidden|navigation"
@@ -117,26 +123,10 @@
         <activity android:name=".activity.WalletActivity">
 
         </activity>
-=======
 
-        <activity android:name=".activity.CenterActivity"></activity>
-        <activity android:name=".activity.Write_ReadActivity" />
+
         <activity android:name=".activity.ThemeContentActivity"></activity>
 
-
-        <activity android:name=".activity.ThemeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-
-        <activity android:name=".activity.AndWriteContent_Activity"></activity>
-
-
->>>>>>> f09643b8073a206ee3703f677801783210711dd8
     </application>
 
 </manifest>
