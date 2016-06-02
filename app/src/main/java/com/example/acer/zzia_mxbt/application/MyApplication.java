@@ -10,19 +10,20 @@ import org.xutils.x;
  * Created by acer on 2016/5/18.
  */
 public class MyApplication extends Application {
-
+    //获取钱包信息
+    private String Url_Wallet="http://10.201.1.115:8080/ZZIA_MXBT/wallet_servlet";
     //获取续写内容
-    private static String Url_WriteArticle="http://10.201.1.183:8080/ZZIA_MXBT/write_Content";
+    private static String Url_WriteArticle="http://10.201.1.115:8080/ZZIA_MXBT/write_Content";
     //获取文章内容
 
-    private static String Url_Article = "http://10.201.1.183:8080/ZZIA_MXBT/article_complete";
+    private static String Url_Article = "http://10.201.1.115:8080/ZZIA_MXBT/article_complete";
     /*private String registUrl="http://10.201.1.170:80/MXBT_Register/checkServlet";
     private String loginUrl="http://10.201.1.170:80/MXBT_Register/loginCheckServlet";*/
     //注册
-    private String registUrl = "http://10.201.1.183:8080/ZZIA_MXBT/registCheckServlet";
+    private String registUrl = "http://10.201.1.115:8080/ZZIA_MXBT/registCheckServlet";
 
     //登录
-    private String loginUrl = "http://10.201.1.183:8080/ZZIA_MXBT/loginCheckServlet";
+    private String loginUrl = "http://10.201.1.115:8080/ZZIA_MXBT/loginCheckServlet";
     //显示专题封面
 
 
@@ -32,10 +33,10 @@ public class MyApplication extends Application {
 
 
     //排行榜
-    private String author_url = "http://10.201.1.183:8080/ZZIA_MXBT/user_servlet";
-    private String novel_url = "http://10.201.1.183:8080/ZZIA_MXBT/novel_servlet";
+    private String author_url = "http://10.201.1.115:8080/ZZIA_MXBT/user_servlet";
+    private String novel_url = "http://10.201.1.115:8080/ZZIA_MXBT/novel_servlet";
     //投票
-    private String vote_url = "http://10.201.1.183:8080/ZZIA_MXBT/vote_servlet";
+    private String vote_url = "http://10.201.1.115:8080/ZZIA_MXBT/vote_servlet";
 
 
 
@@ -47,6 +48,10 @@ public class MyApplication extends Application {
         super.onCreate();
         x.Ext.init(this);
         x.Ext.setDebug(BuildConfig.DEBUG);
+    }
+
+    public String getUrl_Wallet() {
+        return Url_Wallet;
     }
 
     public static String getUrl_WriteArticle() {

@@ -93,7 +93,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int APPEAR_CODE = 2;
     //是否登录
     private boolean isLogin = false;
-    private User user;
+
+    public static User getUser() {
+        return user;
+    }
+
+    private static User user;
     //双击退出标志位
     Boolean isExit =false;
     //更多按钮

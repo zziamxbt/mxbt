@@ -25,6 +25,7 @@ import com.example.acer.zzia_mxbt.adapters.IndexListAdapter1;
 import com.example.acer.zzia_mxbt.bean.IndexBean;
 
 import com.example.acer.zzia_mxbt.R;
+import com.example.acer.zzia_mxbt.bean.User;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -90,10 +91,10 @@ public class ViewFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                Toast.makeText(getActivity(), "" + position, Toast.LENGTH_SHORT).show();
                 int Aid = list.get(position - 2).getArticleId();
-//                Log.e("Aid", "onItemClick: "+Aid );
-                Intent intent = new Intent(getActivity(), Article_ReadActivity.class);
-                intent.putExtra("Article_Id", Aid);
-                startActivity(intent);
+                Log.e("Aid", "onItemClick: "+Aid );
+              /*  Intent intent = new Intent(getActivity(), Article_ReadActivity.class);
+                intent.putExtra("Article_Id",Aid);
+                startActivity(intent);*/
             }
         });
 

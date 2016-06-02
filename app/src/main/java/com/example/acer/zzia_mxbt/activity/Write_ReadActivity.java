@@ -31,6 +31,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Write_ReadActivity extends AppCompatActivity {
+    //Xutil的 RequestParams params
+    private RequestParams params;
     // 投票和关注flag以及图片
     private boolean PeopleVote_flag = true;
     private boolean PeopleFocus_flag = true;
@@ -48,7 +50,15 @@ public class Write_ReadActivity extends AppCompatActivity {
     private Write_ReadAdapter mWriteReadAdapter;
     //  private List<Write_ReadBean> mListData;
     //访问网络数据的路径
-    public String mPath;
+    private String mPath;
+    private String mVotePath;
+    //是否投票flag和章节内容
+    private int AWid;
+    private String Uid;
+    private String Cid;
+    private String  mvote_flag;
+    //AWid的flag
+   private boolean AWidFlag=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,14 +68,36 @@ public class Write_ReadActivity extends AppCompatActivity {
         setContentView(R.layout.activity_write__read);
         //初始化控件
         init();
+        //获取跳转的值
+        getIntentData();
         //获取路径
         getPath();
         //获取续写内容
-        getTest();
+        getTest(mvote_flag);
         //listview头部和底部滑动监听
         setAddListerner();
 
     }
+
+    private void getIntentData() {
+        Intent intent = getIntent();
+        AWid= intent.getIntExtra("AWid", 0);
+        Uid=intent.getStringExtra("Uid");
+        Log.e("Uid", "Uid: " + Uid);
+        Cid=intent.getStringExtra("Cid");
+        Log.e("Cid", "Cid: " + Cid);
+        mvote_flag=intent.getStringExtra("vote_flag");
+        Log.e("mvote_flag", "mvote_flag: " + mvote_flag);
+        if(mvote_flag!=null){
+            if(mvote_flag.equals("false")){
+                mVote_image.setImageResource(R.drawable.toupiao_success);
+            }else{
+                mVote_image.setImageResource(R.drawable.toupiao);
+            }
+        }
+
+    }
+
 
     private void setAddListerner() {
         mWrite_readListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -80,7 +112,6 @@ public class Write_ReadActivity extends AppCompatActivity {
                             .setDuration(200).start();
                     Top_Buttom_flag = true;
                 }
-
             }
         });
     }
@@ -98,17 +129,19 @@ public class Write_ReadActivity extends AppCompatActivity {
         mWrite_readBeanList = new ArrayList<>();
     }
 
-    //投票监听
-    public void PeopleVote(View view) {
-        if (PeopleVote_flag) {
-            mVote_image.setImageResource(R.drawable.toupiao_success);
-            PeopleVote_flag=false;
-        } else {
+    //投票监听,需要补充
+  /*  public void PeopleVote(View view) {
+        if(mvote_flag.equals("false")){
             mVote_image.setImageResource(R.drawable.toupiao);
-            PeopleVote_flag=true;
+            mvote_flag="true";
+        }else{
+            mVote_image.setImageResource(R.drawable.toupiao_success);
+            mvote_flag="false";
         }
+        //使数据库刷新投票
+        getTest(mvote_flag);
         Toast.makeText(Write_ReadActivity.this, "你点击了投票", Toast.LENGTH_SHORT).show();
-    }
+    }*/
 
     //评论监听
     public void PeopleCommand(View view) {
@@ -140,34 +173,44 @@ public class Write_ReadActivity extends AppCompatActivity {
     public void getPath() {
         MyApplication myApplication = (MyApplication) getApplication();
         mPath = myApplication.getUrl_WriteArticle();
+        mVotePath=myApplication.getVote_url();
     }
 
     //gest请求的到网络数据
-    public void getTest() {
+    public void getTest(String mvote_flag) {
         //get请求
         //第一步：设置访问路径
-
-        Intent intent = getIntent();
-        int AWid = intent.getIntExtra("AWid", 1);
         Log.e("abc", "getTest: " + AWid);
-        RequestParams params = new RequestParams(mPath);
-        params.addQueryStringParameter("AWid", AWid + "");
+        if(AWidFlag){
+            params= new RequestParams(mPath);
+            params.addQueryStringParameter("AWid", AWid + "");
+        }else{
+            params = new RequestParams(mVotePath);
+            params.addQueryStringParameter("flag", mvote_flag);
+            params.addQueryStringParameter("Uid",Uid+"");
+            params.addQueryStringParameter("Cid",""+Cid);
+        }
+
         //第二步：开始请求，设置请求方式，同时实现回调函数
         x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
                 //访问成功，参数其实就是PrintWriter写回的值
                 //把JSON格式的字符串改为Student对象
-                Gson gson = new Gson();
-                Type type = new TypeToken<List<Write_ReadBean>>() {
-                }.getType();
-                mWrite_readBeanList = gson.fromJson(result, type);
+                if(AWidFlag){
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<List<Write_ReadBean>>() {
+                    }.getType();
+                    mWrite_readBeanList = gson.fromJson(result, type);
 
-                Log.e("mWrite_readBeanList", "data：" + gson.fromJson(result, type));
-                mArticleName.setText(mWrite_readBeanList.get(0).getWrite_articleName());
+                    Log.e("mWrite_readBeanList", "data：" + gson.fromJson(result, type));
+                    mArticleName.setText(mWrite_readBeanList.get(0).getWrite_articleName());
 
-                mWriteReadAdapter = new Write_ReadAdapter(Write_ReadActivity.this, mWrite_readBeanList);
-                mWrite_readListView.setAdapter(mWriteReadAdapter);
+                    mWriteReadAdapter = new Write_ReadAdapter(Write_ReadActivity.this, mWrite_readBeanList);
+                    mWrite_readListView.setAdapter(mWriteReadAdapter);
+                    AWidFlag=false;
+                }
+
 
 
             }
@@ -189,4 +232,6 @@ public class Write_ReadActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }
