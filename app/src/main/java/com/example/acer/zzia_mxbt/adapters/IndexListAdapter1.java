@@ -60,9 +60,6 @@ public class IndexListAdapter1 extends BaseAdapter {
         TextView title;
         TextView kindcontent;
         SimpleDraweeView mainimg;
-
-
-
     }
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {

@@ -1,53 +1,41 @@
 package com.example.acer.zzia_mxbt.adapters;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-<<<<<<< HEAD
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.acer.zzia_mxbt.R;
-import com.example.acer.zzia_mxbt.bean.ArticleBean;
+import com.example.acer.zzia_mxbt.bean.IndexBean;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.drawable.ScalingUtils;
+import com.facebook.drawee.generic.GenericDraweeHierarchy;
+import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
+import com.facebook.drawee.generic.RoundingParams;
+import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
-=======
-import android.widget.TextView;
-
-import com.example.acer.zzia_mxbt.R;
->>>>>>> a4904fc3aebcfe5d3f3106fbd0f9c8cc1554a62d
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by 晓勇 on 2015/7/12 0012.
- */
+
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
-<<<<<<< HEAD
-    private List<ArticleBean> datas;
+    private List<IndexBean> datas;
     private Context context;
     private List<Integer> lists;
 
-    public MyRecyclerViewAdapter(Context context, List<ArticleBean> datas) {
-=======
-    private List<Integer> datas;
-    private Context context;
-    private List<Integer> lists;
-
-    public MyRecyclerViewAdapter(Context context, List<Integer> datas) {
->>>>>>> a4904fc3aebcfe5d3f3106fbd0f9c8cc1554a62d
+    public MyRecyclerViewAdapter(Context context, List<IndexBean> datas) {
         this.datas = datas;
         this.context = context;
         getRandomHeights(datas);
     }
 
-<<<<<<< HEAD
-    private void getRandomHeights(List<ArticleBean> datas) {
-=======
-    private void getRandomHeights(List<Integer> datas) {
->>>>>>> a4904fc3aebcfe5d3f3106fbd0f9c8cc1554a62d
+    private void getRandomHeights(List<IndexBean> datas) {
         lists = new ArrayList<>();
         for (int i = 0; i < datas.size(); i++) {
             lists.add((int) (700));
@@ -66,7 +54,80 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
         ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
         params.height = lists.get(position);//把随机的高度赋予item布局
         holder.itemView.setLayoutParams(params);
-        holder.mTextView.setText(position+"");
+        //头像处理
+        String path = datas.get(position).getHeadImg();
+        Uri uri = Uri.parse(path);
+        GenericDraweeHierarchyBuilder builder = new GenericDraweeHierarchyBuilder(context.getResources());
+        GenericDraweeHierarchy hierarchy = builder
+                .setActualImageScaleType(ScalingUtils.ScaleType.FIT_XY)
+                .setPlaceholderImage(context.getResources().getDrawable(R.drawable.index_img1))
+                .setRoundingParams(new RoundingParams().setRoundAsCircle(true))
+                .build();
+
+//
+        DraweeController controller = Fresco.newDraweeControllerBuilder()
+                .setUri(uri)
+                .build();
+        holder.headimg.setHierarchy(hierarchy);
+        holder.headimg.setController(controller);
+
+
+
+        holder.headimg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "头像被点击了", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
+        holder.name.setText(datas.get(position).getNickName());
+        holder.time.setText(datas.get(position).getDateTime());
+        String kind = datas.get(position).getKind();
+        if(kind.startsWith("真事")){
+            holder.kindimg.setImageResource(R.drawable.ring_green);
+        }else if (kind.startsWith("创作")){
+            holder.kindimg.setImageResource(R.drawable.ring_yellow);
+        }else if (kind.startsWith("灵异")){
+            holder.kindimg.setImageResource(R.drawable.ring_blue);
+        }else if(kind.startsWith("生活")){
+            holder.kindimg.setImageResource(R.drawable.ring_red);
+        }
+
+        holder.kindcontent.setText(datas.get(position).getKind());
+
+
+
+
+        //内容图片处理
+        String path2 = datas.get(position).getBackGround();
+        Uri uri2 = Uri.parse(path2);
+        GenericDraweeHierarchyBuilder builder2 = new GenericDraweeHierarchyBuilder(context.getResources());
+        GenericDraweeHierarchy hierarchy2 = builder2
+                .setActualImageScaleType(ScalingUtils.ScaleType.CENTER_CROP)
+                .setPlaceholderImage(context.getResources().getDrawable(R.drawable.index_img1))
+                .build();
+
+
+
+        DraweeController controller2 = Fresco.newDraweeControllerBuilder()
+                .setUri(uri2)
+                .build();
+
+        holder.mainimg.setController(controller2);
+        holder.mainimg.setHierarchy(hierarchy2);
+
+
+
+
+        holder.title.setText(datas.get(position).getTitle());
+
+        //读取第一章内容
+
+        holder.maincontent.setText(datas.get(position).getContent());
+
     }
 
     @Override
@@ -76,7 +137,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
 }
 
 class MyViewHolder extends RecyclerView.ViewHolder {
-<<<<<<< HEAD
     SimpleDraweeView headimg;
     TextView name;
     TextView time;
@@ -95,11 +155,5 @@ class MyViewHolder extends RecyclerView.ViewHolder {
         mainimg = (SimpleDraweeView) itemView.findViewById(R.id.index_img);
         title = (TextView) itemView.findViewById(R.id.list_title);
         maincontent = (TextView) itemView.findViewById(R.id.list_maincontent);
-=======
-    TextView mTextView;
-    public MyViewHolder(View itemView) {
-        super(itemView);
-        mTextView = (TextView) itemView.findViewById(R.id.item_tv);
->>>>>>> a4904fc3aebcfe5d3f3106fbd0f9c8cc1554a62d
     }
 }

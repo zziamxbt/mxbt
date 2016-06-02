@@ -8,9 +8,11 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:text="2016-03-21 11:43:36 共5篇故事"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center"/>
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/theme_content_listviewhead_image"
+        android:layout_marginTop="10dp"
         android:layout_width="340dp"
         android:layout_height="200dp" />
     <TextView
@@ -18,7 +20,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_gravity="center"
         android:text="简介"/>
+
 
     <TextView
         android:id="@+id/theme_content_listviewhead_txt"
@@ -26,5 +30,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="txt文本"/>
+    <ImageView
+        android:id="@+id/theme_content_listviewhead_expandimg"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/expand"
+        android:layout_gravity="center"
+        />
 
 </LinearLayout>

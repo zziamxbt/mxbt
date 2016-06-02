@@ -1,7 +1,6 @@
 package com.example.acer.zzia_mxbt.fragment;
 
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,32 +12,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.acer.zzia_mxbt.R;
-import com.example.acer.zzia_mxbt.activity.Article_ReadActivity;
-import com.example.acer.zzia_mxbt.activity.CenterActivity;
-<<<<<<< HEAD
+
 import com.example.acer.zzia_mxbt.activity.MainActivity;
-import com.example.acer.zzia_mxbt.adapters.IndexListAdapter;
-import com.example.acer.zzia_mxbt.adapters.MyAdapter;
 import com.example.acer.zzia_mxbt.adapters.MyRecyclerViewAdapter;
 import com.example.acer.zzia_mxbt.application.MyApplication;
 import com.example.acer.zzia_mxbt.bean.ArticleBean;
-=======
-import com.example.acer.zzia_mxbt.adapters.IndexListAdapter;
-import com.example.acer.zzia_mxbt.adapters.MyRecyclerViewAdapter;
->>>>>>> a4904fc3aebcfe5d3f3106fbd0f9c8cc1554a62d
+
 import com.example.acer.zzia_mxbt.bean.IndexBean;
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.handmark.pulltorefresh.library.ILoadingLayout;
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -61,23 +46,23 @@ import java.util.List;
  * Created by acer on 2016/5/7.
  */
 public class CenterFragment extends Fragment {
-<<<<<<< HEAD
+
     //存放文章信息的list
     List<ArticleBean> list ;
 
     //Oncreate中用以返回的view
-    View view;
+   // View view;
 
     //定义recyclerView
     RecyclerView recyclerView ;
 
     //recyclerView 适配器
-    MyRecyclerViewAdapter  myRecyclerViewAdapter;
-=======
+    MyRecyclerViewAdapter myRecyclerViewAdapter;
+
     //存放首页文章信息的list
 
     View view;
->>>>>>> a4904fc3aebcfe5d3f3106fbd0f9c8cc1554a62d
+
     private static CenterFragment instance = null;
 
     public static CenterFragment newInstance() {
@@ -91,7 +76,7 @@ public class CenterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.centerlayout, container, false);
-<<<<<<< HEAD
+
 //        RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.center_recyclerView);
 //        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
 //        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -121,7 +106,7 @@ public class CenterFragment extends Fragment {
                 Type type = new TypeToken<List<IndexBean>>() {
                 }.getType();
                 list = gson.fromJson(result, type);
-                myRecyclerViewAdapter = new MyRecyclerViewAdapter(getActivity(),list);
+               // myRecyclerViewAdapter = new MyRecyclerViewAdapter(getActivity(),list);
                 recyclerView.setAdapter(myRecyclerViewAdapter);
 
             }
@@ -242,17 +227,6 @@ public class CenterFragment extends Fragment {
 
         }
 
-=======
-        RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.center_recyclerView);
-        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        List<Integer> datas = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            datas.add(i);
-        }
-        mRecyclerView.setAdapter(new MyRecyclerViewAdapter(getActivity(), datas));
-        return view;
->>>>>>> a4904fc3aebcfe5d3f3106fbd0f9c8cc1554a62d
     }
 }
 

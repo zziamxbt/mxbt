@@ -19,10 +19,9 @@ import android.widget.Toast;
 import com.example.acer.zzia_mxbt.activity.Article_ReadActivity;
 import com.example.acer.zzia_mxbt.activity.MainActivity;
 import com.example.acer.zzia_mxbt.adapters.IndexListAdapter;
-<<<<<<< HEAD
+
 import com.example.acer.zzia_mxbt.adapters.IndexListAdapter1;
-=======
->>>>>>> a4904fc3aebcfe5d3f3106fbd0f9c8cc1554a62d
+
 import com.example.acer.zzia_mxbt.bean.IndexBean;
 
 import com.example.acer.zzia_mxbt.R;
@@ -58,27 +57,15 @@ public class ViewFragment extends Fragment {
     List<IndexBean> list;
     List<IndexBean> savelist;
     PullToRefreshListView listView;
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
     IndexListAdapter1 ila1;
-    SimpleDraweeView headimg;
-    Boolean isend = false;
-    static int begin = 0;
-    static int end = 9;
-=======
->>>>>>> a4904fc3aebcfe5d3f3106fbd0f9c8cc1554a62d
+
+
     IndexListAdapter ila;
     SimpleDraweeView headimg ;
     Boolean isend=false;
     static  int begin = 0;
     static  int end = 9;
-<<<<<<< HEAD
-
-=======
->>>>>>> db59871c633148284d7daa630ffb1dba54653085
->>>>>>> a4904fc3aebcfe5d3f3106fbd0f9c8cc1554a62d
 
     View view;
 
@@ -132,42 +119,26 @@ public class ViewFragment extends Fragment {
 
 
                 initRefreshListView();
-<<<<<<< HEAD
+
 
                 View v = View.inflate(getActivity(), R.layout.index_header_text, null);
                 listView.getRefreshableView().addHeaderView(v, null, true);
 
-=======
-<<<<<<< HEAD
-                View v = View.inflate(getActivity(), R.layout.index_header_text, null);
-                listView.getRefreshableView().addHeaderView(v, null, true);
-=======
-                View v = View.inflate(getActivity(),R.layout.index_header_text,null);
-                listView.getRefreshableView().addHeaderView(v,null,false);
->>>>>>> db59871c633148284d7daa630ffb1dba54653085
->>>>>>> a4904fc3aebcfe5d3f3106fbd0f9c8cc1554a62d
+
+
+
                 listView.getRefreshableView().setHeaderDividersEnabled(false);
 
                 for (int i = begin; i <= end; i++) {
                     savelist.add(list.get(i));
                 }
 
-<<<<<<< HEAD
+
 
 
 
                 ila = new IndexListAdapter(getActivity(),  savelist);
                 listView.setAdapter(ila);
-
-=======
-<<<<<<< HEAD
-                ila1 = new IndexListAdapter1(getActivity(), savelist);
-                listView.setAdapter(ila1);
-=======
-                ila = new IndexListAdapter(getActivity(),  savelist);
-                listView.setAdapter(ila);
->>>>>>> db59871c633148284d7daa630ffb1dba54653085
->>>>>>> a4904fc3aebcfe5d3f3106fbd0f9c8cc1554a62d
 
 
                 listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
