@@ -23,6 +23,7 @@ import com.example.acer.zzia_mxbt.adapters.IndexListAdapter;
 import com.example.acer.zzia_mxbt.bean.IndexBean;
 
 import com.example.acer.zzia_mxbt.R;
+import com.example.acer.zzia_mxbt.bean.User;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -87,6 +88,13 @@ public class ViewFragment extends Fragment {
 //                Log.e("Aid", "onItemClick: "+Aid );
                 Intent intent = new Intent(getActivity(), Article_ReadActivity.class);
                 intent.putExtra("Article_Id",Aid);
+                Log.e("Uid", "MainActivity.getUser().getUid(): "+MainActivity.getUser().getUid() );
+                if(MainActivity.getUser().getUid()==0){
+
+                }else {
+                    intent.putExtra("User_Id",MainActivity.getUser().getUid());
+                }
+
                 startActivity(intent);
             }
         });

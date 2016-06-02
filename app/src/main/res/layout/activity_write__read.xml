@@ -30,6 +30,7 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:textStyle="bold"
+                android:textColor="@color/black"
                 android:text="封面" />
         </LinearLayout>
     </RelativeLayout>

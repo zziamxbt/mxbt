@@ -2,6 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.acer.zzia_mxbt">
 
+    <!--第三方支付的权限-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- Mob网络权限 -->
@@ -94,50 +103,26 @@
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="573329d1e0f55aea7500430f" />
-<<<<<<< HEAD
-        <activity android:name=".activity.CenterActivity"></activity>
-=======
+<!--第三方支付的activity-->
+        <activity
+            android:name="c.b.a.A"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name="c.b.a.B"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent" />
 
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-        <activity android:name=".activity.Write_ReadActivity">
-
-        </activity>
-=======
-<<<<<<< HEAD
->>>>>>> 78d805572bb8e68acdd3e50d1c6f3cff93ac58c7
         <activity android:name=".activity.Write_ReadActivity" />
-        <activity android:name=".activity.AndWriteContent_Activity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".activity.AndWriteContent_Activity" />
+        <activity android:name=".activity.CenterActivity" />
+        <activity android:name=".activity.ThemeActivity"></activity>
+        <activity android:name=".activity.WalletActivity">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-
-
-
-        <activity android:name=".activity.CenterActivity"></activity>
-
-
->>>>>>> d98bb64e77438e7f978bfbee0162b58bea256679
-        <activity android:name=".activity.ThemeActivity">
-        </activity>
-<<<<<<< HEAD
-        <activity android:name=".activity.Write_ReadActivity"></activity>
-=======
-
-<<<<<<< HEAD
-
-
-=======
->>>>>>> d3c0fd6047d0f6bf84f1f9e174754d9e321b6bf4
->>>>>>> a1366b9838d5ec1ce1f063796b4aa20538d84ffd
->>>>>>> 198933d18b88973024f8dd14f00608c73ffaf18c
->>>>>>> 78d805572bb8e68acdd3e50d1c6f3cff93ac58c7
->>>>>>> d98bb64e77438e7f978bfbee0162b58bea256679
     </application>
 
 </manifest>

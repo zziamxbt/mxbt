@@ -122,7 +122,19 @@ public class Article_ReadActivity extends AppCompatActivity {
     private int mListView_Item_position;
     //下载背景
     private Handler handler_background;
-
+    //推荐和收藏图标变换
+    private ImageView mtuijain;
+    private ImageView mshoucang;
+    private boolean shoucangFlag=true;
+    private boolean tuijianFlag=true;
+    //执行文章内容getText（）
+    private int TextContent=0;
+    //执行推荐getText（）
+    private int RecommendNum=1;
+   //执行收藏getText（）
+    private int CollectNum=2;
+    //获取activity跳转过来的值
+    Intent intent=getIntent();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,7 +147,7 @@ public class Article_ReadActivity extends AppCompatActivity {
         //得到网络数据的路径
         getPath();
         //获取网络数据
-        getTest();
+        getTest(TextContent,true);
 
         //添加数据方法
         //  initdata(listData);
@@ -359,6 +371,9 @@ public class Article_ReadActivity extends AppCompatActivity {
         //mRoundPicture=new RoundPicture(Article_ReadActivity.this);
         mArticleList = new ArrayList<>();
         mChapterList = new ArrayList<>();
+        //推荐和收藏初始化
+          mtuijain= (ImageView) findViewById(R.id.tuijian);
+          mshoucang= (ImageView) findViewById(R.id.shoucang);
     }
 
     private void initdata(List<ArticleBean> listData) {
@@ -506,11 +521,33 @@ public class Article_ReadActivity extends AppCompatActivity {
 
     //推荐监听
     public void MyRecommended(View view){
-        Toast.makeText(Article_ReadActivity.this, "你点击了推荐", Toast.LENGTH_SHORT).show();
+        if(tuijianFlag){
+            getTest(RecommendNum,tuijianFlag);
+          mtuijain.setImageResource(R.drawable.tuijian_success);
+            tuijianFlag=false;
+            Toast.makeText(Article_ReadActivity.this, "推荐成功", Toast.LENGTH_SHORT).show();
+        }else {
+            getTest(RecommendNum,tuijianFlag);
+            mtuijain.setImageResource(R.drawable.tuijian);
+            tuijianFlag=true;
+            Toast.makeText(Article_ReadActivity.this, "推荐取消", Toast.LENGTH_SHORT).show();
+        }
+
     }
     //收藏监听
     public void MyCollection(View view){
-        Toast.makeText(Article_ReadActivity.this, "你点击了收藏", Toast.LENGTH_SHORT).show();
+        if(shoucangFlag){
+            getTest(CollectNum,shoucangFlag);
+            mshoucang.setImageResource(R.drawable.shoucang_success);
+            shoucangFlag=false;
+            Toast.makeText(Article_ReadActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
+        }else {
+            getTest(CollectNum,shoucangFlag);
+            mshoucang.setImageResource(R.drawable.shoucang);
+            shoucangFlag=true;
+            Toast.makeText(Article_ReadActivity.this, "收藏取消", Toast.LENGTH_SHORT).show();
+        }
+
     }
     //评论监听
     public void MyComments(View view){
@@ -564,26 +601,53 @@ public class Article_ReadActivity extends AppCompatActivity {
     }
 
     //gest请求的到网络数据
-    public void getTest() {
+    public void getTest(final int Num,boolean flag) {
         //get请求
         //第一步：设置访问路径
+        RequestParams params = null;
+        int User_Id=intent.getIntExtra("User_Id",0);;
+        int article_id=intent.getIntExtra("Article_Id",0);
+        params= new RequestParams(mPath);
+         if(Num==0){
+             params.addQueryStringParameter("Num",0+"");//让后台判断到底执行那个语句，对数据库进行修改（标示）
+             params.addQueryStringParameter("article_id",article_id+"");
+         }else if(Num==1){
+             //判断是否推荐，修改数据库
+             params.addQueryStringParameter("Num",1+"");//让后台判断到底执行那个语句，对数据库进行修改（标示）
+             if (flag){
+                 params.addQueryStringParameter("RecommendNum","true");
+             }else {
+                 params.addQueryStringParameter("RecommendNum","false");
+             }
+             params.addQueryStringParameter("User_Id",User_Id+"");
+             params.addQueryStringParameter("article_id",article_id+"");
+         }else if(Num==2){
+             //判断是否收藏，修改数据库
+             params.addQueryStringParameter("Num",2+"");//让后台判断到底执行那个语句，对数据库进行修改（标示）
+             if (flag){
+                 params.addQueryStringParameter("CollectNum","true");
+             }else {
+                 params.addQueryStringParameter("CollectNum","false");
+             }
+             params.addQueryStringParameter("User_Id",User_Id+"");
+             params.addQueryStringParameter("article_id",article_id+"");
+         }
 
-        Intent intent=getIntent();
-        int article_id=intent.getIntExtra("Article_Id",1);
-        Log.e("abc", "getTest: "+article_id );
-        RequestParams params = new RequestParams(mPath);
-        params.addQueryStringParameter("article_id",article_id+"");
         //第二步：开始请求，设置请求方式，同时实现回调函数
         x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
                 //访问成功，参数其实就是PrintWriter写回的值
                 //把JSON格式的字符串改为Student对象
-                Gson gson = new Gson();
-                Type type = new TypeToken<List<ArticleBean>>() {
-                }.getType();
-                listData = gson.fromJson(result, type);
-                initdata(listData);
+                if(Num==0){
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<List<ArticleBean>>() {
+                    }.getType();
+                    listData = gson.fromJson(result, type);
+                    initdata(listData);
+
+                }
+
 
 
                 //    initdata(list);
