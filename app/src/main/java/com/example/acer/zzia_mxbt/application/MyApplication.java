@@ -25,12 +25,23 @@ public class MyApplication extends Application {
     //登录
     private String loginUrl = "http://10.201.1.115:8080/ZZIA_MXBT/loginCheckServlet";
     //显示专题封面
+
+
     private String showSubjectUrl = "http://10.201.1.170:80/ZZIA_MXBT/showSubjectServlet";
+    //显示专题对应文章
+    private String showSubjectArticleUrl = "http://10.201.1.170:80/ZZIA_MXBT/showSubjectArticleServlet";
+
+
     //排行榜
     private String author_url = "http://10.201.1.115:8080/ZZIA_MXBT/user_servlet";
     private String novel_url = "http://10.201.1.115:8080/ZZIA_MXBT/novel_servlet";
     //投票
     private String vote_url = "http://10.201.1.115:8080/ZZIA_MXBT/vote_servlet";
+
+
+
+    //个人中心
+    private static  String center_url="http://10.201.1.183:8080/ZZIA_MXBT/index_servlet";
 
     @Override
     public void onCreate() {
@@ -73,4 +84,14 @@ public class MyApplication extends Application {
     public String getShowSubjectUrl() {
         return showSubjectUrl;
     }
+
+    public String getShowSubjectArticleUrl() {
+        return showSubjectArticleUrl;
+    }
+
+    public static String getCenter_url() {
+        return center_url;
+    }
+
+
 }

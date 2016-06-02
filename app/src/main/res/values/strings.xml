@@ -104,4 +104,7 @@
         根据互联网的发展和有关法律、法规及规范性文件的变化，或者因业务发展需要，梦溪笔谈有权对本协议的条款作出修改或变更。梦溪笔谈会直接发布协议修改的通知。\n\n
         \n\n
     </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
