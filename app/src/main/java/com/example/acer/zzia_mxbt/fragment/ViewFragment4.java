@@ -113,7 +113,7 @@ public class ViewFragment4 extends Fragment {
 
 
 
-        RequestParams params = new RequestParams("http://10.201.1.183:8080/ZZIA_MXBT/indexofshenghuo_servlet");
+        RequestParams params = new RequestParams("http://10.201.1.115:8080/ZZIA_MXBT/indexofshenghuo_servlet");
 
 //       RequestParams params= new RequestParams("http://139.129.58.244:8080/ZZIA_MXBT/indexoflingyi_servlet");
         params.addQueryStringParameter("select",flag);

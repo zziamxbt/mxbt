@@ -16,21 +16,25 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        sourceSets.main {
+            jniLibs.srcDirs = ['src/main/jniLibs']
+        }
     }
+
 }
+
 repositories {
     flatDir {
         dirs 'libs'//存放aar的路径
     }
+
 }
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-
     compile name: 'SMSSDK-2.0.2', ext: 'aar'
     compile name: 'SMSSDKGUI-2.0.2', ext: 'aar'
     compile 'com.android.support:appcompat-v7:23.4.0'
-
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.android.support:design:23.2.1'
     compile 'com.facebook.fresco:fresco:0.10.0'
@@ -38,7 +42,6 @@ dependencies {
     compile 'org.xutils:xutils:3.3.34'
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.loopeer.android.thirdparty.pulltorefresh:Android-PullToRefresh:2.1.1'
-
     compile files('libs/umeng_social_sdk.jar')
     compile files('libs/SocialSDK_Sina.jar')
     compile files('libs/SocialSDK_QQZone_3.jar')
@@ -56,5 +59,5 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.4.0'
     compile 'com.android.support:palette-v7:23.4.0'
     compile 'com.android.support:support-v4:23.4.0'
-
+    compile files('libs/jpush-android-2.1.5.jar')
 }

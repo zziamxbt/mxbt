@@ -91,10 +91,10 @@ public class ViewFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                Toast.makeText(getActivity(), "" + position, Toast.LENGTH_SHORT).show();
                 int Aid = list.get(position - 2).getArticleId();
-                Log.e("Aid", "onItemClick: "+Aid );
-              /*  Intent intent = new Intent(getActivity(), Article_ReadActivity.class);
+             //   Log.e("Aid", "onItemClick: "+Aid );
+                Intent intent = new Intent(getActivity(), Article_ReadActivity.class);
                 intent.putExtra("Article_Id",Aid);
-                startActivity(intent);*/
+                startActivity(intent);
             }
         });
 
@@ -103,7 +103,7 @@ public class ViewFragment extends Fragment {
     private void initList() {
 
 
-        RequestParams params = new RequestParams("http://10.201.1.183:8080/ZZIA_MXBT/index_servlet");
+        RequestParams params = new RequestParams("http://10.201.1.115:8080/ZZIA_MXBT/index_servlet");
 
 //       RequestParams params= new RequestParams("http://139.129.58.244:8080/ZZIA_MXBT/index_servlet");
         x.http().get(params, new Callback.CommonCallback<String>() {

@@ -126,16 +126,17 @@ public class Article_ReadActivity extends AppCompatActivity {
     //推荐和收藏图标变换
     private ImageView mtuijain;
     private ImageView mshoucang;
-    private boolean shoucangFlag=true;
-    private boolean tuijianFlag=true;
+    private boolean shoucangFlag = true;
+    private boolean tuijianFlag = true;
     //执行文章内容getText（）
-    private int TextContent=0;
+    private int TextContent = 0;
     //执行推荐getText（）
-    private int RecommendNum=1;
-   //执行收藏getText（）
-    private int CollectNum=2;
-    //获取activity跳转过来的值
-    Intent intent=getIntent();
+    private int RecommendNum = 1;
+    //执行收藏getText（）
+    private int CollectNum = 2;
+    //保存章节Id
+    private int[] Chapter_Id;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,7 +149,7 @@ public class Article_ReadActivity extends AppCompatActivity {
         //得到网络数据的路径
         getPath();
         //获取网络数据
-        getTest(TextContent,true);
+        getTest(TextContent, true);
 
         //添加数据方法
         //  initdata(listData);
@@ -188,7 +189,7 @@ public class Article_ReadActivity extends AppCompatActivity {
 
     private void setArticle_Adapter() {
         //文章适配器
-        myAdapter_article = new MyAdapter_article(Article_ReadActivity.this,mArticleList,mListView_Item_position);
+        myAdapter_article = new MyAdapter_article(Article_ReadActivity.this, mArticleList, mListView_Item_position);
         mArticleListView.setAdapter(myAdapter_article);
 //        myAdapter_article.notifyDataSetChanged();
         //  Log.e(TAG, "数据为" + mHeadAuthorName.getText());
@@ -373,8 +374,8 @@ public class Article_ReadActivity extends AppCompatActivity {
         mArticleList = new ArrayList<>();
         mChapterList = new ArrayList<>();
         //推荐和收藏初始化
-          mtuijain= (ImageView) findViewById(R.id.tuijian);
-          mshoucang= (ImageView) findViewById(R.id.shoucang);
+        mtuijain = (ImageView) findViewById(R.id.tuijian);
+        mshoucang = (ImageView) findViewById(R.id.shoucang);
     }
 
     private void initdata(List<ArticleBean> listData) {
@@ -400,7 +401,7 @@ public class Article_ReadActivity extends AppCompatActivity {
                 mJavaBean_chapter.setArticleEasyIntroduction(listData.get(0).getAuthor_name());
                 mJavaBean_chapter.setChapterNumber("封底");
             } else {
-                mJavaBean_chapter.setArticleEasyIntroduction(listData.get(0).getChapter_content().get(j-1));
+                mJavaBean_chapter.setArticleEasyIntroduction(listData.get(0).getChapter_content().get(j - 1));
                 mJavaBean_chapter.setChapterNumber(j + "/" + listData.get(0).getChapter_number().size());
             }
             mChapterList.add(mJavaBean_chapter);
@@ -409,13 +410,13 @@ public class Article_ReadActivity extends AppCompatActivity {
         mHeadAuthorName.setText(listData.get(0).getAuthor_name().toString());
         mArticleHeadBackground.setImageURI(Uri.parse(listData.get(0).getArticle_cover()));
         mHeadArticleTitle.setText(listData.get(0).getArticle_title());
-        if (listData.get(0).getArticle_type().equals("生活")){
+        if (listData.get(0).getArticle_type().equals("生活")) {
             mArticleTypeImage.setImageResource(R.drawable.ring_red);
-        }else if(listData.get(0).getArticle_type().equals("真事")){
+        } else if (listData.get(0).getArticle_type().equals("真事")) {
             mArticleTypeImage.setImageResource(R.drawable.ring_green);
-        }else if(listData.get(0).getArticle_type().equals("创作")){
+        } else if (listData.get(0).getArticle_type().equals("创作")) {
             mArticleTypeImage.setImageResource(R.drawable.ring_yellow);
-        }else if(listData.get(0).getArticle_type().equals("灵异")){
+        } else if (listData.get(0).getArticle_type().equals("灵异")) {
             mArticleTypeImage.setImageResource(R.drawable.ring_blue);
         }
 
@@ -437,6 +438,19 @@ public class Article_ReadActivity extends AppCompatActivity {
             mauthor_sex.setImageResource(R.drawable.sex_girl);
         } else {
             mauthor_sex.setImageResource(0);
+        }
+
+        //判断是否推荐
+        if(listData.get(0).isRecommandFalg()){
+            mtuijain.setImageResource(R.drawable.tuijian_success);
+        }else{
+            mtuijain.setImageResource(R.drawable.tuijian);
+        }
+        //判断是否收藏
+        if(listData.get(0).isCollectFalg()){
+            mshoucang.setImageResource(R.drawable.shoucang_success);
+        }else{
+            mshoucang.setImageResource(R.drawable.shoucang);
         }
         ReadBackground(listData.get(0).getArticle_background());
         handler_background = new Handler() {
@@ -507,65 +521,73 @@ public class Article_ReadActivity extends AppCompatActivity {
         }
 
     }
+
     //返回监听
-    public void Back(View view){
+    public void Back(View view) {
         finish();
     }
+
     //foot的e_mail监听
-    public void Foot_e_mail(View view){
+    public void Foot_e_mail(View view) {
         Toast.makeText(Article_ReadActivity.this, "你点击了foot的e_mail", Toast.LENGTH_SHORT).show();
     }
+
     //foot的addfriend监听
-    public void Foot_addfriend(View view){
+    public void Foot_addfriend(View view) {
         Toast.makeText(Article_ReadActivity.this, "你点击了foot的Foot_addfriend", Toast.LENGTH_SHORT).show();
     }
 
     //推荐监听
-    public void MyRecommended(View view){
-        if(tuijianFlag){
-            getTest(RecommendNum,tuijianFlag);
-          mtuijain.setImageResource(R.drawable.tuijian_success);
-            tuijianFlag=false;
-            Toast.makeText(Article_ReadActivity.this, "推荐成功", Toast.LENGTH_SHORT).show();
-        }else {
-            getTest(RecommendNum,tuijianFlag);
+    public void MyRecommended(View view) {
+        if (listData.get(0).isRecommandFalg()) {
+            getTest(RecommendNum, false);
             mtuijain.setImageResource(R.drawable.tuijian);
-            tuijianFlag=true;
+            listData.get(0).setRecommandFalg(false);
             Toast.makeText(Article_ReadActivity.this, "推荐取消", Toast.LENGTH_SHORT).show();
+        } else {
+            getTest(RecommendNum, true);
+            mtuijain.setImageResource(R.drawable.tuijian_success);
+            listData.get(0).setRecommandFalg(true);
+            Toast.makeText(Article_ReadActivity.this, "推荐成功", Toast.LENGTH_SHORT).show();
         }
 
     }
+
     //收藏监听
-    public void MyCollection(View view){
-        if(shoucangFlag){
-            getTest(CollectNum,shoucangFlag);
-            mshoucang.setImageResource(R.drawable.shoucang_success);
-            shoucangFlag=false;
-            Toast.makeText(Article_ReadActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
-        }else {
-            getTest(CollectNum,shoucangFlag);
+    public void MyCollection(View view) {
+        if (listData.get(0).isCollectFalg()) {
+            getTest(CollectNum, false);
             mshoucang.setImageResource(R.drawable.shoucang);
-            shoucangFlag=true;
+            listData.get(0).setCollectFalg(false);
             Toast.makeText(Article_ReadActivity.this, "收藏取消", Toast.LENGTH_SHORT).show();
+        } else {
+            getTest(CollectNum, true);
+            mshoucang.setImageResource(R.drawable.shoucang_success);
+            listData.get(0).setCollectFalg(true);
+            Toast.makeText(Article_ReadActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
         }
 
     }
+
     //评论监听
-    public void MyComments(View view){
+    public void MyComments(View view) {
         Toast.makeText(Article_ReadActivity.this, "你点击了评论", Toast.LENGTH_SHORT).show();
     }
+
     //分享监听
-    public void MyShare(View view){
-       Toast.makeText(Article_ReadActivity.this, "你点击了分享", Toast.LENGTH_SHORT).show();
+    public void MyShare(View view) {
+        Toast.makeText(Article_ReadActivity.this, "你点击了分享", Toast.LENGTH_SHORT).show();
     }
+
     //续写监听
-    public void MyWrite(View view){
+    public void MyWrite(View view) {
         Toast.makeText(Article_ReadActivity.this, "你点击了续写", Toast.LENGTH_SHORT).show();
     }
+
     //投票监听
-    public void MyVote(View view){
-        Intent intent=new Intent(this,VoteActivity.class);
-        intent.putExtra("Chapter_Id",listData.get(0).getChapter_id());
+    public void MyVote(View view) {
+        Intent intent = new Intent(this, VoteActivity.class);
+        intent.putExtra("Chapter_Id", listData.get(0).getChapter_id());
         Log.e("wwwwww", "Chapter_Id：" + listData.get(0).getChapter_id());
 //        Toast.makeText(Article_ReadActivity.this, "你点击了投票", Toast.LENGTH_SHORT).show();
         startActivity(intent);
@@ -602,38 +624,41 @@ public class Article_ReadActivity extends AppCompatActivity {
     }
 
     //gest请求的到网络数据
-    public void getTest(final int Num,boolean flag) {
+    public void getTest(final int Num, boolean flag) {
         //get请求
         //第一步：设置访问路径
         RequestParams params = null;
-
-        int article_id=intent.getIntExtra("Article_Id",0);
-        Log.e("Aid", "onItemClick: "+article_id );
-        params= new RequestParams(mPath);
-         if(Num==0){
-             params.addQueryStringParameter("Num",0+"");//让后台判断到底执行那个语句，对数据库进行修改（标示）
-             params.addQueryStringParameter("article_id",article_id+"");
-         }else if(Num==1){
-             //判断是否推荐，修改数据库
-             params.addQueryStringParameter("Num",1+"");//让后台判断到底执行那个语句，对数据库进行修改（标示）
-             if (flag){
-                 params.addQueryStringParameter("RecommendNum","true");
-             }else {
-                 params.addQueryStringParameter("RecommendNum","false");
-             }
-           //  params.addQueryStringParameter("User_Id",User.getUid()+"");
-             params.addQueryStringParameter("article_id",article_id+"");
-         }else if(Num==2){
-             //判断是否收藏，修改数据库
-             params.addQueryStringParameter("Num",2+"");//让后台判断到底执行那个语句，对数据库进行修改（标示）
-             if (flag){
-                 params.addQueryStringParameter("CollectNum","true");
-             }else {
-                 params.addQueryStringParameter("CollectNum","false");
-             }
-           //  params.addQueryStringParameter("User_Id",User.getUid()+"");
-             params.addQueryStringParameter("article_id",article_id+"");
-         }
+//获取activity跳转过来的值
+        Intent intent = getIntent();
+        int article_id = intent.getIntExtra("Article_Id",0);
+     //
+        params = new RequestParams(mPath);
+        if (Num == 0) {
+            params.addQueryStringParameter("User_Id",1+"");
+            params.addQueryStringParameter("Num", 0 + "");//让后台判断到底执行那个语句，对数据库进行修改（标示）
+            params.addQueryStringParameter("article_id", article_id + "");
+            Log.e("Aid", "activity: " + article_id);
+        } else if (Num == 1) {
+            //判断是否推荐，修改数据库
+            params.addQueryStringParameter("Num", 1 + "");//让后台判断到底执行那个语句，对数据库进行修改（标示）
+            if (flag) {
+                params.addQueryStringParameter("RecommendNum", "true");
+            } else {
+                params.addQueryStringParameter("RecommendNum", "false");
+            }
+              params.addQueryStringParameter("User_Id",1+"");
+            params.addQueryStringParameter("article_id", article_id + "");
+        } else if (Num == 2) {
+            //判断是否收藏，修改数据库
+            params.addQueryStringParameter("Num", 2 + "");//让后台判断到底执行那个语句，对数据库进行修改（标示）
+            if (flag) {
+                params.addQueryStringParameter("CollectNum", "true");
+            } else {
+                params.addQueryStringParameter("CollectNum", "false");
+            }
+              params.addQueryStringParameter("User_Id",1+"");
+            params.addQueryStringParameter("article_id", article_id + "");
+        }
 
         //第二步：开始请求，设置请求方式，同时实现回调函数
         x.http().get(params, new Callback.CommonCallback<String>() {
@@ -641,14 +666,16 @@ public class Article_ReadActivity extends AppCompatActivity {
             public void onSuccess(String result) {
                 //访问成功，参数其实就是PrintWriter写回的值
                 //把JSON格式的字符串改为Student对象
-                if(Num==0){
-                    Gson gson = new Gson();
-                    Type type = new TypeToken<List<ArticleBean>>() {
-                    }.getType();
-                    listData = gson.fromJson(result, type);
-                    initdata(listData);
+                     if(Num==0){
+                         Gson gson = new Gson();
+                         Type type = new TypeToken<List<ArticleBean>>() {
+                         }.getType();
+                         listData = gson.fromJson(result, type);
+                         initdata(listData);
+                         Log.e("listData", "listData: " + listData);
+                     }
 
-                }
+
 
 
 
