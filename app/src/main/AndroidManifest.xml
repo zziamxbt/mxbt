@@ -53,13 +53,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-<<<<<<< HEAD
-=======
-        <activity android:name=".activity.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
->>>>>>> 363cb125c3016c0ce9f7095c6240069116ad0158
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -113,14 +106,7 @@
             android:name="UMENG_APPKEY"
             android:value="573329d1e0f55aea7500430f" />
 
-<<<<<<< HEAD
-        <activity android:name=".activity.CenterActivity" />
-        <activity android:name=".activity.Write_ReadActivity" />
-        <activity android:name=".activity.ThemeContentActivity" />
-        <activity android:name=".activity.ThemeActivity">
-        </activity>
-        <activity android:name=".activity.AndWriteContent_Activity" />
-=======
+
         <!--第三方支付的activity-->
         <activity
             android:name="c.b.a.A"
@@ -144,7 +130,6 @@
 
 
         <activity android:name=".activity.ThemeContentActivity"></activity>
-<<<<<<< HEAD
          <!--极光推送集成-->
         <!-- Required SDK核心功能-->
         <activity
@@ -235,9 +220,6 @@
         <!-- Required . Enable it you can get statistics data with channel -->
         <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>
         <meta-data android:name="JPUSH_APPKEY" android:value="0df39e6620b17589afd021a6" /> <!-- </>值来自开发者平台取得的AppKey-->
-=======
->>>>>>> 363cb125c3016c0ce9f7095c6240069116ad0158
->>>>>>> 9d54412c37919f50a5b1af63fc86ca9254de4849
 
     </application>
 
