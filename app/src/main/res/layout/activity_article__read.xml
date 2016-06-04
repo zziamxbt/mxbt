@@ -93,6 +93,7 @@
             >
             <ImageView
                 android:paddingTop="10dp"
+                android:id="@+id/tuijian"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -115,6 +116,7 @@
             >
             <ImageView
                 android:paddingTop="10dp"
+                android:id="@+id/shoucang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

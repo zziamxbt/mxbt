@@ -70,25 +70,25 @@ public class ThemeActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                        int sid=mList.get(position).getSid();//专题id
-                        String imagePath=mList.get(position).getPath();//图片地址
-                        String content=mList.get(position).getScontent();//专题简介
-                        String textPath=mList.get(position).getStext();//专题内容
+                        int sid = mList.get(position).getSid();//专题id
+                        String imagePath = mList.get(position).getPath();//图片地址
+                        String content = mList.get(position).getScontent();//专题简介
+                        String textPath = mList.get(position).getStext();//专题内容
 
                         //将路径转化为URI
-                        Uri imageUri=Uri.parse(imagePath);
-                        Uri textUri=Uri.parse(textPath);
-                        Log.e("qiyu,传递sid",sid+"");
-                        Log.e("qiyu,传递image",imageUri+"");
-                        Log.e("qiyu,传递txt",textUri+"");
-                        Log.e("qiyu,传递content",content);
+                        Uri imageUri = Uri.parse(imagePath);
+                        Uri textUri = Uri.parse(textPath);
+                        Log.e("qiyu,传递sid", sid + "");
+                        Log.e("qiyu,传递image", imageUri + "");
+                        Log.e("qiyu,传递txt", textUri + "");
+                        Log.e("qiyu,传递content", content);
 
                         //传递参数
-                        Intent intent=new Intent(ThemeActivity.this,ThemeContentActivity.class);
-                        intent.putExtra("sid",sid);
-                        intent.putExtra("imageUri",imageUri.toString());
-                        intent.putExtra("textUri",textUri.toString());
-                        intent.putExtra("content",content);
+                        Intent intent = new Intent(ThemeActivity.this, ThemeContentActivity.class);
+                        intent.putExtra("sid", sid);
+                        intent.putExtra("imageUri", imageUri.toString());
+                        intent.putExtra("textUri", textUri.toString());
+                        intent.putExtra("content", content);
                         startActivity(intent);
                     }
                 });
@@ -96,7 +96,7 @@ public class ThemeActivity extends AppCompatActivity {
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                Log.e("qiyu", "onError: "+ex.getMessage() );
+                Log.e("qiyu", "onError: " + ex.getMessage());
             }
 
             @Override

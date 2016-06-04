@@ -24,17 +24,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+<<<<<<< HEAD
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> implements View.OnClickListener {
     private List<IndexBean> datas;
     private Context context;
     private List<Integer> lists;
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
+=======
+public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
+    private List<IndexBean> datas;
+    private Context context;
+    private List<Integer> lists;
+
+>>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
     public MyRecyclerViewAdapter(Context context, List<IndexBean> datas) {
         this.datas = datas;
         this.context = context;
        
     }
 
+<<<<<<< HEAD
+=======
+    private void getRandomHeights(List<IndexBean> datas) {
+        lists = new ArrayList<>();
+        for (int i = 0; i < datas.size(); i++) {
+            lists.add((int) (700));
+        }
+    }
+>>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
 
     public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
         this.mOnItemClickListener = listener;

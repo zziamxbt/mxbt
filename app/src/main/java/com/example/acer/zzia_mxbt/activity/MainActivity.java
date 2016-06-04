@@ -50,6 +50,8 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import cn.jpush.android.api.JPushInterface;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawer;
     ViewPager index_viewPager;
@@ -94,14 +96,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     //是否登录
+<<<<<<< HEAD
     private static  boolean isLogin = false;
+=======
+    private boolean isLogin = false;
+>>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
 
     public static User getUser() {
         return user;
     }
+<<<<<<< HEAD
     public static boolean isLogin() {
         return isLogin;
     }
+=======
+>>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
 
     private static User user;
     //双击退出标志位
@@ -116,7 +125,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
-
+       // JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
         getLoginParam();
         initView();
         initData();
