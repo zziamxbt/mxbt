@@ -9,15 +9,14 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="256dp"
+        android:layout_height="300dp"
         android:fitsSystemWindows="true">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar_layout"
             android:layout_width="match_parent"
             app:title="宁秀才"
-
-            android:layout_height="200dp"
+            android:layout_height="244dp"
             app:contentScrim="#30469b"
             app:expandedTitleMarginStart="48dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
@@ -41,8 +40,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin" >
+            </android.support.v7.widget.Toolbar>
+                <TextView
+                    android:id="@+id/center_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="编辑资料"
+                    android:layout_marginLeft="280dp"
+                    android:layout_marginTop="21dp"
+                    app:layout_collapseMode="pin"
 
-                </android.support.v7.widget.Toolbar>
+                    />
+
         </android.support.design.widget.CollapsingToolbarLayout>
 
         <android.support.design.widget.TabLayout
@@ -55,15 +64,7 @@
             app:tabSelectedTextColor="#0000ff"
             app:tabTextColor="#000000" />
     </android.support.design.widget.AppBarLayout>
-    <TextView
-        android:id="@+id/center_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="编辑资料"
-        android:layout_marginLeft="280dp"
-        android:layout_marginTop="15dp"
-        app:layout_scrollFlags="scroll|exitUntilCollapsed"
-        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -71,8 +72,11 @@
         android:scrollbars="none"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
         <android.support.v4.view.ViewPager
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:id="@+id/center_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
+
 </android.support.design.widget.CoordinatorLayout>

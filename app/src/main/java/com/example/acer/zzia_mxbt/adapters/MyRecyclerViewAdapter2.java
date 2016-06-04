@@ -24,34 +24,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-<<<<<<< HEAD
-public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> implements View.OnClickListener {
+public class MyRecyclerViewAdapter2 extends RecyclerView.Adapter<MyViewHolder> implements View.OnClickListener {
     private List<IndexBean> datas;
     private Context context;
     private List<Integer> lists;
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
-=======
-public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
-    private List<IndexBean> datas;
-    private Context context;
-    private List<Integer> lists;
-
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
-    public MyRecyclerViewAdapter(Context context, List<IndexBean> datas) {
+    public MyRecyclerViewAdapter2(Context context, List<IndexBean> datas) {
         this.datas = datas;
         this.context = context;
-       
+
     }
 
-<<<<<<< HEAD
-=======
-    private void getRandomHeights(List<IndexBean> datas) {
-        lists = new ArrayList<>();
-        for (int i = 0; i < datas.size(); i++) {
-            lists.add((int) (700));
-        }
-    }
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
 
     public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
         this.mOnItemClickListener = listener;
@@ -74,6 +57,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
         holder.itemView.setTag(position);
         ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
+
         holder.itemView.setLayoutParams(params);
         //头像处理
         String path = datas.get(position).getHeadImg();
@@ -154,7 +138,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
     @Override
     public int getItemCount() {
         if (datas!=null)
-        return datas.size();
+            return datas.size();
         else
             return 0;
     }
@@ -168,7 +152,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
     }
 }
 
-class MyViewHolder extends RecyclerView.ViewHolder {
+class MyViewHolder2 extends RecyclerView.ViewHolder {
     SimpleDraweeView headimg;
     TextView name;
     TextView time;
@@ -177,7 +161,7 @@ class MyViewHolder extends RecyclerView.ViewHolder {
     TextView title;
     TextView kindcontent;
     SimpleDraweeView mainimg;
-    public MyViewHolder(View itemView) {
+    public MyViewHolder2(View itemView) {
         super(itemView);
         headimg= (SimpleDraweeView) itemView.findViewById(R.id.index_head);
         name = (TextView) itemView.findViewById(R.id.index_username);
