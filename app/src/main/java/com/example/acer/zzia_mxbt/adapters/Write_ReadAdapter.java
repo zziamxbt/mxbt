@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.acer.zzia_mxbt.R;
 import com.example.acer.zzia_mxbt.bean.Write_ReadBean;
@@ -70,6 +71,13 @@ public class Write_ReadAdapter extends BaseAdapter {
         viewHolder.Write_ChapterAuthor.setImageURI(Uri.parse(mWrite_readBeanList.get(position).getWrite_ChapterAuthor()));
         viewHolder.Write_ChapterAuthorName.setText(mWrite_readBeanList.get(position).getWrite_ChapterAuthorName());
         viewHolder.Write_ArticleTime.setText(mWrite_readBeanList.get(position).getWrite_ArticleTime());
+
+        viewHolder.Write_ChapterAuthor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext, "你点击了本章续写者的头像", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return convertView;
     }

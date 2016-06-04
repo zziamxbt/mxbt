@@ -205,7 +205,7 @@ public class recycleview_adapter extends RecyclerView.Adapter<recycleview_adapte
     }
     public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
         this.mOnItemClickListener = listener;
-    }
+}
 
     public static class recycleView extends  RecyclerView.ViewHolder{
         SimpleDraweeView headimg;

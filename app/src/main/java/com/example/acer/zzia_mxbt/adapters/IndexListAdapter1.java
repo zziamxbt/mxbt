@@ -60,9 +60,6 @@ public class IndexListAdapter1 extends BaseAdapter {
         TextView title;
         TextView kindcontent;
         SimpleDraweeView mainimg;
-
-
-
     }
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -79,6 +76,7 @@ public class IndexListAdapter1 extends BaseAdapter {
             viewHolder.title = (TextView) convertView.findViewById(R.id.list_title);
 
             viewHolder.maincontent = (TextView) convertView.findViewById(R.id.list_maincontent);
+
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
@@ -116,6 +114,7 @@ public class IndexListAdapter1 extends BaseAdapter {
 
         viewHolder.name.setText(mlist.get(position).getNickName());
         viewHolder.time.setText(mlist.get(position).getDateTime());
+       // viewHolder.time.setText(System.currentTimeMillis()-Integer.parseInt(mlist.get(position).getDateTime())+""+"前更新");
         String kind = mlist.get(position).getKind();
         if(kind.startsWith("真事")){
             viewHolder.kindimg.setImageResource(R.drawable.ring_green);
@@ -158,6 +157,7 @@ public class IndexListAdapter1 extends BaseAdapter {
         //读取第一章内容
 
         viewHolder.maincontent.setText(mlist.get(position).getContent());
+
 
         return convertView;
     }
