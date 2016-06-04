@@ -1,6 +1,5 @@
 package com.example.acer.zzia_mxbt.activity;
 
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -13,7 +12,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.view.animation.Transformation;
-import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -48,7 +47,9 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ThemeContentActivity extends AppCompatActivity {
@@ -69,35 +70,23 @@ public class ThemeContentActivity extends AppCompatActivity {
     private TextView mHeadTxtTextView;//头部txt文件
     private SimpleDraweeView mHeadImageView;//头部专题标题image
     private ImageView mExpandImg;//头部展开图标
-    private int maxLine = 3;//默认最大展示行数
+    private int maxLine = 3;//默认txt最大展示行数
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fresco.initialize(this);//处理图片
         setContentView(R.layout.activity_theme_content);
-        //1，初始化布局
-        initViews();
+        initViews(); //1，初始化布局
 
-      /*  View head = View.inflate(ThemeContentActivity.this, R.layout.theme_content_listviewhead, null);
-        mListView.getRefreshableView().addHeaderView(head, null, false);*/
-        //2,初始化数据
-        initDatas();
+        initDatas();//2,初始化数据
 
-        //3,在listview上添加头部
+        initListeners(); //3，监听事件(返回键，分享按钮)
 
-//        addListViewHead();
+        listViewListeners();//4,listview监听事件
 
-        //4，监听事件(返回键，分享按钮)
-        initListeners();
-
-        //5,上拉加载，下拉刷新
-        mListView.setMode(PullToRefreshBase.Mode.BOTH);//表示既可以加载又可以刷新
+        mListView.setMode(PullToRefreshBase.Mode.BOTH);//5,上拉加载，下拉刷新,both表示既可以加载又可以刷新
         initRefreshListView();//初始化刷新事件
-        listViewListeners();//listview监听事件
-
-       /* View head = View.inflate(ThemeContentActivity.this, R.layout.theme_content_listviewhead, null);
-        mListView.getRefreshableView().addHeaderView(head, null, false);*/
     }
 
     /**
@@ -112,7 +101,7 @@ public class ThemeContentActivity extends AppCompatActivity {
      * 2,初始化数据：将专题页面传递的id交于后台处理获取所有的文章集合，再转交适配器处理
      */
 
-    /**********************************************以下是获取后台数据集合并处理后交由适配器处理BEGIN**************************************************/
+    /*********************************************** 以下是获取后台数据集合并处理后交由适配器处理BEGIN**************************************************/
     private void initDatas() {
         MyApplication myApplication = (MyApplication) getApplication();
         mShowSubjectArticlePath = myApplication.getShowSubjectArticleUrl();//访问后台的地址
@@ -123,15 +112,6 @@ public class ThemeContentActivity extends AppCompatActivity {
         Log.e("qiyu接收sid", sid + "");
 
         mList = new ArrayList<>();//保存后台的bean集合
-
-        /*View head = View.inflate(ThemeContentActivity.this, R.layout.theme_content_listviewhead, null);
-        mListView.getRefreshableView().addHeaderView(head, null, false);
-
-        mThemeContentAdapter = new ThemeContentAdapter(ThemeContentActivity.this, mList);
-        mListView.setAdapter(mThemeContentAdapter);
-*/
-
-
 
         RequestParams params = new RequestParams(mShowSubjectArticlePath);
         params.addParameter("sid", sid);
@@ -147,21 +127,17 @@ public class ThemeContentActivity extends AppCompatActivity {
                 loadListTxtAsyncTask myTask = new loadListTxtAsyncTask();
                 myTask.execute(mList);
 
-              /*  View head = View.inflate(ThemeContentActivity.this, R.layout.theme_content_listviewhead, null);
-                mListView.getRefreshableView().addHeaderView(head, null, false);*/
+                //在listview上添加头部
+                View head = View.inflate(ThemeContentActivity.this, R.layout.theme_content_listviewhead, null);
+                mListView.getRefreshableView().addHeaderView(head, null, false);
+                addListViewHead();
 
-                AbsListView.LayoutParams layoutParams = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.WRAP_CONTENT);
-                View header = getLayoutInflater().inflate(R.layout.theme_content_listviewhead, mListView, false);
-                header.setLayoutParams(layoutParams);
-                ListView lv = mListView.getRefreshableView();
-                lv.addHeaderView(header);
-
-
-
-
+                //listview绑定适配器
                 mThemeContentAdapter = new ThemeContentAdapter(ThemeContentActivity.this, mList);
                 mListView.setAdapter(mThemeContentAdapter);
+               /* addListViewHead();*/
 
+                mThemeContentAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -181,7 +157,7 @@ public class ThemeContentActivity extends AppCompatActivity {
         });
     }
 
-    //耗时操作，异步加载取出文章集合的第一章，
+    //耗时操作，异步加载取出文章集合的第一章
 
     /**
      * 参数一：表示需要处理的数据类型
@@ -190,6 +166,7 @@ public class ThemeContentActivity extends AppCompatActivity {
      */
     static class loadListTxtAsyncTask extends AsyncTask<List<SubjectArticleBean>, Void, String> {
         List<SubjectArticleBean> mList = null;
+
         @Override
         protected String doInBackground(List<SubjectArticleBean>... params) {
             mList = params[0];
@@ -238,9 +215,9 @@ public class ThemeContentActivity extends AppCompatActivity {
 
 
     /**
-     * 3,在listview上添加头部，并将由专题页面传递的参数显示在页面
+     * 3，设置listview头部参数，并将由专题页面传递的参数显示在页面
      */
-    /**********************************************以下是listview添加头部BEGIN***********************************************/
+    /*********************************************** 以下是listview添加头部BEGIN***********************************************/
     private void addListViewHead() {
         mHeadTimeTextView = (TextView) findViewById(R.id.theme_content_listviewhead_timetext);
         mHeadImageView = (SimpleDraweeView) findViewById(R.id.theme_content_listviewhead_image);
@@ -251,11 +228,13 @@ public class ThemeContentActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Uri imageUri = Uri.parse(intent.getStringExtra("imageUri"));
         String content = intent.getStringExtra("content");
-        String txt=intent.getStringExtra("textUri");
+        String txt = intent.getStringExtra("textUri");
 
-        Log.e("qiyu接收img", imageUri + "");
-        Log.e("qiyu接收content", content + "");
-        Log.e("qiyu接收txt",txt + "");
+        //时间及文章总数显示
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String now = df.format(new Date());
+        int size = mList.size();
+        mHeadTimeTextView.setText(now + " " + "共" + size + "篇故事");
 
         //简介显示
         mHeadContentTextView.setText(content);
@@ -274,86 +253,80 @@ public class ThemeContentActivity extends AppCompatActivity {
         mHeadImageView.setHierarchy(hierarchy);
 
         //txt显示
-        loadTxtAsyncTask txtTask=new loadTxtAsyncTask(ThemeContentActivity.this);
+        loadTxtAsyncTask txtTask = new loadTxtAsyncTask(ThemeContentActivity.this);
         txtTask.execute(txt);
-
-      /*  //文本展开
-        mHeadTxtTextView.setHeight(mHeadTxtTextView.getLineHeight()*maxLine);//设置默认显示高度
-        //依据高度来控制是否翻转icon
-        mHeadTxtTextView.post(new Runnable() {
-            @Override
-            public void run() {
-                mExpandImg.setVisibility(mHeadTxtTextView.getLineCount()>maxLine? View.VISIBLE:View.GONE);
-            }
-        });
-
-      mExpandImg.setOnClickListener(new MyTurnListener());//翻转监听事件*//**//*
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main,menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id=item.getItemId();
-        if(id==R.id.action_settings){
-            return  true;
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     private class MyTurnListener implements View.OnClickListener {
         boolean isExpand;//是否翻转
+
         @Override
         public void onClick(View v) {
-            isExpand=!isExpand;
+            isExpand = !isExpand;
             mHeadTxtTextView.clearAnimation();//清除动画
             final int tempHight;
-            final int startHight=mHeadTxtTextView.getHeight();//起始高度
-            int durationMillis=200;
-            if(isExpand){
+            final int startHight = mHeadTxtTextView.getHeight();//起始高度
+            int durationMillis = 200;
+            if (isExpand) {
                 //折叠，长变短
-                tempHight=mHeadTxtTextView.getLineHeight()*mHeadTxtTextView.getLineCount()-startHight;//为正值
-                //180翻转icon
-                RotateAnimation animation=new RotateAnimation(0,180, Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+                tempHight = mHeadTxtTextView.getLineHeight() * mHeadTxtTextView.getLineCount() - startHight;  //为正值，长文减去短文的高度差
+                //翻转icon的180度旋转动画
+                RotateAnimation animation = new RotateAnimation(0, 180, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
                 animation.setDuration(durationMillis);
                 animation.setFillAfter(true);
                 mExpandImg.startAnimation(animation);
-            }else{
+            } else {
                 //展开，短变长
-                tempHight=mHeadTxtTextView.getLineHeight()*maxLine-startHight;//为负值
-                //180翻转icon
-                RotateAnimation animation=new RotateAnimation(180,0, Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+                tempHight = mHeadTxtTextView.getLineHeight() * maxLine - startHight;//为负值，即短文减去长文的高度差
+                //翻转icon的180度旋转动画
+                RotateAnimation animation = new RotateAnimation(180, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
                 animation.setDuration(durationMillis);
                 animation.setFillAfter(true);
                 mExpandImg.startAnimation(animation);
             }
-            Animation animation=new Animation() {
-                protected void applyTransformation(float interpolatedTime, Transformation t){
-                    mHeadTxtTextView.setHeight((int) (startHight+tempHight*interpolatedTime));
+            Animation animation = new Animation() {
+                protected void applyTransformation(float interpolatedTime, Transformation t) {
+                    mHeadTxtTextView.setHeight((int) (startHight + tempHight * interpolatedTime));
                 }
             };
             animation.setDuration(durationMillis);
             mHeadTxtTextView.startAnimation(animation);
 
-        }*/
+        }
     }
+*/
     //专题txt异步加载
     static class loadTxtAsyncTask extends AsyncTask<String, Void, String> {
         private ThemeContentActivity activity;
         public loadTxtAsyncTask(ThemeContentActivity activity) {
             this.activity = activity;
         }
-        String txt = null;
+
+        String txt = null;//专题页面传递的txt地址
+
         @Override
         protected String doInBackground(String... params) {
             txt = params[0];
             StringBuilder content = null;
             URL url = null;
+
             try {
+                //将专题界面的具体简介从网络加载出来
                 url = new URL(txt);
                 InputStream is = url.openStream();
                 BufferedReader buff = new BufferedReader(new InputStreamReader(is, "UTF-8"));
@@ -372,18 +345,70 @@ public class ThemeContentActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String str) {
-            activity.mHeadTxtTextView.setText(str);
-            //文本展开
-            /*activity.mHeadTxtTextView.setHeight(activity.mHeadTxtTextView.getLineHeight()*activity.maxLine);//设置默认显示高度
+            activity.mHeadTxtTextView.setText(str);//将加载的文本显示出来
+            //文本展开及收缩操作
+            activity.mHeadTxtTextView.setHeight(activity.mHeadTxtTextView.getLineHeight() * activity.maxLine);//设置默认显示高度
             //依据高度来控制是否翻转icon
             activity.mHeadTxtTextView.post(new Runnable() {
                 @Override
                 public void run() {
-                   activity. mExpandImg.setVisibility(activity.mHeadTxtTextView.getLineCount()>activity.maxLine? View.VISIBLE:View.GONE);
+                    activity.mExpandImg.setVisibility(activity.mHeadTxtTextView.getLineCount() > activity.maxLine ? View.VISIBLE : View.GONE);
                 }
             });
 
-            activity.mExpandImg.setOnClickListener(activity.new MyTurnListener());//翻转监听事件*/
+            activity.mExpandImg.setOnClickListener(activity.new MyTurnListener());//翻转监听事件
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private class MyTurnListener implements View.OnClickListener {
+        boolean isExpand;//是否翻转
+        @Override
+        public void onClick(View v) {
+            isExpand = !isExpand;
+            mHeadTxtTextView.clearAnimation();//清除动画
+            final int tempHight;
+            final int startHight = mHeadTxtTextView.getHeight();//起始高度
+            int durationMillis = 200;
+            if (isExpand) {
+                //折叠，长变短
+                tempHight = mHeadTxtTextView.getLineHeight() * mHeadTxtTextView.getLineCount() - startHight;  //为正值，长文减去短文的高度差
+                //翻转icon的180度旋转动画
+                RotateAnimation animation = new RotateAnimation(0, 180, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                animation.setDuration(durationMillis);
+                animation.setFillAfter(true);
+                mExpandImg.startAnimation(animation);
+            } else {
+                //展开，短变长
+                tempHight = mHeadTxtTextView.getLineHeight() * maxLine - startHight;//为负值，即短文减去长文的高度差
+                //翻转icon的180度旋转动画
+                RotateAnimation animation = new RotateAnimation(180, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                animation.setDuration(durationMillis);
+                animation.setFillAfter(true);
+                mExpandImg.startAnimation(animation);
+            }
+            Animation animation = new Animation() {
+                protected void applyTransformation(float interpolatedTime, Transformation t) {
+                    mHeadTxtTextView.setHeight((int) (startHight + tempHight * interpolatedTime));
+                }
+            };
+            animation.setDuration(durationMillis);
+            mHeadTxtTextView.startAnimation(animation);
+
         }
     }
 
@@ -393,6 +418,7 @@ public class ThemeContentActivity extends AppCompatActivity {
      * 4，其他控件监听事件
      */
     private void initListeners() {
+        //返回键的监听事件
         mReturnImg.setOnClickListener(new View.OnClickListener() {
             //返回键
             @Override
@@ -407,7 +433,9 @@ public class ThemeContentActivity extends AppCompatActivity {
     /**
      * 5,listview上拉加载下拉刷新
      */
-    /**********************************************以下是listview上拉加载下拉刷新BEGIN*************************************************/
+    /***********************************************
+     * 以下是listview上拉加载下拉刷新BEGIN
+     *************************************************/
     //listview刷新初始化
     private void initRefreshListView() {
         ILoadingLayout startLables = mListView.getLoadingLayoutProxy(true, false);
@@ -428,10 +456,23 @@ public class ThemeContentActivity extends AppCompatActivity {
                 //加载耗时，异步操作
                 new loadListViewAsyncTask(ThemeContentActivity.this).execute();
             }
+
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
 
                 new loadListViewAsyncTask(ThemeContentActivity.this).execute();
+            }
+        });
+
+        //ListView的item点击事件
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //listview有两个头部（刷新，专题封面），所以减2
+                int aid = mList.get(position - 2).getArticleId();
+                Intent intent = new Intent(ThemeContentActivity.this, Article_ReadActivity.class);
+                intent.putExtra("Article_Id", aid);
+                startActivity(intent);
             }
         });
     }
@@ -439,9 +480,11 @@ public class ThemeContentActivity extends AppCompatActivity {
     //内部类：实现数据加载的耗时操作
     static class loadListViewAsyncTask extends AsyncTask<Void, Void, String> {
         private ThemeContentActivity activity;
+
         public loadListViewAsyncTask(ThemeContentActivity activity) {
             this.activity = activity;
         }
+
         @Override
         protected String doInBackground(Void... params) {
             //用一个线程来模拟刷新
@@ -450,8 +493,6 @@ public class ThemeContentActivity extends AppCompatActivity {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            //加载数据
-            activity.initDatas();
             return "success";
         }
 
