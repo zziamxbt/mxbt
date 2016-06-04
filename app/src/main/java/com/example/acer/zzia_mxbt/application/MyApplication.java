@@ -30,7 +30,11 @@ public class MyApplication extends Application {
     private String novel_url = "http://10.201.1.183:8080/ZZIA_MXBT/novel_servlet";
     //投票
     private String vote_url = "http://10.201.1.183:8080/ZZIA_MXBT/vote_servlet";
-
+    //续写插入
+    private String andwrite_url="http://10.201.1.166:8080/ZZIA_MXBT/AndWrite_InsertServlet";
+    //评论查询，插入
+    private String article_comment_url="http://10.201.1.166:8080/ZZIA_MXBT/ArticeComment_Servlet";
+   private String andwrite_comment_url="http://10.201.1.166:8080/ZZIA_MXBT/AndWriteComment_Servlet";
     @Override
     public void onCreate() {
         super.onCreate();
@@ -68,4 +72,9 @@ public class MyApplication extends Application {
     public String getShowSubjectUrl() {
         return showSubjectUrl;
     }
+    public String getAndwrite_url(){
+        return andwrite_url;
+    }
+    public String getArticle_comment_url(){return article_comment_url;}
+    public String getAndwrite_comment_url(){return andwrite_comment_url;}
 }
