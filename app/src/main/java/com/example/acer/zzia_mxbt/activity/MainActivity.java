@@ -91,9 +91,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public Handler handler;
     private static final int HIDDEN_CODE = 1;
     private static final int APPEAR_CODE = 2;
+
+
     //是否登录
-    private boolean isLogin = false;
-    private User user;
+    private static  boolean isLogin = false;
+
+    public static User getUser() {
+        return user;
+    }
+    public static boolean isLogin() {
+        return isLogin;
+    }
+
+    private static User user;
     //双击退出标志位
     Boolean isExit =false;
     //更多按钮

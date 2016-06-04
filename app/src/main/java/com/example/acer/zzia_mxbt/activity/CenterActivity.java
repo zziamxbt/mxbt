@@ -1,5 +1,6 @@
 package com.example.acer.zzia_mxbt.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -12,10 +13,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.acer.zzia_mxbt.R;
 import com.example.acer.zzia_mxbt.adapters.CenterViewPagerAdapter;
+import com.example.acer.zzia_mxbt.bean.User;
 import com.example.acer.zzia_mxbt.fragment.CenterFragment;
 import com.example.acer.zzia_mxbt.fragment.CenterFragment1;
 import com.example.acer.zzia_mxbt.fragment.CenterFragment2;
@@ -41,15 +44,29 @@ public class CenterActivity extends AppCompatActivity {
     TextView textView ;
     ViewPager center_viewPager ;
     CenterViewPagerAdapter centerViewPagerAdapter;
+
+    public static User getUser() {
+        return user;
+    }
+
+    private static  User user;
+    Boolean isLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fresco.initialize(CenterActivity.this);
         setContentView(R.layout.activity_center);
+        intentGetter();
         iniView();
         setView();
         intiPager();
 
+    }
+
+    private void intentGetter() {
+        Intent intent = getIntent();
+        isLogin = intent.getBooleanExtra("isLogin", false);
+        user = (User) intent.getSerializableExtra("user");
     }
 
     private void intiPager() {
@@ -68,9 +85,13 @@ public class CenterActivity extends AppCompatActivity {
     }
 
     private void setView() {
+
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        String path2 = "http://139.129.58.244:8080/image/fengjing1.jpg";
+
+
+
+        String path2 = user.getUbk();
         Uri uri2 = Uri.parse(path2);
         GenericDraweeHierarchyBuilder builder2 = new GenericDraweeHierarchyBuilder(CenterActivity.this.getResources());
         GenericDraweeHierarchy hierarchy2 = builder2
@@ -85,13 +106,14 @@ public class CenterActivity extends AppCompatActivity {
 
 
 
-        String path1 = "http://139.129.58.244:8080/image/UserDefault.png";
+        String path1 = user.getUhead();
         Uri uri1 = Uri.parse(path1);
         GenericDraweeHierarchyBuilder builder1 = new GenericDraweeHierarchyBuilder(CenterActivity.this.getResources());
         GenericDraweeHierarchy hierarchy1 = builder1
                 .setActualImageScaleType(ScalingUtils.ScaleType.CENTER_CROP)
                 .setPlaceholderImage(CenterActivity.this.getResources().getDrawable(R.drawable.index_img1))
                 .setRoundingParams(new RoundingParams().setRoundAsCircle(true))
+
                 .build();
         DraweeController controller1 = Fresco.newDraweeControllerBuilder()
                 .setUri(uri1)
@@ -107,14 +129,17 @@ public class CenterActivity extends AppCompatActivity {
                         Palette.from((Bitmap)msg.obj).generate(new Palette.PaletteAsyncListener() {
                             @Override
                             public void onGenerated(final Palette palette) {
-                                int defaultColor = getResources().getColor(R.color.blue);
-                                int defaultTitleColor = getResources().getColor(R.color.white);
-                                int bgColor = palette.getDarkVibrantColor(defaultColor);
-                                int titleColor = palette.getLightVibrantColor(defaultTitleColor);
+
+                                int bgColor = palette.getLightVibrantColor(getResources().getColor(R.color.white));
+                                int titleColor = palette.getMutedColor(getResources().getColor(R.color.white));
+                                int ExpandedTitleColor = palette.getLightVibrantColor(getResources().getColor(R.color.white));
+                                if(ExpandedTitleColor==getResources().getColor(R.color.white))
+                                    ExpandedTitleColor = palette.getDarkMutedColor(getResources().getColor(R.color.white));
                                 ctbl.setContentScrimColor(bgColor);
                                 ctbl.setCollapsedTitleTextColor(titleColor);
-                                ctbl.setExpandedTitleColor(titleColor);
+                                ctbl.setExpandedTitleColor(ExpandedTitleColor);
                                 textView.setTextColor(titleColor);
+
                             }
                         });
 
@@ -129,13 +154,17 @@ public class CenterActivity extends AppCompatActivity {
                     super.run();
                     URL url = null;
                     try {
-                        url = new URL("http://139.129.58.244:8080/image/fengjing1.jpg");
+                        url = new URL(user.getUbk());
                         InputStream is = url.openStream();
                         Bitmap bitmap = BitmapFactory.decodeStream(is);
+//                        if(bitmap!=null){
+//                            Log.e("bitmap", "run: "+"NOTNULL" );
+//                        }
                         Message msg = new Message();
                         msg.obj = bitmap;
                         msg.what = BACK_IMAGE_CODE;
                         hanler.sendMessage(msg);
+                        is.close();
                     } catch (MalformedURLException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
@@ -143,6 +172,8 @@ public class CenterActivity extends AppCompatActivity {
                     }
                 }
             }.start();
+            ctbl.setTitle(user.getUnickname());
+
     }
 
     private void iniView() {
@@ -152,5 +183,15 @@ public class CenterActivity extends AppCompatActivity {
        textView = (TextView) findViewById(R.id.center_edit);
         head_simpleDraweeView = (SimpleDraweeView) findViewById(R.id.center_head);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home)
+        {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -24,17 +24,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> implements View.OnClickListener {
+public class MyRecyclerViewAdapter1 extends RecyclerView.Adapter<MyViewHolder> implements View.OnClickListener {
     private List<IndexBean> datas;
     private Context context;
     private List<Integer> lists;
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
-    public MyRecyclerViewAdapter(Context context, List<IndexBean> datas) {
+    public MyRecyclerViewAdapter1(Context context, List<IndexBean> datas) {
         this.datas = datas;
         this.context = context;
-       
+//        getRandomHeights(datas);
     }
-
 
     public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
         this.mOnItemClickListener = listener;
@@ -57,6 +56,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> im
 
         holder.itemView.setTag(position);
         ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
+
         holder.itemView.setLayoutParams(params);
         //头像处理
         String path = datas.get(position).getHeadImg();
@@ -137,7 +137,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> im
     @Override
     public int getItemCount() {
         if (datas!=null)
-        return datas.size();
+            return datas.size();
         else
             return 0;
     }
@@ -151,7 +151,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> im
     }
 }
 
-class MyViewHolder extends RecyclerView.ViewHolder {
+class MyViewHolder1 extends RecyclerView.ViewHolder {
     SimpleDraweeView headimg;
     TextView name;
     TextView time;
@@ -160,7 +160,7 @@ class MyViewHolder extends RecyclerView.ViewHolder {
     TextView title;
     TextView kindcontent;
     SimpleDraweeView mainimg;
-    public MyViewHolder(View itemView) {
+    public MyViewHolder1(View itemView) {
         super(itemView);
         headimg= (SimpleDraweeView) itemView.findViewById(R.id.index_head);
         name = (TextView) itemView.findViewById(R.id.index_username);

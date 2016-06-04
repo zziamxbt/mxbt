@@ -24,18 +24,33 @@ public class MyApplication extends Application {
     //登录
     private String loginUrl = "http://10.201.1.183:8080/ZZIA_MXBT/loginCheckServlet";
     //显示专题封面
-<<<<<<< HEAD
-    private String showSubjectUrl = "http://10.201.1.170:80/ZZIA_MXBT/showSubjectServlet";
-    //显示专题对应文章
-    private String showSubjectArticleUrl = "http://10.201.1.170:80/ZZIA_MXBT/showSubjectArticleServlet";
-=======
+    private String showSubjectArticleUrl = "http://10.201.1.183:80/ZZIA_MXBT/showSubjectArticleServlet";
+
     private String showSubjectUrl = "http://10.201.1.183:80/ZZIA_MXBT/showSubjectServlet";
->>>>>>> db59871c633148284d7daa630ffb1dba54653085
+
     //排行榜
     private String author_url = "http://10.201.1.183:8080/ZZIA_MXBT/user_servlet";
     private String novel_url = "http://10.201.1.183:8080/ZZIA_MXBT/novel_servlet";
     //投票
     private String vote_url = "http://10.201.1.183:8080/ZZIA_MXBT/vote_servlet";
+
+
+    //个人中心
+    //我的故事
+    private static  String mystory_url="http://10.201.1.183:8080/ZZIA_MXBT/mystory";
+    //我的收藏
+    private static  String mycollect_url="http://10.201.1.183:8080/ZZIA_MXBT/mycollect";
+
+
+    //我的推荐
+    private static  String myrecommand_url="http://10.201.1.183:8080/ZZIA_MXBT/myrecommand";
+
+
+    public static String getMycollect_url() {
+        return mycollect_url;
+    }
+
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -77,4 +92,12 @@ public class MyApplication extends Application {
     public String getShowSubjectArticleUrl() {
         return showSubjectArticleUrl;
     }
+    public static String getMystory_url() {
+        return mystory_url;
+    }
+
+    public static String getMyrecommand_url() {
+        return myrecommand_url;
+    }
+
 }
