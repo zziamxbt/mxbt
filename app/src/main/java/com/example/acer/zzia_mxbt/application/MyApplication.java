@@ -16,7 +16,7 @@ public class MyApplication extends Application {
     private static String Url_WriteArticle="http://10.201.1.115:8080/ZZIA_MXBT/write_Content";
     //获取文章内容
 
-    private static String Url_Article = "http://10.201.1.115:8080/ZZIA_MXBT/article_complete";
+    private static String Url_Article = "http://10.201.1.170:80/ZZIA_MXBT/article_complete";
     /*private String registUrl="http://10.201.1.170:80/MXBT_Register/checkServlet";
     private String loginUrl="http://10.201.1.170:80/MXBT_Register/loginCheckServlet";*/
     //注册
@@ -24,12 +24,21 @@ public class MyApplication extends Application {
 
     //登录
     private String loginUrl = "http://10.201.1.115:8080/ZZIA_MXBT/loginCheckServlet";
+
+    //显示搜素版块
+    private String searchThemeUrl = "http://10.201.1.170:80/ZZIA_MXBT/searchServlet";
+
     //显示专题封面
+    private String showLableUrl = "http://10.201.1.170:80/ZZIA_MXBT/showLableServlet";
 
-
-    private String showSubjectUrl = "http://10.201.1.170:80/ZZIA_MXBT/showSubjectServlet";
     //显示专题对应文章
     private String showSubjectArticleUrl = "http://10.201.1.170:80/ZZIA_MXBT/showSubjectArticleServlet";
+
+    //显示标签封面
+    private String showSubjectUrl = "http://10.201.1.170:80/ZZIA_MXBT/showSubjectServlet";
+    //显示标签对应文章
+    private String showLableArticleUrl = "http://10.201.1.170:80/ZZIA_MXBT/showLableArticleServlet";
+
 
 
     //排行榜
@@ -93,5 +102,19 @@ public class MyApplication extends Application {
         return center_url;
     }
 
+    public String getSearchThemeUrl() {
+        return searchThemeUrl;
+    }
 
+    public String getShowLableUrl() {
+        return showLableUrl;
+    }
+
+    public String getShowLableArticleUrl() {
+        return showLableArticleUrl;
+    }
 }
+
+
+
+

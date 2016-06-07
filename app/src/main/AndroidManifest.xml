@@ -2,15 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.acer.zzia_mxbt">
 
-    <!--第三方支付的权限-->
+    <!-- 第三方支付的权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- Mob网络权限 -->
@@ -46,18 +44,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".activity.MainActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-<<<<<<< HEAD
-=======
-        <activity android:name=".activity.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
->>>>>>> 363cb125c3016c0ce9f7095c6240069116ad0158
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".activity.Article_ReadActivity" />
         <activity android:name=".activity.LoginActivity" />
@@ -109,15 +96,13 @@
             android:name="UMENG_APPKEY"
             android:value="573329d1e0f55aea7500430f" />
 
-<<<<<<< HEAD
         <activity android:name=".activity.CenterActivity" />
         <activity android:name=".activity.Write_ReadActivity" />
         <activity android:name=".activity.ThemeContentActivity" />
-        <activity android:name=".activity.ThemeActivity">
-        </activity>
+        <activity android:name=".activity.ThemeActivity" />
         <activity android:name=".activity.AndWriteContent_Activity" />
-=======
-        <!--第三方支付的activity-->
+
+        <!-- 第三方支付的activity -->
         <activity
             android:name="c.b.a.A"
             android:configChanges="orientation|keyboardHidden|navigation"
@@ -128,20 +113,17 @@
             android:name="c.b.a.B"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent" />
+        <activity android:name=".activity.WalletActivity" />
+        <activity android:name=".activity.SearchActivity">
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        <activity android:name=".activity.Write_ReadActivity" />
-        <activity android:name=".activity.AndWriteContent_Activity" />
-        <activity android:name=".activity.CenterActivity" />
-        <activity android:name=".activity.ThemeActivity"></activity>
-        <activity android:name=".activity.WalletActivity">
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-
-
-        <activity android:name=".activity.ThemeContentActivity"></activity>
->>>>>>> 363cb125c3016c0ce9f7095c6240069116ad0158
-
+        <activity android:name=".activity.LableActivity" />
+        <activity android:name=".activity.LableContentActivity"></activity>
     </application>
 
 </manifest>

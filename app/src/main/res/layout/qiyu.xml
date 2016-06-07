@@ -8,45 +8,38 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.qiyu.regist.MainActivity">
-<LinearLayout
-    android:layout_centerInParent="true"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-    <Button
-        android:id="@+id/login"
-        android:layout_width="260dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/middle"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/regist_button"
-        android:text="登录"
-        android:textColor="#ffffff"
-        android:onClick="userLogin"/>
-    <Button
-        android:id="@+id/regist"
-        android:layout_width="260dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/middle"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/regist_button"
-        android:text="注册"
-        android:onClick="userRegist"
-        android:textColor="#ffffff" />
-    <Button
-        android:id="@+id/theme"
-        android:layout_width="260dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/middle"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/regist_button"
-        android:text="专题"
-        android:onClick="themePage"
-        android:textColor="#ffffff" />
-</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="260dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/middle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/regist_button"
+            android:onClick="userLogin"
+            android:text="登录"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/regist"
+            android:layout_width="260dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/middle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/regist_button"
+            android:onClick="userRegist"
+            android:text="注册"
+            android:textColor="#ffffff" />
+
+    </LinearLayout>
 
 
 </RelativeLayout>

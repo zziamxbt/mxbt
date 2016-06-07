@@ -134,15 +134,13 @@ public class Article_ReadActivity extends AppCompatActivity {
     private int RecommendNum=1;
    //执行收藏getText（）
     private int CollectNum=2;
-    //获取activity跳转过来的值
-    Intent intent=getIntent();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         x.view().inject(this);
         Fresco.initialize(this);
-        setContentView(R.layout.activity_article__read);
         //初始化方法
         init();
         //得到网络数据的路径
@@ -606,9 +604,11 @@ public class Article_ReadActivity extends AppCompatActivity {
         //get请求
         //第一步：设置访问路径
         RequestParams params = null;
-
+//获取activity跳转过来的值
+        Intent intent=getIntent();
         int article_id=intent.getIntExtra("Article_Id",0);
-        Log.e("Aid", "onItemClick: "+article_id );
+        //Log.e("qiyu,Aid", "onItemClick: "+article_id );
+        Log.e("qiyu,Article_Read,", "接收文章id: "+ article_id);
         params= new RequestParams(mPath);
          if(Num==0){
              params.addQueryStringParameter("Num",0+"");//让后台判断到底执行那个语句，对数据库进行修改（标示）
@@ -647,7 +647,7 @@ public class Article_ReadActivity extends AppCompatActivity {
                     }.getType();
                     listData = gson.fromJson(result, type);
                     initdata(listData);
-
+                    Log.e("qiyu,Article_Read,", "接收文章listdata: "+ listData);
                 }
 
 
