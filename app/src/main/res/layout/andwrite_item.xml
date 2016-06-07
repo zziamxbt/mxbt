@@ -26,14 +26,12 @@
         android:layout_height="30dp"
         android:id="@+id/andwrite_contiue"
         android:text="连载中"
-        android:layout_marginBottom="30dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:background="@drawable/anniu3"
+        android:background="@drawable/author_anniu"
+        android:layout_marginLeft="105dp"
 
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/andwrite_finish"
-        android:layout_toStartOf="@+id/andwrite_finish" />
+        android:layout_marginBottom="30dp"
+        />
 
     <Button
         android:layout_width="wrap_content"
@@ -43,24 +41,14 @@
         android:layout_gravity="right"
         android:background="@drawable/anniu2"
 
-        android:layout_marginRight="43dp"
-        android:layout_marginEnd="43dp"
-        android:layout_alignTop="@+id/andwrite_contiue"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:id="@+id/andwrite_single"
-        android:text="单篇"
-        android:background="@drawable/anniu"
 
         android:layout_alignTop="@+id/andwrite_contiue"
-        android:layout_toLeftOf="@+id/andwrite_contiue"
-        android:layout_toStartOf="@+id/andwrite_contiue" />
+        android:layout_toRightOf="@+id/andwrite_contiue"
+        android:layout_toEndOf="@+id/andwrite_contiue" />
+
+
+
+
 </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"

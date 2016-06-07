@@ -158,11 +158,13 @@ public class Write_ReadActivity extends AppCompatActivity {
         if (PeopleFocus_flag) {
             mFocus_image.setImageResource(R.drawable.guanzhu_success);
             PeopleFocus_flag=false;
+            Toast.makeText(Write_ReadActivity.this, "已关注", Toast.LENGTH_SHORT).show();
         } else {
             mFocus_image.setImageResource(R.drawable.guanzhu);
             PeopleFocus_flag=true;
+            Toast.makeText(Write_ReadActivity.this, "取消关注", Toast.LENGTH_SHORT).show();
         }
-        Toast.makeText(Write_ReadActivity.this, "你点击了关注", Toast.LENGTH_SHORT).show();
+
     }
     //返回监听
 
@@ -181,8 +183,8 @@ public class Write_ReadActivity extends AppCompatActivity {
         //get请求
         //第一步：设置访问路径
         Log.e("abc", "getTest: " + AWid);
+        params= new RequestParams(mPath);
         if(AWidFlag){
-            params= new RequestParams(mPath);
             params.addQueryStringParameter("AWid", AWid + "");
         }else{
             params = new RequestParams(mVotePath);

@@ -24,35 +24,56 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+<<<<<<< HEAD
+public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> implements View.OnClickListener {
+    private List<IndexBean> datas;
+    private Context context;
+    private List<Integer> lists;
+    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
+=======
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
     private List<IndexBean> datas;
     private Context context;
     private List<Integer> lists;
 
+>>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
     public MyRecyclerViewAdapter(Context context, List<IndexBean> datas) {
         this.datas = datas;
         this.context = context;
-        getRandomHeights(datas);
+       
     }
 
+<<<<<<< HEAD
+=======
     private void getRandomHeights(List<IndexBean> datas) {
         lists = new ArrayList<>();
         for (int i = 0; i < datas.size(); i++) {
             lists.add((int) (700));
         }
     }
+>>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
 
+    public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
+        this.mOnItemClickListener = listener;
+    }
+    //define interface
+    public static interface OnRecyclerViewItemClickListener {
+        //-----------------------
+        void onItemClick(View view, int position);
+    }
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.index_content, parent, false);
         MyViewHolder viewHolder = new MyViewHolder(view);
+        view.setOnClickListener(this);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
+
+        holder.itemView.setTag(position);
         ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
-        params.height = lists.get(position);//把随机的高度赋予item布局
         holder.itemView.setLayoutParams(params);
         //头像处理
         String path = datas.get(position).getHeadImg();
@@ -132,7 +153,18 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     @Override
     public int getItemCount() {
+        if (datas!=null)
         return datas.size();
+        else
+            return 0;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (mOnItemClickListener != null) {
+            //注意这里使用getTag方法获取数据
+            mOnItemClickListener.onItemClick(v, (Integer) v.getTag());
+        }
     }
 }
 
