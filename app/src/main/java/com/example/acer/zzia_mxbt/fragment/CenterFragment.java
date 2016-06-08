@@ -1,6 +1,7 @@
 package com.example.acer.zzia_mxbt.fragment;
 
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,8 +19,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-<<<<<<< HEAD
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.acer.zzia_mxbt.R;
@@ -30,18 +29,8 @@ import com.example.acer.zzia_mxbt.adapters.MyRecyclerViewAdapter1;
 import com.example.acer.zzia_mxbt.application.MyApplication;
 import com.example.acer.zzia_mxbt.bean.IndexBean;
 import com.example.acer.zzia_mxbt.utils.SpacesItemDecoration;
-=======
-import android.widget.Toast;
-
-import com.example.acer.zzia_mxbt.R;
-
 import com.example.acer.zzia_mxbt.activity.MainActivity;
-import com.example.acer.zzia_mxbt.adapters.MyRecyclerViewAdapter;
-import com.example.acer.zzia_mxbt.application.MyApplication;
 import com.example.acer.zzia_mxbt.bean.ArticleBean;
-
-import com.example.acer.zzia_mxbt.bean.IndexBean;
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -66,48 +55,32 @@ import java.util.List;
  * Created by acer on 2016/5/7.
  */
 public class CenterFragment extends Fragment {
-<<<<<<< HEAD
+
     //存放文章信息的list
-    List<IndexBean> list ;
+    List<IndexBean> list;
     List<IndexBean> savelist = new ArrayList<>();
     //Oncreate中用以返回的view
     View view;
     public static final int DISTANCE = 100;
     //定义recyclerView
-    RecyclerView recyclerView ;
-    Boolean isend=false;
-    static  int begin = 0;
-    static  int end = 9;
+    RecyclerView recyclerView;
+    Boolean isend = false;
+    static int begin = 0;
+    static int end = 9;
     //记录屏幕上已经出现的行数
     int result;
     //记录用户按下屏幕和抬起手指时候触摸点的y轴坐标
-    float startY,stopY;
+    float startY, stopY;
     int lastVisibleItem;
     //recyclerView 适配器
     MyRecyclerViewAdapter myRecyclerViewAdapter;
     LinearLayoutManager linearLayoutManager;
-=======
 
-    //存放文章信息的list
-    List<ArticleBean> list ;
 
-    //Oncreate中用以返回的view
-   // View view;
-
-    //定义recyclerView
-    RecyclerView recyclerView ;
-
-    //recyclerView 适配器
-    MyRecyclerViewAdapter myRecyclerViewAdapter;
-
-    //存放首页文章信息的list
-
-    View view;
-
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
     private static CenterFragment instance = null;
     //SwipeRefreshLayout
     SwipeRefreshLayout mSwipeRefreshWidget;
+
     public static CenterFragment newInstance() {
         if (instance == null) {
             instance = new CenterFragment();
@@ -119,29 +92,16 @@ public class CenterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.centerlayout, container, false);
-<<<<<<< HEAD
-=======
 
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
-//        RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.center_recyclerView);
-//        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
-//        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-//        List<Integer> datas = new ArrayList<>();
-//        for (int i = 0; i < 100; i++) {
-//            datas.add(i);
-//        }
-//        mRecyclerView.setAdapter(new MyRecyclerViewAdapter(getActivity(), datas));
-<<<<<<< HEAD
         initBeginAndEnd();
-=======
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
+
         //初始化各个控件和视图
         initView();
         //设置各个控件和视图
         setView();
         //向服务器请求数据
         askForData();
-<<<<<<< HEAD
+
         savelist.removeAll(savelist);
         return view;
     }
@@ -151,70 +111,59 @@ public class CenterFragment extends Fragment {
         end = 9;
     }
 
-    private void askForData() {
-        RequestParams params = new RequestParams(MyApplication.getMystory_url());
-
-//       RequestParams params= new RequestParams("http://139.129.58.244:8080/ZZIA_MXBT/index_servlet");
-        params.addQueryStringParameter("uid",CenterActivity.getUser().getUid()+"");
-=======
-        return view;
-    }
 
     private void askForData() {
         RequestParams params = new RequestParams(MyApplication.getCenter_url());
 
 //       RequestParams params= new RequestParams("http://139.129.58.244:8080/ZZIA_MXBT/index_servlet");
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
+
         x.http().get(params, new Callback.CommonCallback<String>() {
 
             @Override
             public void onSuccess(String result) {
-<<<<<<< HEAD
-                Log.e("aaa", "onSuccess: " );
-=======
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
+
+                Log.e("aaa", "onSuccess: ");
+
                 Gson gson = new Gson();
                 Type type = new TypeToken<List<IndexBean>>() {
                 }.getType();
                 list = gson.fromJson(result, type);
-<<<<<<< HEAD
-                if(list!=null) {
+
+                if (list != null) {
                     new loadDataAsyncTask((CenterActivity) getActivity()).execute(list);
-                    if(list.size()>end) {
+                    if (list.size() > end) {
                         for (int i = begin; i <= end; i++) {
                             savelist.add(list.get(i));
                         }
-                    }else{
-                        for (int i = begin ; i<= (end=list.size()-1);i++){
+                    } else {
+                        for (int i = begin; i <= (end = list.size() - 1); i++) {
                             savelist.add(list.get(i));
                         }
                     }
                 }
-                myRecyclerViewAdapter = new MyRecyclerViewAdapter(getActivity(),savelist);
+                myRecyclerViewAdapter = new MyRecyclerViewAdapter(getActivity(), savelist);
                 recyclerView.setAdapter(myRecyclerViewAdapter);
                 myRecyclerViewAdapter.setOnItemClickListener(new MyRecyclerViewAdapter.OnRecyclerViewItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        Intent intent = new Intent(getActivity(),Article_ReadActivity.class);
-                        intent.putExtra("Article_Id",list.get(position).getArticleId());
+                        Intent intent = new Intent(getActivity(), Article_ReadActivity.class);
+                        intent.putExtra("Article_Id", list.get(position).getArticleId());
                         startActivity(intent);
                     }
                 });
-=======
-               // myRecyclerViewAdapter = new MyRecyclerViewAdapter(getActivity(),list);
+
+                // myRecyclerViewAdapter = new MyRecyclerViewAdapter(getActivity(),list);
                 recyclerView.setAdapter(myRecyclerViewAdapter);
 
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
+
             }
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
                 Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_LONG).show();
-<<<<<<< HEAD
+
                 Log.e("aaa", "错误原因：" + ex.getMessage());
-=======
-                Log.e("a", "错误原因：" + ex.getMessage());
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
+
             }
 
             @Override
@@ -230,7 +179,6 @@ public class CenterFragment extends Fragment {
         });
 
 
-<<<<<<< HEAD
     }
 
     private void setView() {
@@ -269,7 +217,7 @@ public class CenterFragment extends Fragment {
                     mSwipeRefreshWidget.setRefreshing(true);
                     // 此处在现实项目中，请换成网络请求数据代码，sendRequest .....
                     new loadDataAsyncTask((CenterActivity) getActivity()).execute(list);
-                    for(int i = begin ; i<= end; i++){
+                    for (int i = begin; i <= end; i++) {
                         savelist.add(list.get(i));
                     }
 
@@ -279,60 +227,44 @@ public class CenterFragment extends Fragment {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                lastVisibleItem  = linearLayoutManager.findLastVisibleItemPosition();
+                lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition();
             }
         });
-=======
-}
 
-    private void setView() {
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
     }
+
 
     private void initView() {
         recyclerView = (RecyclerView) view.findViewById(R.id.center_recyclerView);
-<<<<<<< HEAD
+
         mSwipeRefreshWidget = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_widget);
     }
 
 
     //AsyncTask 内部类
-    class loadDataAsyncTask extends AsyncTask<List<IndexBean>, Integer,String> {
-
-        private CenterActivity activity;
-        List<IndexBean> list;
-        public loadDataAsyncTask(CenterActivity activity) {
-=======
-
-    }
-
-
-//AsyncTask 内部类
     class loadDataAsyncTask extends AsyncTask<List<IndexBean>, Integer, String> {
         private static final int HIDDEN_CODE = 1;
         private static final int APPEAR_CODE = 2;
-        private MainActivity activity;
+        private CenterActivity activity;
 
-        public loadDataAsyncTask(MainActivity activity) {
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
+        public loadDataAsyncTask(CenterActivity activity) {
+
             this.activity = activity;
         }
 
         @Override
         protected String doInBackground(List<IndexBean>... params) {
             //用一个线程来模拟刷新
-<<<<<<< HEAD
+
 
             list = params[0];
 //            publishProgress(1);
-            if(list.size()>=end){
+            if (list.size() >= end) {
                 addData(list, begin, end);
-            }else{
-                begin=0;
-                end=list.size()-1;
-                addData(list , begin ,end);
+            } else {
+                begin = 0;
+                end = list.size() - 1;
+                addData(list, begin, end);
             }
 
 
@@ -350,16 +282,6 @@ public class CenterFragment extends Fragment {
         }
 
 
-=======
-            List<IndexBean> list;
-            list = params[0];
-            publishProgress(1);
-            addData(list, 0, list.size());
-            publishProgress(0);
-            return "success";
-        }
-
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
         //对返回值进行操作
         @Override
         protected void onPostExecute(String s) {
@@ -367,7 +289,7 @@ public class CenterFragment extends Fragment {
             if ("success".equals(s)) {
                 //通知数据集改变，刷新页面
                 myRecyclerViewAdapter.notifyDataSetChanged();
-<<<<<<< HEAD
+
                 //刷新完成;
 
                 mSwipeRefreshWidget.setRefreshing(false);
@@ -376,75 +298,53 @@ public class CenterFragment extends Fragment {
         }
 
 
-
     }
 
 
-    //数据添加方法
-=======
-                //刷新完成
-//                recyclerView.();
-            }
-        }
 
 
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
 
-            Log.e("load", "onProgressUpdate: " + values[0]);
-            if (values[0] != 0) {
-                activity.handler.sendEmptyMessage(APPEAR_CODE);
-            } else {
-                activity.handler.sendEmptyMessage(HIDDEN_CODE);
-            }
 
-        }
-    }
 
 
 //数据添加方法
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
-    public void addData(List<IndexBean> beanList, int begin, int end) {
-        for (int i = begin; i <= end; i++) {
-            String contentHttp = beanList.get(i).getContent();
-            StringBuilder content = null;
 
-            URL url = null;
-            try {
-                url = new URL(contentHttp);
-                InputStream is = url.openStream();
-                BufferedReader buff = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-                content = new StringBuilder();
-                String valueString;
+public void addData(List<IndexBean>beanList,int begin,int end){
+        for(int i=begin;i<=end;i++){
+        String contentHttp=beanList.get(i).getContent();
+        StringBuilder content=null;
 
-                while ((valueString = buff.readLine()) != null) {
-                    content.append(valueString);
-<<<<<<< HEAD
-=======
+        URL url=null;
+        try{
+        url=new URL(contentHttp);
+        InputStream is=url.openStream();
+        BufferedReader buff=new BufferedReader(new InputStreamReader(is,"UTF-8"));
+        content=new StringBuilder();
+        String valueString;
 
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
+        while((valueString=buff.readLine())!=null){
+        content.append(valueString);
+
 //                        Log.e("lalala", "getView: "+mlist.get(p).getNickName()+stringBuilder);
-                }
-                if (content.toString().length() >= 60) {
-                    beanList.get(i).setContent(content.toString().substring(0, 60) + "...");
-                } else {
-                    beanList.get(i).setContent(content.toString());
-                }
-                buff.close();
-                is.close();
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        }
+        if(content.toString().length()>=60){
+        beanList.get(i).setContent(content.toString().substring(0,60)+"...");
+        }else{
+        beanList.get(i).setContent(content.toString());
+        }
+        buff.close();
+        is.close();
+        }catch(MalformedURLException e){
+        e.printStackTrace();
+        }catch(UnsupportedEncodingException e){
+        e.printStackTrace();
+        }catch(IOException e){
+        e.printStackTrace();
+        }
 
         }
-<<<<<<< HEAD
-=======
 
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
-    }
-}
+
+        }
+        }
 

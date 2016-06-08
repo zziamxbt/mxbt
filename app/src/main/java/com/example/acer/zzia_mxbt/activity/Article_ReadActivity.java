@@ -1,8 +1,10 @@
 package com.example.acer.zzia_mxbt.activity;
 
 import android.animation.ObjectAnimator;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -46,6 +48,7 @@ import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
@@ -59,6 +62,8 @@ import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
 public class Article_ReadActivity extends AppCompatActivity {
+    //获取文章id
+    int article_id;
     //接受上下文
     private Bitmap bitmap;
     //从网上获取的数据放入list集合中
@@ -137,10 +142,12 @@ public class Article_ReadActivity extends AppCompatActivity {
     private int RecommendNum = 1;
     //执行收藏getText（）
     private int CollectNum = 2;
-    //保存章节Id
-    private int[] Chapter_Id;
-
-
+//创建sqllite，存储图片
+    Bitmap mUhead=null;
+    Bitmap mUbk=null;
+    Bitmap mcoverimg=null;
+    int Uid=2;//数据待接收。。。。。。。。。。。。。。。。。。。。。
+    SQLiteDatabase db=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -578,15 +585,12 @@ public class Article_ReadActivity extends AppCompatActivity {
     }
 
     //分享监听
-<<<<<<< HEAD
-    public void MyShare(View view){
-       Toast.makeText(Article_ReadActivity.this, "你点击了分享", Toast.LENGTH_SHORT).show();
-        showShare();
-=======
+
     public void MyShare(View view) {
         Toast.makeText(Article_ReadActivity.this, "你点击了分享", Toast.LENGTH_SHORT).show();
->>>>>>> 42c3d4d3b7d314f110699972472a68eb9d124c62
+        showShare();
     }
+
 
     //续写监听
     public void MyWrite(View view) {
@@ -629,6 +633,128 @@ public class Article_ReadActivity extends AppCompatActivity {
 // 启动分享GUI
         oks.show(this);
     }
+
+    //离线阅读监听
+   public void Downline_Read(View view){
+       createdatabase();
+
+   }
+
+
+    public void createdatabase() {
+
+
+//            //打开或创建test.db数据库
+//            db = openOrCreateDatabase("test.db", Context.MODE_PRIVATE, null);
+//            //创建person表
+//            db.execSQL("CREATE TABLE article (Aid INTEGER PRIMARY KEY AUTOINCREMENT,Uid INTEGER, Uhead BLOB, Unickname varchar(20), Ubk BLOB, Akind varchar(20), " +
+//                    " Acoverimg BLOB, Atitle varchar(50),content text,Usex varchar(2), focus INTEGER, focused INTEGER)");
+//
+//            Log.e("db","数据库创建成功");
+
+        if(Uid!=0){
+
+            new Thread(){
+                public void run(){
+                    final String  Uhead=listData.get(0).getAuthor_headportrait();//文章作者信息
+                    final String Ubk=listData.get(0).getArticle_background();
+                    String  Unickname=listData.get(0).getAuthor_name();
+                    String  Usex=listData.get(0).getAuthor_sex();
+                    int  focus=listData.get(0).getFocus_number();
+                    int  focused=listData.get(0).getReader_number();
+
+                    String Akind=listData.get(0).getArticle_type();//文章信息
+                    final String Acoverimg=listData.get(0).getArticle_cover();
+                    String Atitle=listData.get(0).getArticle_title();
+                    StringBuilder content=new StringBuilder();
+
+                    for(int i=0;i<listData.get(0).getChapter_content().size();i++){
+                        String data=listData.get(0).getChapter_content().get(i);
+                        content.append(data+"\n");
+                    }
+                    Log.e("tag",Uhead+":"+Ubk+":"+Unickname+":"+Usex+":"+content.toString());
+                    URL url=null;
+                    URL url2=null;
+                    URL url3=null;
+
+                    try {
+                        url=new URL(Uhead);
+                        url2=new URL(Ubk);
+                        url3=new URL(Acoverimg);
+
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        HttpURLConnection conn = null;
+                        HttpURLConnection conn2 = null;
+                        HttpURLConnection conn3 = null;
+                        conn = (HttpURLConnection) url.openConnection();
+                        conn2= (HttpURLConnection) url2.openConnection();
+                        conn3= (HttpURLConnection) url3.openConnection();
+                        conn.setDoInput(true);
+                        conn2.setDoInput(true);
+                        conn3.setDoInput(true);
+                        conn.connect();
+                        conn2.connect();
+                        conn3.connect();
+                        InputStream is = conn.getInputStream();
+                        InputStream is2 = conn2.getInputStream();
+                        InputStream is3 = conn3.getInputStream();
+                        mUhead = BitmapFactory.decodeStream(is);
+                        mUbk = BitmapFactory.decodeStream(is2);
+                        mcoverimg = BitmapFactory.decodeStream(is3);
+                        is.close();
+                        is2.close();
+                        is3.close();
+
+
+                        ContentValues values = new ContentValues();
+                        final ByteArrayOutputStream os = new ByteArrayOutputStream();
+                        final ByteArrayOutputStream os2 = new ByteArrayOutputStream();
+                        final ByteArrayOutputStream os3 = new ByteArrayOutputStream();
+                        mUhead.compress(Bitmap.CompressFormat.PNG, 100, os);
+                        mcoverimg.compress(Bitmap.CompressFormat.PNG, 100, os2);
+                        mUbk.compress(Bitmap.CompressFormat.PNG, 100, os3);
+                        values.put("Uid",Uid);
+                        values.put("Uhead", os.toByteArray());
+                        values.put("Unickname",Unickname);
+                        values.put("Ubk",os3.toByteArray());
+                        values.put("Akind",Akind);
+                        values.put("Atitle",Atitle);
+                        values.put("Acoverimg",os2.toByteArray());
+                        values.put("content",content.toString());
+                        values.put("Usex",Usex);
+                        values.put("focus",focus);
+                        values.put("focused",focused);
+                        db.insert("article",null, values);
+                        Log.e("tag","插入成功");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }.start();
+
+            Toast.makeText(Article_ReadActivity.this,"下载完成",Toast.LENGTH_SHORT).show();
+
+        }else{
+            Toast.makeText(Article_ReadActivity.this,"请先登录",Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(Article_ReadActivity.this,RegistActivity.class);
+            startActivity(intent);
+        }
+
+
+    //如何将网络图片网址转换为bitmap
+
+    }
+
+
+
+    //举报监听
+    public void Report(View view){
+
+    }
+
     /**
      * 手机屏幕宽
      *
@@ -666,7 +792,7 @@ public class Article_ReadActivity extends AppCompatActivity {
         RequestParams params = null;
 //获取activity跳转过来的值
         Intent intent = getIntent();
-        int article_id = intent.getIntExtra("Article_Id",0);
+        article_id= intent.getIntExtra("Article_Id",0);
      //
         params = new RequestParams(mPath);
         if (Num == 0) {
