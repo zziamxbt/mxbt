@@ -19,13 +19,9 @@ import android.widget.Toast;
 import com.example.acer.zzia_mxbt.activity.Article_ReadActivity;
 import com.example.acer.zzia_mxbt.activity.MainActivity;
 import com.example.acer.zzia_mxbt.adapters.IndexListAdapter;
-<<<<<<< HEAD
-import com.example.acer.zzia_mxbt.adapters.IndexListAdapter1;
-=======
 
 import com.example.acer.zzia_mxbt.adapters.IndexListAdapter1;
 
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
 import com.example.acer.zzia_mxbt.bean.IndexBean;
 
 import com.example.acer.zzia_mxbt.R;
@@ -51,7 +47,12 @@ import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 
 /**
  * Created by Wang on 2016/5/7.
@@ -62,22 +63,12 @@ public class ViewFragment extends Fragment {
     List<IndexBean> list;
     List<IndexBean> savelist;
     PullToRefreshListView listView;
-
-<<<<<<< HEAD
-=======
     IndexListAdapter1 ila1;
-
-
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
     IndexListAdapter ila;
     SimpleDraweeView headimg ;
     Boolean isend=false;
     static  int begin = 0;
     static  int end = 9;
-<<<<<<< HEAD
-
-=======
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
 
     View view;
 
@@ -104,13 +95,7 @@ public class ViewFragment extends Fragment {
                 int Aid = list.get(position - 2).getArticleId();
              //   Log.e("Aid", "onItemClick: "+Aid );
                 Intent intent = new Intent(getActivity(), Article_ReadActivity.class);
-<<<<<<< HEAD
-
                 intent.putExtra("Article_Id", Aid);
-
-=======
-                intent.putExtra("Article_Id",Aid);
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
                 startActivity(intent);
             }
         });
@@ -121,8 +106,41 @@ public class ViewFragment extends Fragment {
 
 
         RequestParams params = new RequestParams("http://10.201.1.115:8080/ZZIA_MXBT/index_servlet");
-
+       RequestParams paramsSend=new RequestParams("http://10.201.1.115:8080/ZZIA_MXBT/sendMessage");
 //       RequestParams params= new RequestParams("http://139.129.58.244:8080/ZZIA_MXBT/index_servlet");
+        x.http().get(paramsSend, new Callback.CommonCallback<String>() {
+
+            @Override
+            public void onSuccess(String result) {
+                Gson gson = new Gson();
+                Type type = new TypeToken<Set<String>>() {
+                }.getType();
+                Set<String> set=new HashSet<String>();
+                set = gson.fromJson(result, type);
+                JPushInterface.setTags(getActivity(), set, new TagAliasCallback() {
+                    @Override
+                    public void gotResult(int i, String s, Set<String> set) {
+
+                    }
+                });
+                Log.e("set", "set: "+set );
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
         x.http().get(params, new Callback.CommonCallback<String>() {
 
             @Override
@@ -138,38 +156,16 @@ public class ViewFragment extends Fragment {
 
                 initRefreshListView();
 
-<<<<<<< HEAD
+
                 View v = View.inflate(getActivity(), R.layout.index_header_text, null);
                 listView.getRefreshableView().addHeaderView(v, null, false);
-=======
-
-                View v = View.inflate(getActivity(), R.layout.index_header_text, null);
-                listView.getRefreshableView().addHeaderView(v, null, true);
-
-
-
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
-
                 listView.getRefreshableView().setHeaderDividersEnabled(false);
 
                 for (int i = begin; i <= end; i++) {
                     savelist.add(list.get(i));
                 }
-
-
-
-
-<<<<<<< HEAD
                 ila = new IndexListAdapter(getActivity(),  savelist);
                 listView.setAdapter(ila);
-
-=======
-
-                ila = new IndexListAdapter(getActivity(),  savelist);
-                listView.setAdapter(ila);
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
-
-
                 listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
                     @Override
                     public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {

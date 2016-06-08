@@ -15,6 +15,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -45,7 +46,9 @@ import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -53,6 +56,8 @@ import java.util.TimerTask;
 import cn.jpush.android.api.JPushInterface;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    //判断是否已经签到
+    private boolean signFlag=true;
     DrawerLayout drawer;
     ViewPager index_viewPager;
     ImageView index_menu;//导航菜单按钮
@@ -96,21 +101,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     //是否登录
-<<<<<<< HEAD
+
     private static  boolean isLogin = false;
-=======
-    private boolean isLogin = false;
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
 
     public static User getUser() {
         return user;
     }
-<<<<<<< HEAD
+
     public static boolean isLogin() {
         return isLogin;
     }
-=======
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
 
     private static User user;
     //双击退出标志位
@@ -125,8 +125,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
-       // JPushInterface.setDebugMode(true);
-        JPushInterface.init(this);
+        JPushInterface.setDebugMode(true);
         getLoginParam();
         initView();
         initData();
@@ -382,13 +381,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 PopupWindow popupWindow;
                 View view;
                 view = layoutInflater.inflate(R.layout.index_drop_down, null);
-                TextView drop1, drop2, drop3;
+                final TextView drop1, drop2, drop3;
                 drop1 = (TextView) view.findViewById(R.id.drop1);
                 drop2 = (TextView) view.findViewById(R.id.drop2);
                 drop3 = (TextView) view.findViewById(R.id.drop3);
 
                 drop1.setText("排行榜");
-                drop2.setText("2");
+                drop2.setText("签到");
                 drop3.setText("3");
 
 
@@ -397,12 +396,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 popupWindow.setOutsideTouchable(true);
                 popupWindow.showAsDropDown(more, -230, 20);
                 popupWindow.setAnimationStyle(R.style.anim_menu_animation);
+                //排行榜监听
                 drop1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent();
                         intent.setClass(MainActivity.this, RankActivity.class);
                         startActivity(intent);
+                    }
+                });
+                //签到监听
+                drop2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(signFlag){
+                            Log.e("isSignFlag","isSignFlag:"+isSignFlag());
+                            Toast.makeText(MainActivity.this,"签到成功，送你2个金币",Toast.LENGTH_LONG).show();
+                            drop2.setText("已签到");
+                            signFlag=false;
+                        }else {
+                            Toast.makeText(MainActivity.this,"你已签到，请明天再来",Toast.LENGTH_LONG).show();
+                        }
+
                     }
                 });
             }
@@ -465,4 +480,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return false;
     }
 
+    //用来判断是否可以再次签到
+    public String isSignFlag(){
+        SimpleDateFormat    formatter    =   new SimpleDateFormat("yyyy年MM月dd日");
+        Date curDate    =   new    Date(System.currentTimeMillis());//获取当前时间
+        String    str    =    formatter.format(curDate);
+        return str;
+    }
 }

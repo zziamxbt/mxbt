@@ -35,7 +35,6 @@ import com.example.acer.zzia_mxbt.application.MyApplication;
 import com.example.acer.zzia_mxbt.bean.ArticleBean;
 import com.example.acer.zzia_mxbt.bean.JavaBean_article;
 import com.example.acer.zzia_mxbt.bean.JavaBean_chapter;
-import com.example.acer.zzia_mxbt.bean.User;
 import com.example.acer.zzia_mxbt.utils.SetPicture;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -126,16 +125,16 @@ public class Article_ReadActivity extends AppCompatActivity {
     //推荐和收藏图标变换
     private ImageView mtuijain;
     private ImageView mshoucang;
-    private boolean shoucangFlag = true;
-    private boolean tuijianFlag = true;
     //执行文章内容getText（）
     private int TextContent = 0;
     //执行推荐getText（）
     private int RecommendNum = 1;
     //执行收藏getText（）
     private int CollectNum = 2;
-    //保存章节Id
-    private int[] Chapter_Id;
+    //接受传递的参数
+   private  int User_Id;
+
+
 
 
     @Override
@@ -539,33 +538,43 @@ public class Article_ReadActivity extends AppCompatActivity {
 
     //推荐监听
     public void MyRecommended(View view) {
-        if (listData.get(0).isRecommandFalg()) {
-            getTest(RecommendNum, false);
-            mtuijain.setImageResource(R.drawable.tuijian);
-            listData.get(0).setRecommandFalg(false);
-            Toast.makeText(Article_ReadActivity.this, "推荐取消", Toast.LENGTH_SHORT).show();
-        } else {
-            getTest(RecommendNum, true);
-            mtuijain.setImageResource(R.drawable.tuijian_success);
-            listData.get(0).setRecommandFalg(true);
-            Toast.makeText(Article_ReadActivity.this, "推荐成功", Toast.LENGTH_SHORT).show();
+        if(User_Id==0){
+            Toast.makeText(Article_ReadActivity.this, "你未登录，无法进行该操作", Toast.LENGTH_SHORT).show();
+        }else{
+            if (listData.get(0).isRecommandFalg()) {
+                getTest(RecommendNum, false);
+                mtuijain.setImageResource(R.drawable.tuijian);
+                listData.get(0).setRecommandFalg(false);
+                Toast.makeText(Article_ReadActivity.this, "推荐取消", Toast.LENGTH_SHORT).show();
+            } else {
+                getTest(RecommendNum, true);
+                mtuijain.setImageResource(R.drawable.tuijian_success);
+                listData.get(0).setRecommandFalg(true);
+                Toast.makeText(Article_ReadActivity.this, "推荐成功", Toast.LENGTH_SHORT).show();
+            }
+
         }
 
     }
 
     //收藏监听
     public void MyCollection(View view) {
-        if (listData.get(0).isCollectFalg()) {
-            getTest(CollectNum, false);
-            mshoucang.setImageResource(R.drawable.shoucang);
-            listData.get(0).setCollectFalg(false);
-            Toast.makeText(Article_ReadActivity.this, "收藏取消", Toast.LENGTH_SHORT).show();
-        } else {
-            getTest(CollectNum, true);
-            mshoucang.setImageResource(R.drawable.shoucang_success);
-            listData.get(0).setCollectFalg(true);
-            Toast.makeText(Article_ReadActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
+        if(User_Id==0){
+            Toast.makeText(Article_ReadActivity.this, "你未登录，无法进行该操作", Toast.LENGTH_SHORT).show();
+        }else{
+            if (listData.get(0).isCollectFalg()) {
+                getTest(CollectNum, false);
+                mshoucang.setImageResource(R.drawable.shoucang);
+                listData.get(0).setCollectFalg(false);
+                Toast.makeText(Article_ReadActivity.this, "收藏取消", Toast.LENGTH_SHORT).show();
+            } else {
+                getTest(CollectNum, true);
+                mshoucang.setImageResource(R.drawable.shoucang_success);
+                listData.get(0).setCollectFalg(true);
+                Toast.makeText(Article_ReadActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
+            }
         }
+
 
     }
 
@@ -629,36 +638,43 @@ public class Article_ReadActivity extends AppCompatActivity {
         //第一步：设置访问路径
         RequestParams params = null;
 //获取activity跳转过来的值
-        Intent intent = getIntent();
+        Intent intent= getIntent();
         int article_id = intent.getIntExtra("Article_Id",0);
-     //
+        User_Id =intent.getIntExtra("User_Id",0);
+     //   int User_Id=0;
         params = new RequestParams(mPath);
-        if (Num == 0) {
-            params.addQueryStringParameter("User_Id",1+"");
-            params.addQueryStringParameter("Num", 0 + "");//让后台判断到底执行那个语句，对数据库进行修改（标示）
+        if(User_Id==0){
+            params.addQueryStringParameter("User_Id",0+"");
             params.addQueryStringParameter("article_id", article_id + "");
-            Log.e("Aid", "activity: " + article_id);
-        } else if (Num == 1) {
-            //判断是否推荐，修改数据库
-            params.addQueryStringParameter("Num", 1 + "");//让后台判断到底执行那个语句，对数据库进行修改（标示）
-            if (flag) {
-                params.addQueryStringParameter("RecommendNum", "true");
-            } else {
-                params.addQueryStringParameter("RecommendNum", "false");
+        }else{
+            if (Num == 0) {
+                params.addQueryStringParameter("User_Id",1+"");
+                params.addQueryStringParameter("Num", 0 + "");//让后台判断到底执行那个语句，对数据库进行修改（标示）
+                params.addQueryStringParameter("article_id", article_id + "");
+                Log.e("Aid", "activity: " + article_id);
+            } else if (Num == 1) {
+                //判断是否推荐，修改数据库
+                params.addQueryStringParameter("Num", 1 + "");//让后台判断到底执行那个语句，对数据库进行修改（标示）
+                if (flag) {
+                    params.addQueryStringParameter("RecommendNum", "true");
+                } else {
+                    params.addQueryStringParameter("RecommendNum", "false");
+                }
+                params.addQueryStringParameter("User_Id",1+"");
+                params.addQueryStringParameter("article_id", article_id + "");
+            } else if (Num == 2) {
+                //判断是否收藏，修改数据库
+                params.addQueryStringParameter("Num", 2 + "");//让后台判断到底执行那个语句，对数据库进行修改（标示）
+                if (flag) {
+                    params.addQueryStringParameter("CollectNum", "true");
+                } else {
+                    params.addQueryStringParameter("CollectNum", "false");
+                }
+                params.addQueryStringParameter("User_Id",1+"");
+                params.addQueryStringParameter("article_id", article_id + "");
             }
-              params.addQueryStringParameter("User_Id",1+"");
-            params.addQueryStringParameter("article_id", article_id + "");
-        } else if (Num == 2) {
-            //判断是否收藏，修改数据库
-            params.addQueryStringParameter("Num", 2 + "");//让后台判断到底执行那个语句，对数据库进行修改（标示）
-            if (flag) {
-                params.addQueryStringParameter("CollectNum", "true");
-            } else {
-                params.addQueryStringParameter("CollectNum", "false");
-            }
-              params.addQueryStringParameter("User_Id",1+"");
-            params.addQueryStringParameter("article_id", article_id + "");
         }
+
 
         //第二步：开始请求，设置请求方式，同时实现回调函数
         x.http().get(params, new Callback.CommonCallback<String>() {
