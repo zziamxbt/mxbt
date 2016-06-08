@@ -109,7 +109,7 @@ public class ThemeContentActivity extends AppCompatActivity {
         //获取Theme页面传递的专题id
         Intent intent = getIntent();
         int sid = intent.getIntExtra("sid", 0);
-        Log.e("qiyu接收sid", sid + "");
+        //Log.e("qiyu接收sid", sid + "");
 
         mList = new ArrayList<>();//保存后台的bean集合
 
@@ -472,8 +472,12 @@ public class ThemeContentActivity extends AppCompatActivity {
                 int aid = mList.get(position - 2).getArticleId();
                 Intent intent = new Intent(ThemeContentActivity.this, Article_ReadActivity.class);
                 intent.putExtra("Article_Id", aid);
+                Log.e("qiyu,ThemeContent,", "传递文章id: "+ aid);
                 startActivity(intent);
+                /*Intent intent=new Intent(ThemeContentActivity.this,QiyuActivity.class);
+                startActivity(intent);*/
             }
+
         });
     }
 

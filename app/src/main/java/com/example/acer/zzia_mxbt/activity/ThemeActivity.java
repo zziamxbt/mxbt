@@ -78,10 +78,10 @@ public class ThemeActivity extends AppCompatActivity {
                         //将路径转化为URI
                         Uri imageUri = Uri.parse(imagePath);
                         Uri textUri = Uri.parse(textPath);
-                        Log.e("qiyu,传递sid", sid + "");
-                        Log.e("qiyu,传递image", imageUri + "");
-                        Log.e("qiyu,传递txt", textUri + "");
-                        Log.e("qiyu,传递content", content);
+                       // Log.e("qiyu,传递sid", sid + "");
+                        //Log.e("qiyu,传递image", imageUri + "");
+                        //Log.e("qiyu,传递txt", textUri + "");
+                        //Log.e("qiyu,传递content", content);
 
                         //传递参数
                         Intent intent = new Intent(ThemeActivity.this, ThemeContentActivity.class);
