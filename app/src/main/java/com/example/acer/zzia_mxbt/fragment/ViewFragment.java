@@ -21,7 +21,10 @@ import com.example.acer.zzia_mxbt.activity.MainActivity;
 import com.example.acer.zzia_mxbt.adapters.IndexListAdapter;
 
 import com.example.acer.zzia_mxbt.adapters.IndexListAdapter1;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
 import com.example.acer.zzia_mxbt.bean.IndexBean;
 
 import com.example.acer.zzia_mxbt.R;
@@ -63,13 +66,24 @@ public class ViewFragment extends Fragment {
     List<IndexBean> list;
     List<IndexBean> savelist;
     PullToRefreshListView listView;
+<<<<<<< HEAD
     IndexListAdapter1 ila1;
+=======
+
+
+    IndexListAdapter1 ila1;
+
+
+>>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
     IndexListAdapter ila;
     SimpleDraweeView headimg ;
     Boolean isend=false;
     static  int begin = 0;
     static  int end = 9;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
     View view;
 
     @Nullable
@@ -105,8 +119,13 @@ public class ViewFragment extends Fragment {
     private void initList() {
 
 
+<<<<<<< HEAD
         RequestParams params = new RequestParams("http://10.201.1.115:8080/ZZIA_MXBT/index_servlet");
        RequestParams paramsSend=new RequestParams("http://10.201.1.115:8080/ZZIA_MXBT/sendMessage");
+=======
+        RequestParams params = new RequestParams("http://10.201.1.183:8080/ZZIA_MXBT/index_servlet");
+
+>>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
 //       RequestParams params= new RequestParams("http://139.129.58.244:8080/ZZIA_MXBT/index_servlet");
         x.http().get(paramsSend, new Callback.CommonCallback<String>() {
 
@@ -164,8 +183,20 @@ public class ViewFragment extends Fragment {
                 for (int i = begin; i <= end; i++) {
                     savelist.add(list.get(i));
                 }
+<<<<<<< HEAD
                 ila = new IndexListAdapter(getActivity(),  savelist);
                 listView.setAdapter(ila);
+=======
+
+
+
+
+
+                ila = new IndexListAdapter(getActivity(),  savelist);
+                listView.setAdapter(ila);
+
+
+>>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
                 listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
                     @Override
                     public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {

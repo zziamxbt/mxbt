@@ -44,7 +44,7 @@ public class VoteActivity extends AppCompatActivity {
             switch (msg.what){
                 case 1:
                     Uid= (int) msg.obj;
-                    Log.e("ccc", "handleMessage: "+"aaaaaaaaaa啊啊"+Uid );
+                 //   Log.e("ccc", "handleMessage: "+"aaaaaaaaaa啊啊"+Uid );
                     initdata();
                     break;
                 case 2:
