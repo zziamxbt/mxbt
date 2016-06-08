@@ -63,7 +63,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ImageView index_menu;//导航菜单按钮
     ImageView kind_ring;//分类图片（圆环）
     TextView kind_content;//分类内容
-
+    //需要传一个Uid给离线阅读
+    int Uid=2;//数据待接受。。。。。。。。。。。。。。。。。。。
 
     //隐藏的布局
     RelativeLayout loadding_layout;
@@ -103,6 +104,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //是否登录
 
     private static  boolean isLogin = false;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
+>>>>>>> 26efadd7082c159a74806439998f4ba56ea4a837
+>>>>>>> 7486ff674008437d0cb85be343bef918207db514
 
     public static User getUser() {
         return user;
@@ -111,6 +123,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static boolean isLogin() {
         return isLogin;
     }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
+>>>>>>> 26efadd7082c159a74806439998f4ba56ea4a837
+>>>>>>> 7486ff674008437d0cb85be343bef918207db514
 
     private static User user;
     //双击退出标志位
@@ -233,6 +255,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Toast.makeText(MainActivity.this, "最近阅读", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.side_download) {
             Toast.makeText(MainActivity.this, "离线阅读", Toast.LENGTH_SHORT).show();
+            //离线阅读操作
+            if(Uid!=0){
+                Intent intent=new Intent(MainActivity.this,DownlineActivity.class);
+                intent.putExtra("Uid",Uid);
+                startActivity(intent);
+            }else{
+                Intent intent=new Intent(MainActivity.this,RegistActivity.class);
+                startActivity(intent);
+            }
+
+
         } else if (id == R.id.side_config) {
             Toast.makeText(MainActivity.this, "设置", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.side_nightmode) {
@@ -248,6 +281,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 
     public void initView() {
         index_menu = (ImageView) findViewById(R.id.index_menu);
