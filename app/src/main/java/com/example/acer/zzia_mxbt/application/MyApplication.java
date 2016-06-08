@@ -16,21 +16,59 @@ public class MyApplication extends Application {
     private static String Url_WriteArticle="http://10.201.1.183:8080/ZZIA_MXBT/write_Content";
     //获取文章内容
 
+<<<<<<< HEAD
     private static String Url_Article = "http://10.201.1.183:8080/ZZIA_MXBT/article_complete";
+=======
+    private static String Url_Article = "http://10.201.1.170:80/ZZIA_MXBT/article_complete";
+>>>>>>> 62bbc80fe493bf3af2f9a942637ed722aaa330bf
     /*private String registUrl="http://10.201.1.170:80/MXBT_Register/checkServlet";
     private String loginUrl="http://10.201.1.170:80/MXBT_Register/loginCheckServlet";*/
     //注册
     private String registUrl = "http://10.201.1.183:8080/ZZIA_MXBT/registCheckServlet";
 
     //登录
+<<<<<<< HEAD
     private String loginUrl = "http://10.201.1.183:8080/ZZIA_MXBT/loginCheckServlet";
+=======
+    private String loginUrl = "http://10.201.1.115:8080/ZZIA_MXBT/loginCheckServlet";
+<<<<<<< HEAD
+
+    //显示搜素版块
+    private String searchThemeUrl = "http://10.201.1.170:80/ZZIA_MXBT/searchServlet";
+
+    //显示专题封面
+    private String showLableUrl = "http://10.201.1.170:80/ZZIA_MXBT/showLableServlet";
+
+=======
+>>>>>>> 62bbc80fe493bf3af2f9a942637ed722aaa330bf
     //显示专题封面
 
     private String showSubjectUrl = "http://10.201.1.183:80/ZZIA_MXBT/showSubjectServlet";
+<<<<<<< HEAD
+=======
+=======
+
+
+    private String showSubjectUrl = "http://10.201.1.115:80/ZZIA_MXBT/showSubjectServlet";
+>>>>>>> 2543310f901c162d458b167dda87db1f3196a7dc
+>>>>>>> 62bbc80fe493bf3af2f9a942637ed722aaa330bf
     //显示专题对应文章
     private String showSubjectArticleUrl = "http://10.201.1.183:80/ZZIA_MXBT/showSubjectArticleServlet";
 
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    //显示标签封面
+    private String showSubjectUrl = "http://10.201.1.170:80/ZZIA_MXBT/showSubjectServlet";
+    //显示标签对应文章
+    private String showLableArticleUrl = "http://10.201.1.170:80/ZZIA_MXBT/showLableArticleServlet";
+
+
+=======
+>>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
+>>>>>>> 2543310f901c162d458b167dda87db1f3196a7dc
+>>>>>>> 62bbc80fe493bf3af2f9a942637ed722aaa330bf
 
     //排行榜
     private String author_url = "http://10.201.1.183:8080/ZZIA_MXBT/user_servlet";
@@ -121,6 +159,28 @@ public class MyApplication extends Application {
         return center_url;
     }
 
+    public String getSearchThemeUrl() {
+        return searchThemeUrl;
+    }
 
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+    public String getShowLableUrl() {
+        return showLableUrl;
+    }
+
+    public String getShowLableArticleUrl() {
+        return showLableArticleUrl;
+    }
+=======
+>>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
+>>>>>>> 42c3d4d3b7d314f110699972472a68eb9d124c62
+>>>>>>> 2543310f901c162d458b167dda87db1f3196a7dc
+>>>>>>> 62bbc80fe493bf3af2f9a942637ed722aaa330bf
 }
+
+
+
+

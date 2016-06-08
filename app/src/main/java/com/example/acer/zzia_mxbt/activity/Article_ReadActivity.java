@@ -139,21 +139,33 @@ public class Article_ReadActivity extends AppCompatActivity {
     //执行文章内容getText（）
     private int TextContent = 0;
     //执行推荐getText（）
+<<<<<<< HEAD
+    private int RecommendNum=1;
+   //执行收藏getText（）
+    private int CollectNum=2;
+=======
     private int RecommendNum = 1;
     //执行收藏getText（）
     private int CollectNum = 2;
+<<<<<<< HEAD
 //创建sqllite，存储图片
     Bitmap mUhead=null;
     Bitmap mUbk=null;
     Bitmap mcoverimg=null;
     int Uid=2;//数据待接收。。。。。。。。。。。。。。。。。。。。。
     SQLiteDatabase db=null;
+=======
+    //保存章节Id
+    private int[] Chapter_Id;
+>>>>>>> 2543310f901c162d458b167dda87db1f3196a7dc
+
+
+>>>>>>> 62bbc80fe493bf3af2f9a942637ed722aaa330bf
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         x.view().inject(this);
         Fresco.initialize(this);
-        setContentView(R.layout.activity_article__read);
         //初始化方法
         init();
         //得到网络数据的路径
@@ -791,6 +803,37 @@ public class Article_ReadActivity extends AppCompatActivity {
         //第一步：设置访问路径
         RequestParams params = null;
 //获取activity跳转过来的值
+<<<<<<< HEAD
+        Intent intent=getIntent();
+        int article_id=intent.getIntExtra("Article_Id",0);
+        //Log.e("qiyu,Aid", "onItemClick: "+article_id );
+        Log.e("qiyu,Article_Read,", "接收文章id: "+ article_id);
+        params= new RequestParams(mPath);
+         if(Num==0){
+             params.addQueryStringParameter("Num",0+"");//让后台判断到底执行那个语句，对数据库进行修改（标示）
+             params.addQueryStringParameter("article_id",article_id+"");
+         }else if(Num==1){
+             //判断是否推荐，修改数据库
+             params.addQueryStringParameter("Num",1+"");//让后台判断到底执行那个语句，对数据库进行修改（标示）
+             if (flag){
+                 params.addQueryStringParameter("RecommendNum","true");
+             }else {
+                 params.addQueryStringParameter("RecommendNum","false");
+             }
+           //  params.addQueryStringParameter("User_Id",User.getUid()+"");
+             params.addQueryStringParameter("article_id",article_id+"");
+         }else if(Num==2){
+             //判断是否收藏，修改数据库
+             params.addQueryStringParameter("Num",2+"");//让后台判断到底执行那个语句，对数据库进行修改（标示）
+             if (flag){
+                 params.addQueryStringParameter("CollectNum","true");
+             }else {
+                 params.addQueryStringParameter("CollectNum","false");
+             }
+           //  params.addQueryStringParameter("User_Id",User.getUid()+"");
+             params.addQueryStringParameter("article_id",article_id+"");
+         }
+=======
         Intent intent = getIntent();
         article_id= intent.getIntExtra("Article_Id",0);
      //
@@ -821,6 +864,7 @@ public class Article_ReadActivity extends AppCompatActivity {
               params.addQueryStringParameter("User_Id",1+"");
             params.addQueryStringParameter("article_id", article_id + "");
         }
+>>>>>>> 2543310f901c162d458b167dda87db1f3196a7dc
 
         //第二步：开始请求，设置请求方式，同时实现回调函数
         x.http().get(params, new Callback.CommonCallback<String>() {
@@ -828,6 +872,16 @@ public class Article_ReadActivity extends AppCompatActivity {
             public void onSuccess(String result) {
                 //访问成功，参数其实就是PrintWriter写回的值
                 //把JSON格式的字符串改为Student对象
+<<<<<<< HEAD
+                if(Num==0){
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<List<ArticleBean>>() {
+                    }.getType();
+                    listData = gson.fromJson(result, type);
+                    initdata(listData);
+                    Log.e("qiyu,Article_Read,", "接收文章listdata: "+ listData);
+                }
+=======
                      if(Num==0){
                          Gson gson = new Gson();
                          Type type = new TypeToken<List<ArticleBean>>() {
@@ -838,6 +892,7 @@ public class Article_ReadActivity extends AppCompatActivity {
                      }
 
 
+>>>>>>> 2543310f901c162d458b167dda87db1f3196a7dc
 
 
 
