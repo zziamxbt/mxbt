@@ -19,13 +19,10 @@ import android.widget.Toast;
 import com.example.acer.zzia_mxbt.activity.Article_ReadActivity;
 import com.example.acer.zzia_mxbt.activity.MainActivity;
 import com.example.acer.zzia_mxbt.adapters.IndexListAdapter;
-<<<<<<< HEAD
-import com.example.acer.zzia_mxbt.adapters.IndexListAdapter1;
-=======
 
-import com.example.acer.zzia_mxbt.adapters.IndexListAdapter1;
 
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
+
+
 import com.example.acer.zzia_mxbt.bean.IndexBean;
 
 import com.example.acer.zzia_mxbt.R;
@@ -47,7 +44,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Type;
+    import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -63,21 +60,16 @@ public class ViewFragment extends Fragment {
     List<IndexBean> savelist;
     PullToRefreshListView listView;
 
-<<<<<<< HEAD
-=======
-    IndexListAdapter1 ila1;
 
 
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
+
+
     IndexListAdapter ila;
     SimpleDraweeView headimg ;
     Boolean isend=false;
     static  int begin = 0;
     static  int end = 9;
-<<<<<<< HEAD
 
-=======
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
 
     View view;
 
@@ -104,13 +96,10 @@ public class ViewFragment extends Fragment {
                 int Aid = list.get(position - 2).getArticleId();
              //   Log.e("Aid", "onItemClick: "+Aid );
                 Intent intent = new Intent(getActivity(), Article_ReadActivity.class);
-<<<<<<< HEAD
 
-                intent.putExtra("Article_Id", Aid);
 
-=======
                 intent.putExtra("Article_Id",Aid);
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
+
                 startActivity(intent);
             }
         });
@@ -120,7 +109,7 @@ public class ViewFragment extends Fragment {
     private void initList() {
 
 
-        RequestParams params = new RequestParams("http://10.201.1.115:8080/ZZIA_MXBT/index_servlet");
+        RequestParams params = new RequestParams("http://10.201.1.183:8080/ZZIA_MXBT/index_servlet");
 
 //       RequestParams params= new RequestParams("http://139.129.58.244:8080/ZZIA_MXBT/index_servlet");
         x.http().get(params, new Callback.CommonCallback<String>() {
@@ -138,17 +127,14 @@ public class ViewFragment extends Fragment {
 
                 initRefreshListView();
 
-<<<<<<< HEAD
+
                 View v = View.inflate(getActivity(), R.layout.index_header_text, null);
                 listView.getRefreshableView().addHeaderView(v, null, false);
-=======
-
-                View v = View.inflate(getActivity(), R.layout.index_header_text, null);
-                listView.getRefreshableView().addHeaderView(v, null, true);
 
 
 
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
+
+
 
                 listView.getRefreshableView().setHeaderDividersEnabled(false);
 
@@ -159,15 +145,13 @@ public class ViewFragment extends Fragment {
 
 
 
-<<<<<<< HEAD
-                ila = new IndexListAdapter(getActivity(),  savelist);
-                listView.setAdapter(ila);
-
-=======
 
                 ila = new IndexListAdapter(getActivity(),  savelist);
                 listView.setAdapter(ila);
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
+
+
+
+
 
 
                 listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {

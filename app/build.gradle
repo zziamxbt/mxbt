@@ -60,4 +60,6 @@ dependencies {
     compile 'com.android.support:palette-v7:23.4.0'
     compile 'com.android.support:support-v4:23.4.0'
     compile files('libs/jpush-android-2.1.5.jar')
+    compile files('libs/android-async-http-1.4.6.jar')
+    compile files('libs/qiniu-android-sdk-7.0.3.jar')
 }

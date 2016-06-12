@@ -44,4 +44,8 @@ public class QiyuActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    public void themePage(View view) {
+        intent=new Intent(QiyuActivity.this,ThemeActivity.class);
+        startActivity(intent);
+    }
 }

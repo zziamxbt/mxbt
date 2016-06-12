@@ -13,7 +13,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.acer.zzia_mxbt.R;
@@ -37,6 +39,8 @@ import java.net.URL;
 
 public class CenterActivity extends AppCompatActivity {
     private static final int BACK_IMAGE_CODE = 1;
+    private static final int EDIT_CODE = 3001;
+    private static final int USER_RESULT_COD = 1;
     Toolbar mToolbar;
     CollapsingToolbarLayout ctbl ;
     SimpleDraweeView simpleDraweeView;
@@ -58,8 +62,9 @@ public class CenterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_center);
         intentGetter();
         iniView();
-        setView();
+        setView(user);
         intiPager();
+
 
     }
 
@@ -84,12 +89,22 @@ public class CenterActivity extends AppCompatActivity {
         mTabLayout.setupWithViewPager(center_viewPager);
     }
 
-    private void setView() {
+    private void setView(final User user) {
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CenterActivity.this,EditActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("user", user);
+                bundle.putBoolean("isLogin",true);
+                intent.putExtras(bundle);
+                startActivityForResult(intent, EDIT_CODE);
+            }
+        });
 
         String path2 = user.getUbk();
         Uri uri2 = Uri.parse(path2);
@@ -185,13 +200,128 @@ public class CenterActivity extends AppCompatActivity {
 
     }
 
+
+    //返回监听
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == android.R.id.home)
         {
+            Log.e("ccc", "onOptionsItemSelected: " );
+            Intent intent = new Intent();
+            Bundle bundle=new Bundle();
+            bundle.putSerializable("user",user);
+            intent.putExtras(bundle);
+            setResult(USER_RESULT_COD, intent);
             finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+
+
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==EDIT_CODE&&null!=data) {
+            user= (User) data.getSerializableExtra("user");
+            initView(user);
+        }
+
+    }
+
+    private void initView(final User user) {
+
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CenterActivity.this,EditActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("user", user);
+                bundle.putBoolean("isLogin",true);
+                intent.putExtras(bundle);
+                startActivityForResult(intent, EDIT_CODE);
+            }
+        });
+
+        String path2 = user.getUbk();
+        Uri uri2 = Uri.parse(path2);
+
+        DraweeController controller2 = Fresco.newDraweeControllerBuilder()
+                .setUri(uri2)
+                .build();
+        simpleDraweeView.setController(controller2);
+
+
+
+        String path1 = user.getUhead();
+        Uri uri1 = Uri.parse(path1);
+
+        DraweeController controller1 = Fresco.newDraweeControllerBuilder()
+                .setUri(uri1)
+                .build();
+        head_simpleDraweeView.setController(controller1);
+
+        final Handler hanler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                switch (msg.what){
+                    case BACK_IMAGE_CODE:
+                        Palette.from((Bitmap)msg.obj).generate(new Palette.PaletteAsyncListener() {
+                            @Override
+                            public void onGenerated(final Palette palette) {
+
+                                int bgColor = palette.getLightVibrantColor(getResources().getColor(R.color.white));
+                                int titleColor = palette.getMutedColor(getResources().getColor(R.color.white));
+                                int ExpandedTitleColor = palette.getLightVibrantColor(getResources().getColor(R.color.white));
+                                if(ExpandedTitleColor==getResources().getColor(R.color.white))
+                                    ExpandedTitleColor = palette.getDarkMutedColor(getResources().getColor(R.color.white));
+                                ctbl.setContentScrimColor(bgColor);
+                                ctbl.setCollapsedTitleTextColor(titleColor);
+                                ctbl.setExpandedTitleColor(ExpandedTitleColor);
+                                textView.setTextColor(titleColor);
+
+                            }
+                        });
+
+                }
+            }
+        };
+
+
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                URL url = null;
+                try {
+                    url = new URL(user.getUbk());
+                    InputStream is = url.openStream();
+                    Bitmap bitmap = BitmapFactory.decodeStream(is);
+//                        if(bitmap!=null){
+//                            Log.e("bitmap", "run: "+"NOTNULL" );
+//                        }
+                    Message msg = new Message();
+                    msg.obj = bitmap;
+                    msg.what = BACK_IMAGE_CODE;
+                    hanler.sendMessage(msg);
+                    is.close();
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+        ctbl.setTitle(user.getUnickname());
+
     }
 }
