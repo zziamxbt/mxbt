@@ -1,6 +1,8 @@
 package com.example.acer.zzia_mxbt.activity;
 
-
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -29,13 +31,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.acer.zzia_mxbt.R;
 import com.example.acer.zzia_mxbt.adapters.IndexFragmentPagerAdapter;
+import com.example.acer.zzia_mxbt.application.MyApplication;
+import com.example.acer.zzia_mxbt.bean.ArticleBean;
+import com.example.acer.zzia_mxbt.bean.SignBean;
 import com.example.acer.zzia_mxbt.bean.User;
 import com.example.acer.zzia_mxbt.fragment.ViewFragment;
 import com.example.acer.zzia_mxbt.fragment.ViewFragment1;
 import com.example.acer.zzia_mxbt.fragment.ViewFragment2;
 import com.example.acer.zzia_mxbt.fragment.ViewFragment3;
-import com.example.acer.zzia_mxbt.R;
 import com.example.acer.zzia_mxbt.fragment.ViewFragment4;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.drawable.ScalingUtils;
@@ -44,8 +49,12 @@ import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.generic.RoundingParams;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 
+
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -56,15 +65,19 @@ import java.util.TimerTask;
 import cn.jpush.android.api.JPushInterface;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    //listData记录是否签到
+    List<SignBean> listData;
+    //访问网络数据的路径
+    public String mPath;
     //判断是否已经签到
-    private boolean signFlag=true;
+    private boolean signFlag = true;
     DrawerLayout drawer;
     ViewPager index_viewPager;
     ImageView index_menu;//导航菜单按钮
     ImageView kind_ring;//分类图片（圆环）
     TextView kind_content;//分类内容
     //需要传一个Uid给离线阅读
-    int Uid=2;//数据待接受。。。。。。。。。。。。。。。。。。。
+    int Uid = 2;//数据待接受。。。。。。。。。。。。。。。。。。。
 
     //隐藏的布局
     RelativeLayout loadding_layout;
@@ -103,18 +116,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     //是否登录
 
-    private static  boolean isLogin = false;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
+    private static boolean isLogin = false;
 
-
->>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
->>>>>>> 26efadd7082c159a74806439998f4ba56ea4a837
->>>>>>> 7486ff674008437d0cb85be343bef918207db514
 
     public static User getUser() {
         return user;
@@ -123,20 +126,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static boolean isLogin() {
         return isLogin;
     }
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-
->>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
->>>>>>> 26efadd7082c159a74806439998f4ba56ea4a837
->>>>>>> 7486ff674008437d0cb85be343bef918207db514
 
     private static User user;
     //双击退出标志位
-    Boolean isExit =false;
+    Boolean isExit = false;
     //更多按钮
     ImageView more;
 
@@ -256,12 +249,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.side_download) {
             Toast.makeText(MainActivity.this, "离线阅读", Toast.LENGTH_SHORT).show();
             //离线阅读操作
-            if(Uid!=0){
-                Intent intent=new Intent(MainActivity.this,DownlineActivity.class);
-                intent.putExtra("Uid",Uid);
+            if (Uid != 0) {
+                Intent intent = new Intent(MainActivity.this, DownlineActivity.class);
+                intent.putExtra("Uid", Uid);
                 startActivity(intent);
-            }else{
-                Intent intent=new Intent(MainActivity.this,RegistActivity.class);
+            } else {
+                Intent intent = new Intent(MainActivity.this, RegistActivity.class);
                 startActivity(intent);
             }
 
@@ -281,7 +274,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 
 
     public void initView() {
@@ -441,16 +433,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 });
                 //签到监听
+                getPath();//获取路径
+                if (Uid != 0) {
+                    getText(true,drop2);  //从数据库中查看是否被签到
+                } else {
+                    drop2.setText("签到");
+                }
                 drop2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(signFlag){
-                            Log.e("isSignFlag","isSignFlag:"+isSignFlag());
-                            Toast.makeText(MainActivity.this,"签到成功，送你2个金币",Toast.LENGTH_LONG).show();
-                            drop2.setText("已签到");
-                            signFlag=false;
-                        }else {
-                            Toast.makeText(MainActivity.this,"你已签到，请明天再来",Toast.LENGTH_LONG).show();
+                        if (Uid == 0) {
+                            Toast.makeText(MainActivity.this, "你未登录，无法进行该操作", Toast.LENGTH_SHORT).show();
+                        } else {
+                            if (listData.get(0).isSignFlag()) {
+                                Log.e("isSignFlag", "isSignFlag:" + isSignFlag());
+                                Toast.makeText(MainActivity.this, "签到成功，送你2个金币", Toast.LENGTH_LONG).show();
+                                drop2.setText("已签到");
+                                listData.get(0).setSignFlag(false);
+                                getText(false,drop2);
+                            } else {
+                                Toast.makeText(MainActivity.this, "你已签到，请明天再来", Toast.LENGTH_LONG).show();
+                            }
+
                         }
 
                     }
@@ -516,10 +520,56 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     //用来判断是否可以再次签到
-    public String isSignFlag(){
-        SimpleDateFormat    formatter    =   new SimpleDateFormat("yyyy年MM月dd日");
-        Date curDate    =   new    Date(System.currentTimeMillis());//获取当前时间
-        String    str    =    formatter.format(curDate);
+    public String isSignFlag() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日");
+        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+        String str = formatter.format(curDate);
         return str;
+    }
+
+    public void getPath() {
+        MyApplication myApplication = (MyApplication) getApplication();
+        mPath = myApplication.getUrl_Sign();
+    }
+
+    public void getText(final boolean flag, final TextView drop2) {
+        RequestParams params = new RequestParams(mPath);
+        params.addQueryStringParameter("Uid", Uid + "");
+        params.addQueryStringParameter("Flag", flag + "");
+        Log.e("Flag", "Flag:" + flag);
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                if (flag) {
+                    Log.e("listData", "listData: 后台数据刷新成功");
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<List<SignBean>>() {
+                    }.getType();
+                    listData = gson.fromJson(result, type);
+                    Log.e("listData", "listData: 后台数据刷新成功" + listData);
+                    if (listData.get(0).isSignFlag()) {
+                        drop2.setText("签到");
+                    } else {
+                        drop2.setText("已签到");
+                    }
+                }
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Log.e("listData", "错误原因：" + ex.getMessage());
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
     }
 }

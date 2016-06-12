@@ -338,9 +338,11 @@ public class WalletActivity extends AppCompatActivity {
         RequestParams params = new RequestParams(mPath);
         if(goldFlag){
             params.addQueryStringParameter("User_id", 1 + "");
+            params.addQueryStringParameter("gold","true");
             goldFlag=false;
         }else {
             params.addQueryStringParameter("User_id", 1 + "");
+            params.addQueryStringParameter("gold","true");
             params.addQueryStringParameter("goldNum",""+(Integer.valueOf(mnine.getText().toString())+Integer.valueOf(mgoldNum.getText().toString())));
         }
 

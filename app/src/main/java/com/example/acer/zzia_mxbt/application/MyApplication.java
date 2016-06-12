@@ -10,155 +10,74 @@ import org.xutils.x;
  * Created by acer on 2016/5/18.
  */
 public class MyApplication extends Application {
+    //获取签到信息
+    private String Url_Sign="http://10.201.1.115:8080/ZZIA_MXBT/signServlet";
     //获取钱包信息
-    private String Url_Wallet="http://10.201.1.183:8080/ZZIA_MXBT/wallet_servlet";
+    private String Url_Wallet="http://10.201.1.115:8080/ZZIA_MXBT/wallet_servlet";
     //获取续写内容
-    private static String Url_WriteArticle="http://10.201.1.183:8080/ZZIA_MXBT/write_Content";
+    private static String Url_WriteArticle="http://10.201.1.115:8080/ZZIA_MXBT/write_Content";
     //获取文章内容
 
-<<<<<<< HEAD
-    private static String Url_Article = "http://10.201.1.183:8080/ZZIA_MXBT/article_complete";
-=======
-    private static String Url_Article = "http://10.201.1.170:80/ZZIA_MXBT/article_complete";
->>>>>>> 62bbc80fe493bf3af2f9a942637ed722aaa330bf
-    /*private String registUrl="http://10.201.1.170:80/MXBT_Register/checkServlet";
-    private String loginUrl="http://10.201.1.170:80/MXBT_Register/loginCheckServlet";*/
+
+    private static String Url_Article = "http://10.201.1.115:8080/ZZIA_MXBT/article_complete";
+
+    /*private String registUrl="http://10.201.1.115:8080/MXBT_Register/checkServlet";
+    private String loginUrl="http://10.201.1.115:8080/MXBT_Register/loginCheckServlet";*/
     //注册
-    private String registUrl = "http://10.201.1.183:8080/ZZIA_MXBT/registCheckServlet";
+    private String registUrl = "http://10.201.1.115:8080/ZZIA_MXBT/registCheckServlet";
 
     //登录
-<<<<<<< HEAD
-    private String loginUrl = "http://10.201.1.183:8080/ZZIA_MXBT/loginCheckServlet";
-=======
+
     private String loginUrl = "http://10.201.1.115:8080/ZZIA_MXBT/loginCheckServlet";
-<<<<<<< HEAD
-    //显示专题封面
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-=======
-<<<<<<< HEAD
 
     //显示搜素版块
-    private String searchThemeUrl = "http://10.201.1.170:80/ZZIA_MXBT/searchServlet";
+    private String searchThemeUrl = "http://10.201.1.115:8080/ZZIA_MXBT/searchServlet";
 
     //显示专题封面
-    private String showLableUrl = "http://10.201.1.170:80/ZZIA_MXBT/showLableServlet";
-
-=======
->>>>>>> 62bbc80fe493bf3af2f9a942637ed722aaa330bf
-    //显示专题封面
-
-    private String showSubjectUrl = "http://10.201.1.183:80/ZZIA_MXBT/showSubjectServlet";
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
->>>>>>> 26efadd7082c159a74806439998f4ba56ea4a837
->>>>>>> 7486ff674008437d0cb85be343bef918207db514
+    private String showLableUrl = "http://10.201.1.115:8080/ZZIA_MXBT/showLableServlet";
 
 
-    private String showSubjectUrl = "http://10.201.1.115:80/ZZIA_MXBT/showSubjectServlet";
->>>>>>> 2543310f901c162d458b167dda87db1f3196a7dc
->>>>>>> 62bbc80fe493bf3af2f9a942637ed722aaa330bf
     //显示专题对应文章
-    private String showSubjectArticleUrl = "http://10.201.1.183:80/ZZIA_MXBT/showSubjectArticleServlet";
+    private String showSubjectArticleUrl = "http://10.201.1.115:8080/ZZIA_MXBT/showSubjectArticleServlet";
 
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
     //显示标签封面
-    private String showSubjectUrl = "http://10.201.1.170:80/ZZIA_MXBT/showSubjectServlet";
+    private String showSubjectUrl = "http://10.201.1.115:8080/ZZIA_MXBT/showSubjectServlet";
     //显示标签对应文章
-    private String showLableArticleUrl = "http://10.201.1.170:80/ZZIA_MXBT/showLableArticleServlet";
+    private String showLableArticleUrl = "http://10.201.1.115:8080/ZZIA_MXBT/showLableArticleServlet";
 
-
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
-=======
-=======
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
->>>>>>> 2543310f901c162d458b167dda87db1f3196a7dc
->>>>>>> 62bbc80fe493bf3af2f9a942637ed722aaa330bf
->>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
->>>>>>> 26efadd7082c159a74806439998f4ba56ea4a837
->>>>>>> 7486ff674008437d0cb85be343bef918207db514
 
     //排行榜
-    private String author_url = "http://10.201.1.183:8080/ZZIA_MXBT/user_servlet";
-    private String novel_url = "http://10.201.1.183:8080/ZZIA_MXBT/novel_servlet";
+    private String author_url = "http://10.201.1.115:8080/ZZIA_MXBT/user_servlet";
+    private String novel_url = "http://10.201.1.115:8080/ZZIA_MXBT/novel_servlet";
     //投票
-<<<<<<< HEAD
-
     private String vote_url = "http://10.201.1.115:8080/ZZIA_MXBT/vote_servlet";
-=======
-<<<<<<< HEAD
->>>>>>> 7486ff674008437d0cb85be343bef918207db514
-
-    private String vote_url = "http://10.201.1.115:8080/ZZIA_MXBT/vote_servlet";
-=======
-<<<<<<< HEAD
->>>>>>> 26efadd7082c159a74806439998f4ba56ea4a837
-
-    private String vote_url = "http://10.201.1.115:8080/ZZIA_MXBT/vote_servlet";
-=======
-    private String vote_url = "http://10.201.1.183:8080/ZZIA_MXBT/vote_servlet";
     //续写插入
-    private String andwrite_url="http://10.201.1.183:8080/ZZIA_MXBT/AndWrite_InsertServlet";
+    private String andwrite_url="http://10.201.1.115:8080/ZZIA_MXBT/AndWrite_InsertServlet";
     //评论查询，插入
-    private String article_comment_url="http://10.201.1.183:8080/ZZIA_MXBT/ArticeComment_Servlet";
-   private String andwrite_comment_url="http://10.201.1.183:8080/ZZIA_MXBT/AndWriteComment_Servlet";
->>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
+    private String article_comment_url="http://10.201.1.115:8080/ZZIA_MXBT/ArticeComment_Servlet";
+   private String andwrite_comment_url="http://10.201.1.115:8080/ZZIA_MXBT/AndWriteComment_Servlet";
+
 
     //我的故事
     private static  String mystory_url="http://10.201.1.115:8080/ZZIA_MXBT/mystory";
     //我的收藏
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 26efadd7082c159a74806439998f4ba56ea4a837
->>>>>>> 7486ff674008437d0cb85be343bef918207db514
     private static  String mycollect_url="http://10.201.1.115:8080/ZZIA_MXBT/mycollect";
-
-
     //我的推荐
     private static  String myrecommand_url="http://10.201.1.115:8080/ZZIA_MXBT/myrecommand";
-
-
-    public static String getMycollect_url() {
-        return mycollect_url;
-    }
-
     //个人中心
     private static  String center_url="http://10.201.1.115:8080/ZZIA_MXBT/index_servlet";
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-=======
-    private static  String mycollect_url="http://10.201.1.183:8080/ZZIA_MXBT/mycollect";
-    //我的推荐
-    private static  String myrecommand_url="http://10.201.1.183:8080/ZZIA_MXBT/myrecommand";
-    //个人中心
-    private static  String center_url="http://10.201.1.183:8080/ZZIA_MXBT/index_servlet";
->>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
->>>>>>> 26efadd7082c159a74806439998f4ba56ea4a837
->>>>>>> 7486ff674008437d0cb85be343bef918207db514
 
     @Override
     public void onCreate() {
         super.onCreate();
         x.Ext.init(this);
         x.Ext.setDebug(BuildConfig.DEBUG);
+    }
+
+    public String getUrl_Sign() {
+        return Url_Sign;
     }
 
     public String getUrl_Wallet() {
@@ -206,16 +125,7 @@ public class MyApplication extends Application {
     public String getShowSubjectArticleUrl() {
         return showSubjectArticleUrl;
     }
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
 
->>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
->>>>>>> 26efadd7082c159a74806439998f4ba56ea4a837
->>>>>>> 7486ff674008437d0cb85be343bef918207db514
     public static String getMystory_url() {
         return mystory_url;
     }
@@ -224,21 +134,11 @@ public class MyApplication extends Application {
         return myrecommand_url;
     }
 
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
-
-=======
     public static String getMycollect_url() {
         return mycollect_url;
     }
->>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
->>>>>>> 26efadd7082c159a74806439998f4ba56ea4a837
->>>>>>> 7486ff674008437d0cb85be343bef918207db514
+
 
     public static String getCenter_url() {
         return center_url;
@@ -248,34 +148,15 @@ public class MyApplication extends Application {
         return searchThemeUrl;
     }
 
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
-
-<<<<<<< HEAD
-
-=======
-=======
-<<<<<<< HEAD
     public String getShowLableUrl() {
         return showLableUrl;
     }
 
-<<<<<<< HEAD
 
-=======
     public String getShowLableArticleUrl() {
         return showLableArticleUrl;
     }
-=======
->>>>>>> ee39f3392c57094014cb703193776a99a327c2c7
->>>>>>> 42c3d4d3b7d314f110699972472a68eb9d124c62
->>>>>>> 2543310f901c162d458b167dda87db1f3196a7dc
->>>>>>> 62bbc80fe493bf3af2f9a942637ed722aaa330bf
->>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
->>>>>>> 26efadd7082c159a74806439998f4ba56ea4a837
->>>>>>> 7486ff674008437d0cb85be343bef918207db514
+
 }
 
 

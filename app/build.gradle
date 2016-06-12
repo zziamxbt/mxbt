@@ -30,7 +30,7 @@ repositories {
 
 }
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    provided fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile name: 'SMSSDK-2.0.2', ext: 'aar'
     compile name: 'SMSSDKGUI-2.0.2', ext: 'aar'

@@ -14,16 +14,36 @@ public class JavaBean_article implements Serializable {
     private String ChapterAuthorName;
     private String ArticleContent;
     private String ArticleTime;
+    private int AuthorId;
+    private int UserId;
 
     public JavaBean_article(){};
 
     public JavaBean_article(String chapterTitle, String articleTime, String chapterAuthorName, String articleContent
-    ,String mAuthor_portraits) {
+    ,String mAuthor_portraits,int AuthorId,int UserId) {
         ChapterTitle = chapterTitle;
         ArticleTime = articleTime;
         ChapterAuthorName = chapterAuthorName;
         ArticleContent = articleContent;
+        UserId=UserId;
+        AuthorId=AuthorId;
         mAuthor_portraits=mAuthor_portraits;
+    }
+
+    public int getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(int userId) {
+        UserId = userId;
+    }
+
+    public int getAuthorId() {
+        return AuthorId;
+    }
+
+    public void setAuthorId(int authorId) {
+        AuthorId = authorId;
     }
 
     public String getmAuthor_portraits() {

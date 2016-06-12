@@ -26,17 +26,10 @@ import com.example.acer.zzia_mxbt.adapters.MyRecyclerViewAdapter;
 import com.example.acer.zzia_mxbt.application.MyApplication;
 import com.example.acer.zzia_mxbt.bean.IndexBean;
 import com.example.acer.zzia_mxbt.utils.SpacesItemDecoration;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
+
 import com.example.acer.zzia_mxbt.activity.MainActivity;
 import com.example.acer.zzia_mxbt.bean.ArticleBean;
->>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
->>>>>>> 26efadd7082c159a74806439998f4ba56ea4a837
->>>>>>> 7486ff674008437d0cb85be343bef918207db514
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -82,16 +75,7 @@ public class CenterFragment extends Fragment {
     MyRecyclerViewAdapter myRecyclerViewAdapter;
     LinearLayoutManager linearLayoutManager;
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
 
->>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
->>>>>>> 26efadd7082c159a74806439998f4ba56ea4a837
->>>>>>> 7486ff674008437d0cb85be343bef918207db514
     private static CenterFragment instance = null;
     //SwipeRefreshLayout
     SwipeRefreshLayout mSwipeRefreshWidget;
@@ -108,30 +92,6 @@ public class CenterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.centerlayout, container, false);
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 26efadd7082c159a74806439998f4ba56ea4a837
->>>>>>> 7486ff674008437d0cb85be343bef918207db514
-//        RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.center_recyclerView);
-//        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
-//        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-//        List<Integer> datas = new ArrayList<>();
-//        for (int i = 0; i < 100; i++) {
-//            datas.add(i);
-//        }
-//        mRecyclerView.setAdapter(new MyRecyclerViewAdapter(getActivity(), datas));
-
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
->>>>>>> 26efadd7082c159a74806439998f4ba56ea4a837
->>>>>>> 7486ff674008437d0cb85be343bef918207db514
         initBeginAndEnd();
 
         //初始化各个控件和视图
@@ -150,64 +110,23 @@ public class CenterFragment extends Fragment {
         end = 9;
     }
 
-<<<<<<< HEAD
+
     private void askForData() {
         RequestParams params = new RequestParams(MyApplication.getMystory_url());
 
 //       RequestParams params= new RequestParams("http://139.129.58.244:8080/ZZIA_MXBT/index_servlet");
         params.addQueryStringParameter("uid",CenterActivity.getUser().getUid()+"");
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-
-=======
-
-=======
-
-    private void askForData() {
-        RequestParams params = new RequestParams(MyApplication.getCenter_url());
-
-//       RequestParams params= new RequestParams("http://139.129.58.244:8080/ZZIA_MXBT/index_servlet");
-
->>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
->>>>>>> 26efadd7082c159a74806439998f4ba56ea4a837
->>>>>>> 7486ff674008437d0cb85be343bef918207db514
         x.http().get(params, new Callback.CommonCallback<String>() {
 
             @Override
             public void onSuccess(String result) {
-
-<<<<<<< HEAD
                 Log.e("aaa", "onSuccess: " );
-=======
-<<<<<<< HEAD
-                Log.e("aaa", "onSuccess: " );
-=======
-<<<<<<< HEAD
-                Log.e("aaa", "onSuccess: " );
-=======
-                Log.e("aaa", "onSuccess: ");
->>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
->>>>>>> 26efadd7082c159a74806439998f4ba56ea4a837
->>>>>>> 7486ff674008437d0cb85be343bef918207db514
-
                 Gson gson = new Gson();
                 Type type = new TypeToken<List<IndexBean>>() {
                 }.getType();
                 list = gson.fromJson(result, type);
-
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 26efadd7082c159a74806439998f4ba56ea4a837
->>>>>>> 7486ff674008437d0cb85be343bef918207db514
-                if(list!=null) {
-=======
                 if (list != null) {
->>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
                     new loadDataAsyncTask((CenterActivity) getActivity()).execute(list);
                     if (list.size() > end) {
                         for (int i = begin; i <= end; i++) {
@@ -229,23 +148,11 @@ public class CenterFragment extends Fragment {
                         startActivity(intent);
                     }
                 });
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
-
-=======
 
                 // myRecyclerViewAdapter = new MyRecyclerViewAdapter(getActivity(),list);
                 recyclerView.setAdapter(myRecyclerViewAdapter);
 
-
->>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
->>>>>>> 26efadd7082c159a74806439998f4ba56ea4a837
->>>>>>> 7486ff674008437d0cb85be343bef918207db514
             }
 
             @Override
@@ -269,18 +176,6 @@ public class CenterFragment extends Fragment {
         });
 
 
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
->>>>>>> 26efadd7082c159a74806439998f4ba56ea4a837
->>>>>>> 7486ff674008437d0cb85be343bef918207db514
     }
 
     private void setView() {
@@ -344,24 +239,13 @@ public class CenterFragment extends Fragment {
 
 
     //AsyncTask 内部类
-<<<<<<< HEAD
+
     class loadDataAsyncTask extends AsyncTask<List<IndexBean>, Integer,String> {
 
         private CenterActivity activity;
         List<IndexBean> list;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-=======
-    class loadDataAsyncTask extends AsyncTask<List<IndexBean>, Integer, String> {
-        private static final int HIDDEN_CODE = 1;
-        private static final int APPEAR_CODE = 2;
-        private CenterActivity activity;
 
->>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
->>>>>>> 26efadd7082c159a74806439998f4ba56ea4a837
->>>>>>> 7486ff674008437d0cb85be343bef918207db514
+
         public loadDataAsyncTask(CenterActivity activity) {
 
             this.activity = activity;
@@ -397,18 +281,9 @@ public class CenterFragment extends Fragment {
         }
 
 
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
 
-=======
->>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
->>>>>>> 26efadd7082c159a74806439998f4ba56ea4a837
->>>>>>> 7486ff674008437d0cb85be343bef918207db514
         //对返回值进行操作
         @Override
         protected void onPostExecute(String s) {
@@ -426,43 +301,6 @@ public class CenterFragment extends Fragment {
 
 
     }
-
-
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 26efadd7082c159a74806439998f4ba56ea4a837
->>>>>>> 7486ff674008437d0cb85be343bef918207db514
-
-//数据添加方法
-
-    public void addData(List<IndexBean> beanList, int begin, int end) {
-        for (int i = begin; i <= end; i++) {
-            String contentHttp = beanList.get(i).getContent();
-            StringBuilder content = null;
-
-            URL url = null;
-            try {
-                url = new URL(contentHttp);
-                InputStream is = url.openStream();
-                BufferedReader buff = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-                content = new StringBuilder();
-                String valueString;
-
-                while ((valueString = buff.readLine()) != null) {
-                    content.append(valueString);
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
-
-=======
-=======
-
-
-
 
 
 
@@ -483,10 +321,7 @@ public void addData(List<IndexBean>beanList,int begin,int end){
 
         while((valueString=buff.readLine())!=null){
         content.append(valueString);
->>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
 
->>>>>>> 26efadd7082c159a74806439998f4ba56ea4a837
->>>>>>> 7486ff674008437d0cb85be343bef918207db514
 //                        Log.e("lalala", "getView: "+mlist.get(p).getNickName()+stringBuilder);
         }
         if(content.toString().length()>=60){
@@ -506,18 +341,7 @@ public void addData(List<IndexBean>beanList,int begin,int end){
 
         }
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 26efadd7082c159a74806439998f4ba56ea4a837
->>>>>>> 7486ff674008437d0cb85be343bef918207db514
     }
 }
-=======
 
-        }
-        }
->>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
 
