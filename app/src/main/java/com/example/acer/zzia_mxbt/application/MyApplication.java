@@ -18,6 +18,7 @@ public class MyApplication extends Application {
     private static String Url_WriteArticle="http://10.201.1.183:8080/ZZIA_MXBT/write_Content";
     //获取文章内容
 
+
     private static String Url_Article = "http://10.201.1.183:8080/ZZIA_MXBT/article_complete";
 
 
@@ -27,15 +28,14 @@ public class MyApplication extends Application {
 
     //修改用户信息的serve
     private static String Url_Edit="http://10.201.1.183:8080/ZZIA_MXBT/user_edit";
+
+
     /*private String registUrl="http://10.201.1.170:80/MXBT_Register/checkServlet";
     private String loginUrl="http://10.201.1.170:80/MXBT_Register/loginCheckServlet";*/
     //注册
     private String registUrl = "http://10.201.1.183:8080/ZZIA_MXBT/registCheckServlet";
 
     //登录
-    private String loginUrl = "http://10.201.1.183:8080/ZZIA_MXBT/loginCheckServlet";
-    //显示专题封面
-
 
 
     private String showSubjectUrl = "http://10.201.1.183:80/ZZIA_MXBT/showSubjectServlet";
@@ -44,23 +44,50 @@ public class MyApplication extends Application {
 
 
 
+    private String loginUrl = "http://10.201.1.183:8080/ZZIA_MXBT/loginCheckServlet";
+
+
+    //显示搜素版块
+    private String searchThemeUrl = "http://10.201.1.170:80/ZZIA_MXBT/searchServlet";
+
+    //显示专题封面
+    private String showLableUrl = "http://10.201.1.170:80/ZZIA_MXBT/showLableServlet";
+
+
+
+
+
+
+
+
+
+
+    //显示标签对应文章
+    private String showLableArticleUrl = "http://10.201.1.170:80/ZZIA_MXBT/showLableArticleServlet";
+
+
+
     //排行榜
     private String author_url = "http://10.201.1.183:8080/ZZIA_MXBT/user_servlet";
     private String novel_url = "http://10.201.1.183:8080/ZZIA_MXBT/novel_servlet";
     //投票
 
+
+
     private String vote_url = "http://10.201.1.183:8080/ZZIA_MXBT/vote_servlet";
+    //续写插入
+    private String andwrite_url="http://10.201.1.183:8080/ZZIA_MXBT/AndWrite_InsertServlet";
+    //评论查询，插入
+    private String article_comment_url="http://10.201.1.183:8080/ZZIA_MXBT/ArticeComment_Servlet";
+   private String andwrite_comment_url="http://10.201.1.183:8080/ZZIA_MXBT/AndWriteComment_Servlet";
 
 
-    //个人中心
     //我的故事
-    private static  String mystory_url="http://10.201.1.183:8080/ZZIA_MXBT/mystory";
+    private static  String mystory_url="http://10.201.1.115:8080/ZZIA_MXBT/mystory";
     //我的收藏
-    private static  String mycollect_url="http://10.201.1.183:8080/ZZIA_MXBT/mycollect";
 
 
-    //我的推荐
-    private static  String myrecommand_url="http://10.201.1.183:8080/ZZIA_MXBT/myrecommand";
+
 
     public static String getArticle_create() {
         return article_create;
@@ -69,16 +96,21 @@ public class MyApplication extends Application {
     //创建故事
     private static String article_create = "http://10.201.1.183:8080/ZZIA_MXBT/articlecreater";
 
-    public static String getMycollect_url() {
-        return mycollect_url;
-    }
 
 
 
 
 
+
+
+
+
+    private static  String mycollect_url="http://10.201.1.183:8080/ZZIA_MXBT/mycollect";
+    //我的推荐
+    private static  String myrecommand_url="http://10.201.1.183:8080/ZZIA_MXBT/myrecommand";
     //个人中心
     private static  String center_url="http://10.201.1.183:8080/ZZIA_MXBT/index_servlet";
+
 
 
     @Override
@@ -124,9 +156,17 @@ public class MyApplication extends Application {
         return showSubjectUrl;
     }
 
+    public String getAndwrite_url(){
+        return andwrite_url;
+    }
+    public String getArticle_comment_url(){return article_comment_url;}
+    public String getAndwrite_comment_url(){return andwrite_comment_url;}
+
+
     public String getShowSubjectArticleUrl() {
         return showSubjectArticleUrl;
     }
+
 
     public static String getMystory_url() {
         return mystory_url;
@@ -137,11 +177,31 @@ public class MyApplication extends Application {
     }
 
 
+    public static String getMycollect_url() {
+        return mycollect_url;
+    }
+
 
     public static String getCenter_url() {
         return center_url;
     }
 
+    public String getSearchThemeUrl() {
+        return searchThemeUrl;
+    }
 
+
+    public String getShowLableUrl() {
+        return showLableUrl;
+    }
+
+
+    public String getShowLableArticleUrl() {
+        return showLableArticleUrl;
+    }
 
 }
+
+
+
+

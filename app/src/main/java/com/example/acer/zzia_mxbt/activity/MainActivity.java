@@ -46,7 +46,9 @@ import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -54,13 +56,19 @@ import java.util.TimerTask;
 import cn.jpush.android.api.JPushInterface;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
     private static final int USER_REQUEST_COD = 1;
+
+    //判断是否已经签到
+    private boolean signFlag=true;
+
     DrawerLayout drawer;
     ViewPager index_viewPager;
     ImageView index_menu;//导航菜单按钮
     ImageView kind_ring;//分类图片（圆环）
     TextView kind_content;//分类内容
-
+    //需要传一个Uid给离线阅读
+    int Uid=2;//数据待接受。。。。。。。。。。。。。。。。。。。
 
     //隐藏的布局
     RelativeLayout loadding_layout;
@@ -242,6 +250,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Toast.makeText(MainActivity.this, "最近阅读", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.side_download) {
             Toast.makeText(MainActivity.this, "离线阅读", Toast.LENGTH_SHORT).show();
+            //离线阅读操作
+            if(Uid!=0){
+                Intent intent=new Intent(MainActivity.this,DownlineActivity.class);
+                intent.putExtra("Uid",Uid);
+                startActivity(intent);
+            }else{
+                Intent intent=new Intent(MainActivity.this,RegistActivity.class);
+                startActivity(intent);
+            }
+
+
         } else if (id == R.id.side_config) {
             Toast.makeText(MainActivity.this, "设置", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.side_nightmode) {
@@ -257,6 +276,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 
     public void initView() {
         index_menu = (ImageView) findViewById(R.id.index_menu);
@@ -390,13 +411,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 PopupWindow popupWindow;
                 View view;
                 view = layoutInflater.inflate(R.layout.index_drop_down, null);
-                TextView drop1, drop2, drop3;
+                final TextView drop1, drop2, drop3;
                 drop1 = (TextView) view.findViewById(R.id.drop1);
                 drop2 = (TextView) view.findViewById(R.id.drop2);
                 drop3 = (TextView) view.findViewById(R.id.drop3);
 
                 drop1.setText("排行榜");
-                drop2.setText("2");
+                drop2.setText("签到");
                 drop3.setText("3");
 
 
@@ -405,12 +426,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 popupWindow.setOutsideTouchable(true);
                 popupWindow.showAsDropDown(more, -230, 20);
                 popupWindow.setAnimationStyle(R.style.anim_menu_animation);
+                //排行榜监听
                 drop1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent();
                         intent.setClass(MainActivity.this, RankActivity.class);
                         startActivity(intent);
+                    }
+                });
+                //签到监听
+                drop2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(signFlag){
+                            Log.e("isSignFlag","isSignFlag:"+isSignFlag());
+                            Toast.makeText(MainActivity.this,"签到成功，送你2个金币",Toast.LENGTH_LONG).show();
+                            drop2.setText("已签到");
+                            signFlag=false;
+                        }else {
+                            Toast.makeText(MainActivity.this,"你已签到，请明天再来",Toast.LENGTH_LONG).show();
+                        }
+
                     }
                 });
             }
@@ -473,11 +510,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return false;
     }
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == USER_REQUEST_COD && null!=data)
-        {
+        if (requestCode == USER_REQUEST_COD && null != data) {
             user = (User) data.getSerializableExtra("user");
             userName.setText(user.getUnickname());
             Uri uri = Uri.parse(user.getUhead());
@@ -488,4 +523,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
     }
+    //用来判断是否可以再次签到
+    public String isSignFlag(){
+        SimpleDateFormat    formatter    =   new SimpleDateFormat("yyyy年MM月dd日");
+        Date curDate    =   new    Date(System.currentTimeMillis());//获取当前时间
+        String    str    =    formatter.format(curDate);
+        return str;
+
+    }
+
 }

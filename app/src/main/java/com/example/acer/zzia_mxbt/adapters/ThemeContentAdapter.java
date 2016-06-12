@@ -99,7 +99,7 @@ public class ThemeContentAdapter extends BaseAdapter {
         Uri uri=Uri.parse(headImgPath);
         GenericDraweeHierarchyBuilder builder = new GenericDraweeHierarchyBuilder(mContext.getResources());
         GenericDraweeHierarchy hierarchy = builder
-                .setActualImageScaleType(ScalingUtils.ScaleType.FIT_XY)
+                .setActualImageScaleType(ScalingUtils.ScaleType.CENTER_CROP)
                 .setPlaceholderImage(mContext.getResources().getDrawable(R.drawable.index_img1))
                 .setRoundingParams(new RoundingParams().setRoundAsCircle(true))
                 .build();
@@ -146,7 +146,7 @@ public class ThemeContentAdapter extends BaseAdapter {
         Uri uri2=Uri.parse(backPath);
         GenericDraweeHierarchyBuilder builder2 = new GenericDraweeHierarchyBuilder(mContext.getResources());
         GenericDraweeHierarchy hierarchy2 = builder2
-                .setActualImageScaleType(ScalingUtils.ScaleType.FIT_XY)
+                .setActualImageScaleType(ScalingUtils.ScaleType.CENTER_CROP)
                 .setPlaceholderImage(mContext.getResources().getDrawable(R.drawable.index_img1))
                 .build();
 

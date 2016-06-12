@@ -29,7 +29,10 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> im
     private List<IndexBean> datas;
     private Context context;
     private List<Integer> lists;
+
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
+
+
 
 
 

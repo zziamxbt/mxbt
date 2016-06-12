@@ -19,10 +19,6 @@ import android.widget.Toast;
 import com.example.acer.zzia_mxbt.activity.Article_ReadActivity;
 import com.example.acer.zzia_mxbt.activity.MainActivity;
 import com.example.acer.zzia_mxbt.adapters.IndexListAdapter;
-
-
-
-
 import com.example.acer.zzia_mxbt.bean.IndexBean;
 
 import com.example.acer.zzia_mxbt.R;
@@ -48,7 +44,12 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 
 /**
  * Created by Wang on 2016/5/7.
@@ -64,13 +65,17 @@ public class ViewFragment extends Fragment {
 
 
 
+
+
+
+
+
+
     IndexListAdapter ila;
     SimpleDraweeView headimg ;
     Boolean isend=false;
     static  int begin = 0;
     static  int end = 9;
-
-
     View view;
 
     @Nullable
@@ -97,8 +102,7 @@ public class ViewFragment extends Fragment {
              //   Log.e("Aid", "onItemClick: "+Aid );
                 Intent intent = new Intent(getActivity(), Article_ReadActivity.class);
 
-
-                intent.putExtra("Article_Id",Aid);
+                intent.putExtra("Article_Id", Aid);
 
                 startActivity(intent);
             }
@@ -109,9 +113,47 @@ public class ViewFragment extends Fragment {
     private void initList() {
 
 
+
+
+       RequestParams paramsSend=new RequestParams("http://10.201.1.115:8080/ZZIA_MXBT/sendMessage");
+
         RequestParams params = new RequestParams("http://10.201.1.183:8080/ZZIA_MXBT/index_servlet");
 
+
 //       RequestParams params= new RequestParams("http://139.129.58.244:8080/ZZIA_MXBT/index_servlet");
+        x.http().get(paramsSend, new Callback.CommonCallback<String>() {
+
+            @Override
+            public void onSuccess(String result) {
+                Gson gson = new Gson();
+                Type type = new TypeToken<Set<String>>() {
+                }.getType();
+                Set<String> set=new HashSet<String>();
+                set = gson.fromJson(result, type);
+                JPushInterface.setTags(getActivity(), set, new TagAliasCallback() {
+                    @Override
+                    public void gotResult(int i, String s, Set<String> set) {
+
+                    }
+                });
+                Log.e("set", "set: "+set );
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
         x.http().get(params, new Callback.CommonCallback<String>() {
 
             @Override
@@ -128,14 +170,11 @@ public class ViewFragment extends Fragment {
                 initRefreshListView();
 
 
+
+
+
                 View v = View.inflate(getActivity(), R.layout.index_header_text, null);
                 listView.getRefreshableView().addHeaderView(v, null, false);
-
-
-
-
-
-
                 listView.getRefreshableView().setHeaderDividersEnabled(false);
 
                 for (int i = begin; i <= end; i++) {
@@ -146,13 +185,9 @@ public class ViewFragment extends Fragment {
 
 
 
+
                 ila = new IndexListAdapter(getActivity(),  savelist);
                 listView.setAdapter(ila);
-
-
-
-
-
 
                 listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
                     @Override

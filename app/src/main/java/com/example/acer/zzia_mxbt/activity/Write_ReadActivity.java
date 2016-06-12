@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.acer.zzia_mxbt.R;
 import com.example.acer.zzia_mxbt.adapters.Write_ReadAdapter;
 import com.example.acer.zzia_mxbt.application.MyApplication;
+import com.example.acer.zzia_mxbt.bean.ArticleBean;
 import com.example.acer.zzia_mxbt.bean.Write_ReadBean;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.gson.Gson;
@@ -51,14 +52,13 @@ public class Write_ReadActivity extends AppCompatActivity {
     //  private List<Write_ReadBean> mListData;
     //访问网络数据的路径
     private String mPath;
-    private String mVotePath;
-    //是否投票flag和章节内容
-    private int AWid;
-    private String Uid;
-    private String Cid;
-    private String  mvote_flag;
-    //AWid的flag
-   private boolean AWidFlag=true;
+    //是否点击投票
+    private int voteNum = 1;
+    //是否点击举报
+    private int focusNum = 2;
+  //用户id
+  private int User_id;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,38 +68,19 @@ public class Write_ReadActivity extends AppCompatActivity {
         setContentView(R.layout.activity_write__read);
         //初始化控件
         init();
-        //获取跳转的值
-        getIntentData();
         //获取路径
         getPath();
         //获取续写内容
-        getTest(mvote_flag);
+        getTest(0, true);
+
         //listview头部和底部滑动监听
         setAddListerner();
 
     }
 
-    private void getIntentData() {
-        Intent intent = getIntent();
-        AWid= intent.getIntExtra("AWid", 0);
-        Uid=intent.getStringExtra("Uid");
-        Log.e("Uid", "Uid: " + Uid);
-        Cid=intent.getStringExtra("Cid");
-        Log.e("Cid", "Cid: " + Cid);
-        mvote_flag=intent.getStringExtra("vote_flag");
-        Log.e("mvote_flag", "mvote_flag: " + mvote_flag);
-        if(mvote_flag!=null){
-            if(mvote_flag.equals("false")){
-                mVote_image.setImageResource(R.drawable.toupiao_success);
-            }else{
-                mVote_image.setImageResource(R.drawable.toupiao);
-            }
-        }
-
-    }
-
 
     private void setAddListerner() {
+
         mWrite_readListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -130,18 +111,23 @@ public class Write_ReadActivity extends AppCompatActivity {
     }
 
     //投票监听,需要补充
-  /*  public void PeopleVote(View view) {
-        if(mvote_flag.equals("false")){
-            mVote_image.setImageResource(R.drawable.toupiao);
-            mvote_flag="true";
-        }else{
-            mVote_image.setImageResource(R.drawable.toupiao_success);
-            mvote_flag="false";
+    public void PeopleVote(View view) {
+        if(User_id==0){
+            Toast.makeText(this, "你未登录，无法进行该操作", Toast.LENGTH_SHORT).show();
+        }else {
+            if (mWrite_readBeanList.get(0).isVoteFlag()) {
+                getTest(voteNum, false);
+                mVote_image.setImageResource(R.drawable.toupiao);
+                mWrite_readBeanList.get(0).setVoteFlag(false);
+                Toast.makeText(Write_ReadActivity.this, "取消投票", Toast.LENGTH_SHORT).show();
+            } else {
+                getTest(voteNum, true);
+                mVote_image.setImageResource(R.drawable.toupiao_success);
+                mWrite_readBeanList.get(0).setVoteFlag(true);
+                Toast.makeText(Write_ReadActivity.this, "已投票", Toast.LENGTH_SHORT).show();
+            }
         }
-        //使数据库刷新投票
-        getTest(mvote_flag);
-        Toast.makeText(Write_ReadActivity.this, "你点击了投票", Toast.LENGTH_SHORT).show();
-    }*/
+    }
 
     //评论监听
     public void PeopleCommand(View view) {
@@ -155,15 +141,22 @@ public class Write_ReadActivity extends AppCompatActivity {
 
     //关注监听
     public void PeopleFocus(View view) {
-        if (PeopleFocus_flag) {
-            mFocus_image.setImageResource(R.drawable.guanzhu_success);
-            PeopleFocus_flag=false;
-            Toast.makeText(Write_ReadActivity.this, "已关注", Toast.LENGTH_SHORT).show();
-        } else {
-            mFocus_image.setImageResource(R.drawable.guanzhu);
-            PeopleFocus_flag=true;
-            Toast.makeText(Write_ReadActivity.this, "取消关注", Toast.LENGTH_SHORT).show();
+        if(User_id==0){
+            Toast.makeText(this, "你未登录，无法进行该操作", Toast.LENGTH_SHORT).show();
+        }else {
+            if (mWrite_readBeanList.get(0).isfocusFlag()) {
+                getTest(focusNum, false);
+                mFocus_image.setImageResource(R.drawable.guanzhu);
+                mWrite_readBeanList.get(0).setfocusFlag(false);
+                Toast.makeText(Write_ReadActivity.this, "取消关注", Toast.LENGTH_SHORT).show();
+            } else {
+                getTest(focusNum, true);
+                mFocus_image.setImageResource(R.drawable.guanzhu_success);
+                mWrite_readBeanList.get(0).setfocusFlag(true);
+                Toast.makeText(Write_ReadActivity.this, "已关注", Toast.LENGTH_SHORT).show();
+            }
         }
+
 
     }
     //返回监听
@@ -175,22 +168,46 @@ public class Write_ReadActivity extends AppCompatActivity {
     public void getPath() {
         MyApplication myApplication = (MyApplication) getApplication();
         mPath = myApplication.getUrl_WriteArticle();
-        mVotePath=myApplication.getVote_url();
     }
 
     //gest请求的到网络数据
-    public void getTest(String mvote_flag) {
+    public void getTest(final int Num, boolean flag) {
         //get请求
         //第一步：设置访问路径
+
+        Intent intent = getIntent();
+        int AWid = intent.getIntExtra("AWid", 0);
+        User_id=intent.getIntExtra("User_id",0);
         Log.e("abc", "getTest: " + AWid);
-        params= new RequestParams(mPath);
-        if(AWidFlag){
+        params = new RequestParams(mPath);
+        if(User_id==0){
             params.addQueryStringParameter("AWid", AWid + "");
+            params.addQueryStringParameter("User_Id", 0 + "");
         }else{
-            params = new RequestParams(mVotePath);
-            params.addQueryStringParameter("flag", mvote_flag);
-            params.addQueryStringParameter("Uid",Uid+"");
-            params.addQueryStringParameter("Cid",""+Cid);
+            if (Num == 0) {
+                params.addQueryStringParameter("Num", 0 + "");
+                params.addQueryStringParameter("AWid", AWid + "");
+                params.addQueryStringParameter("User_Id", 1 + "");
+            } else if (Num == 1) {
+                params.addQueryStringParameter("Num", 1 + "");
+                if (flag) {
+                    params.addQueryStringParameter("voteNum", "true");
+                } else {
+                    params.addQueryStringParameter("voteNum", "false");
+                }
+                params.addQueryStringParameter("User_Id", 1 + "");
+                params.addQueryStringParameter("AWid", AWid + "");
+            } else if (Num == 2) {
+                params.addQueryStringParameter("Num", 2 + "");
+                if (flag) {
+                    params.addQueryStringParameter("focusNum", "true");
+                } else {
+                    params.addQueryStringParameter("focusNum", "false");
+                }
+                params.addQueryStringParameter("User_Id", 1 + "");
+                params.addQueryStringParameter("AWid", AWid + "");
+            }
+
         }
 
         //第二步：开始请求，设置请求方式，同时实现回调函数
@@ -199,20 +216,33 @@ public class Write_ReadActivity extends AppCompatActivity {
             public void onSuccess(String result) {
                 //访问成功，参数其实就是PrintWriter写回的值
                 //把JSON格式的字符串改为Student对象
-                if(AWidFlag){
+                if (Num == 0) {
                     Gson gson = new Gson();
                     Type type = new TypeToken<List<Write_ReadBean>>() {
                     }.getType();
                     mWrite_readBeanList = gson.fromJson(result, type);
+                    //进行判断投票和关注是什么状态
+                    if(User_id==0){
+                        mVote_image.setImageResource(R.drawable.toupiao);
+                        mFocus_image.setImageResource(R.drawable.guanzhu);
+                    }else {
+                        if (mWrite_readBeanList.get(0).isVoteFlag()) {
+                            mVote_image.setImageResource(R.drawable.toupiao_success);
+                        } else {
+                            mVote_image.setImageResource(R.drawable.toupiao);
+                        }
 
-                    Log.e("mWrite_readBeanList", "data：" + gson.fromJson(result, type));
+                        if (mWrite_readBeanList.get(0).isfocusFlag()) {
+                            mFocus_image.setImageResource(R.drawable.guanzhu_success);
+                        } else {
+                            mFocus_image.setImageResource(R.drawable.guanzhu);
+                        }
+                    }
+
                     mArticleName.setText(mWrite_readBeanList.get(0).getWrite_articleName());
-
                     mWriteReadAdapter = new Write_ReadAdapter(Write_ReadActivity.this, mWrite_readBeanList);
                     mWrite_readListView.setAdapter(mWriteReadAdapter);
-                    AWidFlag=false;
                 }
-
 
 
             }
