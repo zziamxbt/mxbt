@@ -13,7 +13,10 @@
         android:protectionLevel="signature" />
 
 
+<<<<<<< HEAD
     <!-- Required 一些系统要求的权限，如访问网络等-->
+=======
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
     <uses-permission android:name="com.example.acer.zzia_mxbt.permission.JPUSH_MESSAGE" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
 
@@ -31,6 +34,10 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<<<<<<< HEAD
+=======
+
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
 
     <!-- Optional for location -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -47,7 +54,17 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.GET_TASKS" />
+<<<<<<< HEAD
 
+=======
+
+    <!-- 读写权限 -->
+    <uses-permission android:name="android.permission.WRITEEXTERNALSTORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
+    <!-- 友盟要求 -->
+
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
 
     <!-- ###################声明SDK使用的相关权限###################### -->
     <!-- 检测网络状态 -->
@@ -80,7 +97,14 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9520d40836af1534f47bedf6f1caafae5a9e5a8c
+>>>>>>> 26efadd7082c159a74806439998f4ba56ea4a837
+>>>>>>> 7486ff674008437d0cb85be343bef918207db514
+>>>>>>> dd098caccbfc824327a696aefd7d4be94787cc08
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
     <application
         android:name=".application.MyApplication"
         android:allowBackup="true"
@@ -89,7 +113,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
 
+<<<<<<< HEAD
         <activity android:name=".activity.MainActivity" />
+=======
+        <activity android:name=".activity.MainActivity"></activity>
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
 
         <activity android:name=".activity.Article_ReadActivity" />
         <activity android:name=".activity.LoginActivity" />
@@ -151,10 +179,23 @@
         <activity android:name=".activity.ThemeActivity" />
         <activity android:name=".activity.ArticleCommentActivity" />
         <activity android:name=".activity.SplashActivity">
+<<<<<<< HEAD
+=======
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
 
         </activity>
         <activity android:name=".activity.GuideActivity" />
+<<<<<<< HEAD
 
+=======
+        <!-- 第三方支付的activity -->
+
+
+
+
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
         <activity
             android:name="c.b.a.A"
             android:configChanges="orientation|keyboardHidden|navigation"
@@ -166,6 +207,7 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent" />
 
+<<<<<<< HEAD
         <activity android:name=".activity.WalletActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -174,31 +216,51 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             </activity>
+=======
+
+        <activity android:name=".activity.WalletActivity" />
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
         <activity android:name=".activity.EditActivity" />
 
         <!-- 极光推送集成 -->
         <!-- Required SDK核心功能 -->
 
 
+<<<<<<< HEAD
 
+=======
+>
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
 
         <!-- 极光推送集成 -->
         <!-- Required SDK核心功能 -->
 
         <activity android:name=".activity.SearchActivity">
+<<<<<<< HEAD
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+=======
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
         </activity>
         <activity android:name=".activity.LableActivity" />
         <activity android:name=".activity.LableContentActivity"></activity>
 
 
 
+<<<<<<< HEAD
         <!-- 极光推送集成 -->
         <!-- Required SDK核心功能 -->
 
+=======
+
+        <!-- 极光推送集成 -->
+        <!-- Required SDK核心功能 -->
+
+
+
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
          <!--极光推送集成-->
         <!-- Required SDK核心功能-->
 
@@ -249,11 +311,18 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
         <!-- Required SDK核心功能 -->
         <service
             android:name="cn.jpush.android.service.DownloadService"
             android:enabled="true"
+<<<<<<< HEAD
 
+=======
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
             android:exported="false"></service>
 
 
@@ -328,6 +397,7 @@
         -->
 
 
+
         <!-- Required . Enable it you can get statistics data with channel -->
         <meta-data
             android:name="JPUSH_CHANNEL"
@@ -336,6 +406,18 @@
             android:name="JPUSH_APPKEY"
             android:value="0df39e6620b17589afd021a6" />
         <!-- </>值来自开发者平台取得的AppKey -->
+<<<<<<< HEAD
+=======
+        <activity android:name=".activity.EditNickname" />
+        <activity android:name=".activity.EditCountry" />
+        <activity android:name=".activity.EditSign" />
+        <activity android:name=".activity.CreateAticle" />
+        <activity android:name=".activity.CoverCreateActivity"></activity>
+        <activity android:name=".activity.ContentCreateActivity"></activity>
+
+
+
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
 
         <activity android:name=".activity.DownlineActivity"></activity>
 

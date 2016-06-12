@@ -134,21 +134,45 @@ public class Article_ReadActivity extends AppCompatActivity {
     //执行文章内容getText（）
     private int TextContent = 0;
     //执行推荐getText（）
+<<<<<<< HEAD
     private int RecommendNum = 1;
     //执行收藏getText（）
     private int CollectNum = 2;
+=======
+
+    private int RecommendNum = 1;
+    //执行收藏getText（）
+    private int CollectNum = 2;
+
+
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
     //接受传递的参数
     private  int User_Id;
 
+<<<<<<< HEAD
     //创建sqllite，存储图片
+=======
+
+//创建sqllite，存储图片
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
     Bitmap mUhead=null;
     Bitmap mUbk=null;
     Bitmap mcoverimg=null;
     int Uid=2;//数据待接收。。。。。。。。。。。。。。。。。。。。。
     SQLiteDatabase db=null;
+<<<<<<< HEAD
 
 
 
+=======
+
+    //保存章节Id
+    private int[] Chapter_Id;
+
+
+
+
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -803,8 +827,45 @@ public class Article_ReadActivity extends AppCompatActivity {
 //获取activity跳转过来的值
         Intent intent= getIntent();
         int article_id = intent.getIntExtra("Article_Id",0);
+<<<<<<< HEAD
         User_Id =intent.getIntExtra("User_Id",1);
         //   int User_Id=0;
+=======
+        User_Id =intent.getIntExtra("User_Id",0);
+     //   int User_Id=0;
+
+
+        //Log.e("qiyu,Aid", "onItemClick: "+article_id );
+        Log.e("qiyu,Article_Read,", "接收文章id: "+ article_id);
+        params= new RequestParams(mPath);
+         if(Num==0){
+             params.addQueryStringParameter("Num",0+"");//让后台判断到底执行那个语句，对数据库进行修改（标示）
+             params.addQueryStringParameter("article_id",article_id+"");
+         }else if(Num==1){
+             //判断是否推荐，修改数据库
+             params.addQueryStringParameter("Num",1+"");//让后台判断到底执行那个语句，对数据库进行修改（标示）
+             if (flag){
+                 params.addQueryStringParameter("RecommendNum","true");
+             }else {
+                 params.addQueryStringParameter("RecommendNum","false");
+             }
+           //  params.addQueryStringParameter("User_Id",User.getUid()+"");
+             params.addQueryStringParameter("article_id",article_id+"");
+         }else if(Num==2){
+             //判断是否收藏，修改数据库
+             params.addQueryStringParameter("Num",2+"");//让后台判断到底执行那个语句，对数据库进行修改（标示）
+             if (flag){
+                 params.addQueryStringParameter("CollectNum","true");
+             }else {
+                 params.addQueryStringParameter("CollectNum","false");
+             }
+           //  params.addQueryStringParameter("User_Id",User.getUid()+"");
+             params.addQueryStringParameter("article_id",article_id+"");
+         }
+
+
+
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
         params = new RequestParams(mPath);
         if(User_Id==0){
             params.addQueryStringParameter("User_Id",0+"");
@@ -837,6 +898,12 @@ public class Article_ReadActivity extends AppCompatActivity {
                 params.addQueryStringParameter("article_id", article_id + "");
             }
         }
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
 
 
         //第二步：开始请求，设置请求方式，同时实现回调函数
@@ -845,6 +912,7 @@ public class Article_ReadActivity extends AppCompatActivity {
             public void onSuccess(String result) {
                 //访问成功，参数其实就是PrintWriter写回的值
                 //把JSON格式的字符串改为Student对象
+<<<<<<< HEAD
                 if(Num==0){
                     Gson gson = new Gson();
                     Type type = new TypeToken<List<ArticleBean>>() {
@@ -853,6 +921,25 @@ public class Article_ReadActivity extends AppCompatActivity {
                     initdata(listData);
                     Log.e("listData", "listData: " + listData);
                 }
+=======
+
+                     if(Num==0){
+                         Gson gson = new Gson();
+                         Type type = new TypeToken<List<ArticleBean>>() {
+                         }.getType();
+                         listData = gson.fromJson(result, type);
+                         initdata(listData);
+                         Log.e("listData", "listData: " + listData);
+                     }
+
+
+
+
+
+
+                //    initdata(list);
+          /*      mArticleList.notify();*/
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
 
             }
 

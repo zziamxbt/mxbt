@@ -2,6 +2,8 @@ package com.example.acer.zzia_mxbt.application;
 
 import android.app.Application;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+
 import org.xutils.BuildConfig;
 import org.xutils.x;
 
@@ -19,16 +21,44 @@ public class MyApplication extends Application {
     //获取文章内容
 
 
+<<<<<<< HEAD
     private static String Url_Article = "http://10.201.1.115:8080/ZZIA_MXBT/article_complete";
 
     /*private String registUrl="http://10.201.1.115:8080/MXBT_Register/checkServlet";
     private String loginUrl="http://10.201.1.115:8080/MXBT_Register/loginCheckServlet";*/
+=======
+    private static String Url_Article = "http://10.201.1.183:8080/ZZIA_MXBT/article_complete";
+
+
+    public static String getUrl_Edit() {
+        return Url_Edit;
+    }
+
+    //修改用户信息的serve
+    private static String Url_Edit="http://10.201.1.183:8080/ZZIA_MXBT/user_edit";
+
+
+    /*private String registUrl="http://10.201.1.170:80/MXBT_Register/checkServlet";
+    private String loginUrl="http://10.201.1.170:80/MXBT_Register/loginCheckServlet";*/
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
     //注册
     private String registUrl = "http://10.201.1.115:8080/ZZIA_MXBT/registCheckServlet";
 
     //登录
 
+<<<<<<< HEAD
     private String loginUrl = "http://10.201.1.115:8080/ZZIA_MXBT/loginCheckServlet";
+=======
+
+    private String showSubjectUrl = "http://10.201.1.183:80/ZZIA_MXBT/showSubjectServlet";
+    //显示专题对应文章
+    private String showSubjectArticleUrl = "http://10.201.1.183:80/ZZIA_MXBT/showSubjectArticleServlet";
+
+
+
+    private String loginUrl = "http://10.201.1.183:8080/ZZIA_MXBT/loginCheckServlet";
+
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
 
     //显示搜素版块
     private String searchThemeUrl = "http://10.201.1.115:8080/ZZIA_MXBT/searchServlet";
@@ -37,6 +67,7 @@ public class MyApplication extends Application {
     private String showLableUrl = "http://10.201.1.115:8080/ZZIA_MXBT/showLableServlet";
 
 
+<<<<<<< HEAD
     //显示专题对应文章
     private String showSubjectArticleUrl = "http://10.201.1.115:8080/ZZIA_MXBT/showSubjectArticleServlet";
 
@@ -45,35 +76,91 @@ public class MyApplication extends Application {
     private String showSubjectUrl = "http://10.201.1.115:8080/ZZIA_MXBT/showSubjectServlet";
     //显示标签对应文章
     private String showLableArticleUrl = "http://10.201.1.115:8080/ZZIA_MXBT/showLableArticleServlet";
+=======
+
+
+
+
+
+
+
+
+    //显示标签对应文章
+    private String showLableArticleUrl = "http://10.201.1.170:80/ZZIA_MXBT/showLableArticleServlet";
+
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
 
 
     //排行榜
     private String author_url = "http://10.201.1.115:8080/ZZIA_MXBT/user_servlet";
     private String novel_url = "http://10.201.1.115:8080/ZZIA_MXBT/novel_servlet";
     //投票
+<<<<<<< HEAD
     private String vote_url = "http://10.201.1.115:8080/ZZIA_MXBT/vote_servlet";
+=======
+
+
+
+    private String vote_url = "http://10.201.1.183:8080/ZZIA_MXBT/vote_servlet";
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
     //续写插入
     private String andwrite_url="http://10.201.1.115:8080/ZZIA_MXBT/AndWrite_InsertServlet";
     //评论查询，插入
+<<<<<<< HEAD
     private String article_comment_url="http://10.201.1.115:8080/ZZIA_MXBT/ArticeComment_Servlet";
    private String andwrite_comment_url="http://10.201.1.115:8080/ZZIA_MXBT/AndWriteComment_Servlet";
+=======
+    private String article_comment_url="http://10.201.1.183:8080/ZZIA_MXBT/ArticeComment_Servlet";
+   private String andwrite_comment_url="http://10.201.1.183:8080/ZZIA_MXBT/AndWriteComment_Servlet";
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
 
 
     //我的故事
     private static  String mystory_url="http://10.201.1.115:8080/ZZIA_MXBT/mystory";
     //我的收藏
+<<<<<<< HEAD
     private static  String mycollect_url="http://10.201.1.115:8080/ZZIA_MXBT/mycollect";
     //我的推荐
     private static  String myrecommand_url="http://10.201.1.115:8080/ZZIA_MXBT/myrecommand";
     //个人中心
     private static  String center_url="http://10.201.1.115:8080/ZZIA_MXBT/index_servlet";
 
+=======
+
+
+
+
+    public static String getArticle_create() {
+        return article_create;
+    }
+
+    //创建故事
+    private static String article_create = "http://10.201.1.183:8080/ZZIA_MXBT/articlecreater";
+
+
+
+
+
+
+
+
+
+
+    private static  String mycollect_url="http://10.201.1.183:8080/ZZIA_MXBT/mycollect";
+    //我的推荐
+    private static  String myrecommand_url="http://10.201.1.183:8080/ZZIA_MXBT/myrecommand";
+    //个人中心
+    private static  String center_url="http://10.201.1.183:8080/ZZIA_MXBT/index_servlet";
+
+
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
 
     @Override
     public void onCreate() {
         super.onCreate();
         x.Ext.init(this);
         x.Ext.setDebug(BuildConfig.DEBUG);
+        Fresco.initialize(this);
     }
 
     public String getUrl_Sign() {
@@ -126,6 +213,10 @@ public class MyApplication extends Application {
         return showSubjectArticleUrl;
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
     public static String getMystory_url() {
         return mystory_url;
     }
@@ -148,6 +239,10 @@ public class MyApplication extends Application {
         return searchThemeUrl;
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
     public String getShowLableUrl() {
         return showLableUrl;
     }

@@ -65,12 +65,21 @@ import java.util.TimerTask;
 import cn.jpush.android.api.JPushInterface;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+<<<<<<< HEAD
     //listData记录是否签到
     List<SignBean> listData;
     //访问网络数据的路径
     public String mPath;
     //判断是否已经签到
     private boolean signFlag = true;
+=======
+
+    private static final int USER_REQUEST_COD = 1;
+
+    //判断是否已经签到
+    private boolean signFlag=true;
+
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
     DrawerLayout drawer;
     ViewPager index_viewPager;
     ImageView index_menu;//导航菜单按钮
@@ -116,7 +125,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     //是否登录
 
+<<<<<<< HEAD
     private static boolean isLogin = false;
+=======
+    private static  boolean isLogin = false;
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
 
 
     public static User getUser() {
@@ -126,6 +139,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static boolean isLogin() {
         return isLogin;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
 
     private static User user;
     //双击退出标志位
@@ -137,10 +154,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fresco.initialize(MainActivity.this);
+       JPushInterface.init(this);
         setContentView(R.layout.activity_main);
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
         JPushInterface.setDebugMode(true);
+
         getLoginParam();
         initView();
         initData();
@@ -150,8 +169,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                if(isLogin==true) {
+                    Intent intent = new Intent(MainActivity.this, CreateAticle.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("user", user);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }else{
+                    Intent intent = new Intent(MainActivity.this, QiyuActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -390,7 +417,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     bundle.putSerializable("user", user);
                     bundle.putBoolean("isLogin", true);
                     intent.putExtras(bundle);
-                    startActivity(intent);
+                    startActivityForResult(intent, USER_REQUEST_COD);
                     Toast.makeText(MainActivity.this, "您自己的头像被点击了！", Toast.LENGTH_SHORT).show();
                 } else {
                     //未登录
@@ -518,15 +545,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return false;
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == USER_REQUEST_COD && null != data) {
+            user = (User) data.getSerializableExtra("user");
+            userName.setText(user.getUnickname());
+            Uri uri = Uri.parse(user.getUhead());
+            DraweeController controller = Fresco.newDraweeControllerBuilder()
+                    .setUri(uri)
+                    .build();
+            headimg.setController(controller);
+        }
 
+    }
     //用来判断是否可以再次签到
     public String isSignFlag() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日");
         Date curDate = new Date(System.currentTimeMillis());//获取当前时间
         String str = formatter.format(curDate);
         return str;
+
     }
 
+<<<<<<< HEAD
     public void getPath() {
         MyApplication myApplication = (MyApplication) getApplication();
         mPath = myApplication.getUrl_Sign();
@@ -572,4 +614,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
+=======
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
 }

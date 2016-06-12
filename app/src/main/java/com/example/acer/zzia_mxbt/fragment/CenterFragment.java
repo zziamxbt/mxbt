@@ -17,6 +17,9 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+
+
 import android.widget.Toast;
 
 import com.example.acer.zzia_mxbt.R;
@@ -27,8 +30,11 @@ import com.example.acer.zzia_mxbt.application.MyApplication;
 import com.example.acer.zzia_mxbt.bean.IndexBean;
 import com.example.acer.zzia_mxbt.utils.SpacesItemDecoration;
 
+<<<<<<< HEAD
 import com.example.acer.zzia_mxbt.activity.MainActivity;
 import com.example.acer.zzia_mxbt.bean.ArticleBean;
+=======
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -92,6 +98,19 @@ public class CenterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.centerlayout, container, false);
 
+<<<<<<< HEAD
+=======
+
+//        RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.center_recyclerView);
+//        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
+//        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+//        List<Integer> datas = new ArrayList<>();
+//        for (int i = 0; i < 100; i++) {
+//            datas.add(i);
+//        }
+//        mRecyclerView.setAdapter(new MyRecyclerViewAdapter(getActivity(), datas));
+
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
         initBeginAndEnd();
 
         //初始化各个控件和视图
@@ -110,22 +129,41 @@ public class CenterFragment extends Fragment {
         end = 9;
     }
 
+<<<<<<< HEAD
 
     private void askForData() {
         RequestParams params = new RequestParams(MyApplication.getMystory_url());
 
 //       RequestParams params= new RequestParams("http://139.129.58.244:8080/ZZIA_MXBT/index_servlet");
         params.addQueryStringParameter("uid",CenterActivity.getUser().getUid()+"");
+=======
+    private void askForData() {
+        RequestParams params = new RequestParams(MyApplication.getCenter_url());
+
+//       RequestParams params= new RequestParams("http://139.129.58.244:8080/ZZIA_MXBT/index_servlet");
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
 
         x.http().get(params, new Callback.CommonCallback<String>() {
 
             @Override
             public void onSuccess(String result) {
+<<<<<<< HEAD
                 Log.e("aaa", "onSuccess: " );
+=======
+
+
+                Log.e("aaa", "onSuccess: ");
+
+
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
                 Gson gson = new Gson();
                 Type type = new TypeToken<List<IndexBean>>() {
                 }.getType();
                 list = gson.fromJson(result, type);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
                 if (list != null) {
                     new loadDataAsyncTask((CenterActivity) getActivity()).execute(list);
                     if (list.size() > end) {
@@ -148,11 +186,14 @@ public class CenterFragment extends Fragment {
                         startActivity(intent);
                     }
                 });
+<<<<<<< HEAD
 
 
                 // myRecyclerViewAdapter = new MyRecyclerViewAdapter(getActivity(),list);
                 recyclerView.setAdapter(myRecyclerViewAdapter);
 
+=======
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
             }
 
             @Override
@@ -174,9 +215,14 @@ public class CenterFragment extends Fragment {
 
             }
         });
-
-
     }
+
+
+<<<<<<< HEAD
+    }
+=======
+
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
 
     private void setView() {
         linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -228,7 +274,10 @@ public class CenterFragment extends Fragment {
             }
         });
 
-    }
+
+}
+
+
 
 
     private void initView() {
@@ -238,6 +287,7 @@ public class CenterFragment extends Fragment {
     }
 
 
+<<<<<<< HEAD
     //AsyncTask 内部类
 
     class loadDataAsyncTask extends AsyncTask<List<IndexBean>, Integer,String> {
@@ -246,6 +296,18 @@ public class CenterFragment extends Fragment {
         List<IndexBean> list;
 
 
+=======
+
+
+
+
+
+    class loadDataAsyncTask extends AsyncTask<List<IndexBean>, Integer, String> {
+        private static final int HIDDEN_CODE = 1;
+        private static final int APPEAR_CODE = 2;
+        private CenterActivity activity;
+
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
         public loadDataAsyncTask(CenterActivity activity) {
 
             this.activity = activity;
@@ -280,11 +342,14 @@ public class CenterFragment extends Fragment {
             return "success";
         }
 
+<<<<<<< HEAD
 
 
 
 
         //对返回值进行操作
+=======
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
@@ -293,7 +358,6 @@ public class CenterFragment extends Fragment {
                 myRecyclerViewAdapter.notifyDataSetChanged();
 
                 //刷新完成;
-
                 mSwipeRefreshWidget.setRefreshing(false);
             }
 
@@ -341,6 +405,10 @@ public void addData(List<IndexBean>beanList,int begin,int end){
 
         }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
     }
 }
 

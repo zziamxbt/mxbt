@@ -29,9 +29,20 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> im
     private List<IndexBean> datas;
     private Context context;
     private List<Integer> lists;
+<<<<<<< HEAD
+=======
 
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
+
+    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
+
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
 
     public MyRecyclerViewAdapter(Context context, List<IndexBean> datas) {
         this.datas = datas;
@@ -39,12 +50,15 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> im
        
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 00e1af9ef112c98b12e75d88cf37e55686f27c7c
 
     private void getRandomHeights(List<IndexBean> datas) {
         lists = new ArrayList<>();
         for (int i = 0; i < datas.size(); i++) {
-            lists.add((int) (700));
+            lists.add((int) (400)+(int)(Math.random()*200));
         }
     }
 
